@@ -1,0 +1,2334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MonsterCreative | AI Content Creation Suite for Windows</title>
+  <link rel="icon" type="image/jpeg" href="{% static 'landing/icon.jpg' %}">
+  <meta name="description" content="MonsterCreative is a Windows desktop app for creating copy, images, videos, Arabic voiceovers, landing pages, and content assets with AI. One-time license. Bring your own fal.ai key." />
+  <meta property="og:title" content="MonsterCreative | AI Content Creation Suite for Windows" />
+  <meta property="og:description" content="Create better content projects from one desktop app: copy, images, video, Arabic voiceovers, landing pages, and format resizing." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#101217" />
+  <script>
+    document.documentElement.classList.add("js-enabled");
+  </script>
+  <script src="https://gumroad.com/js/gumroad.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --paper: #f5f7fa;
+      --paper-soft: #eef3f7;
+      --ink: #101217;
+      --ink-soft: #343a44;
+      --muted: #687381;
+      --line: #dce4ec;
+      --line-strong: #becbd8;
+      --surface: #ffffff;
+      --surface-ink: #171b22;
+      --teal: #07847d;
+      --teal-strong: #065f5a;
+      --teal-soft: #dff7f4;
+      --coral: #f06449;
+      --gold: #d99a18;
+      --plum: #5946a8;
+      --success: #0a8f55;
+      --shadow: 0 24px 70px rgba(16, 18, 23, 0.14);
+      --shadow-soft: 0 12px 30px rgba(16, 18, 23, 0.08);
+      --max: 1180px;
+      --radius: 8px;
+      --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0) 320px),
+        radial-gradient(circle at 20% 0%, rgba(7,132,125,0.08), transparent 300px),
+        var(--paper);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      z-index: 200;
+      transform: translateY(-140%);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(220, 228, 236, 0.7);
+      background: rgba(245, 247, 250, 0.88);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 850;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: block;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--ink);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 800;
+      line-height: 1.1;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: var(--ink);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: #000000;
+      box-shadow: 0 14px 34px rgba(16, 18, 23, 0.18);
+    }
+
+    .btn-accent {
+      color: #ffffff;
+      background: var(--coral);
+      box-shadow: 0 16px 34px rgba(240, 100, 73, 0.2);
+    }
+
+    .btn-accent:hover,
+    .btn-accent:focus-visible {
+      background: #d9563d;
+      box-shadow: 0 16px 34px rgba(240, 100, 73, 0.3);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.74);
+      border-color: var(--line-strong);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      background: #ffffff;
+      border-color: var(--ink);
+    }
+
+    /* ── Hero entrance animations ── */
+    @keyframes hero-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      position: relative;
+      padding: 120px 0 0;
+      overflow: hidden;
+      background: #101217;
+      color: #ffffff;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(7,132,125,0.22), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 30%, rgba(240,100,73,0.08), transparent);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 0 56px;
+    }
+
+    /* Staggered entrance animations */
+    .hero-content .eyebrow  { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+    .hero-content h1        { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.22s both; }
+    .hero-content .hero-copy { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.34s both; }
+    .hero-content .hero-actions { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.46s both; }
+    .hero-content .hero-trust { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.56s both; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero-trust li {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ── Parallax app stage ── */
+    .hero-stage {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+      will-change: transform;
+      animation: hero-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.5s both;
+    }
+
+    /* Bottom fade so the frame bleeds into the next section */
+    .hero-stage::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, #101217);
+      pointer-events: none;
+    }
+
+    .app-frame {
+      width: min(1120px, 92vw);
+      min-height: 540px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 50px 120px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255,255,255,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      background: rgba(21, 26, 33, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transform: perspective(1200px) rotateX(7deg);
+      transform-origin: center bottom;
+    }
+
+    .app-titlebar {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      color: rgba(255,255,255,0.58);
+      background: #0d1117;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.76rem;
+      font-family: var(--mono);
+    }
+
+    .window-dots {
+      display: inline-flex;
+      gap: 7px;
+    }
+
+    .window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.26);
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr) 280px;
+      min-height: 498px;
+    }
+
+    .app-sidebar {
+      padding: 18px 14px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      background: #11161d;
+    }
+
+    .app-tool {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 38px;
+      padding: 0 10px;
+      margin-bottom: 8px;
+      border-radius: var(--radius);
+      color: rgba(255,255,255,0.68);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .app-tool.is-active {
+      color: #ffffff;
+      background: rgba(7,132,125,0.24);
+      border: 1px solid rgba(17, 214, 196, 0.18);
+    }
+
+    .tool-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex: 0 0 auto;
+    }
+
+    .tool-dot.coral {
+      background: var(--coral);
+    }
+
+    .tool-dot.gold {
+      background: var(--gold);
+    }
+
+    .tool-dot.plum {
+      background: var(--plum);
+    }
+
+    .app-canvas {
+      padding: 22px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        #161c24;
+      background-size: 28px 28px;
+    }
+
+    .creative-board {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      gap: 16px;
+    }
+
+    .ad-preview,
+    .asset-stack,
+    .prompt-panel,
+    .metric-chip {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 4px 16px rgba(0,0,0,0.24);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .ad-preview {
+      min-height: 338px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+      background:
+        linear-gradient(135deg, rgba(7,132,125,0.88), rgba(240,100,73,0.8)),
+        #1c232c;
+    }
+
+    .ad-label {
+      width: max-content;
+      padding: 6px 9px;
+      border-radius: var(--radius);
+      color: #12201f;
+      background: rgba(255,255,255,0.82);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .ad-headline {
+      max-width: 370px;
+      font-size: 2rem;
+      line-height: 1.06;
+      font-weight: 920;
+      color: #ffffff;
+      text-wrap: balance;
+    }
+
+    .ad-bars {
+      display: grid;
+      gap: 8px;
+      max-width: 300px;
+    }
+
+    .ad-bars span {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+    }
+
+    .ad-bars span:nth-child(2) {
+      width: 78%;
+    }
+
+    .ad-bars span:nth-child(3) {
+      width: 56%;
+    }
+
+    .asset-stack {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .asset-thumb {
+      min-height: 106px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
+        #202935;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .asset-thumb::before,
+    .asset-thumb::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+    }
+
+    .asset-thumb::before {
+      width: 92px;
+      height: 92px;
+      right: -22px;
+      top: 18px;
+    }
+
+    .asset-thumb::after {
+      width: 54px;
+      height: 54px;
+      left: 18px;
+      bottom: 16px;
+      background: rgba(7,132,125,0.48);
+    }
+
+    .asset-thumb.wide {
+      min-height: 78px;
+      background:
+        linear-gradient(135deg, rgba(240,100,73,0.56), rgba(217,154,24,0.38)),
+        #202935;
+    }
+
+    .app-right {
+      padding: 18px;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      background: #11161d;
+    }
+
+    .prompt-panel {
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .panel-kicker {
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.48);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .prompt-line {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      margin-bottom: 9px;
+    }
+
+    .prompt-line.short {
+      width: 66%;
+    }
+
+    .generate-button {
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      margin-top: 14px;
+      border-radius: var(--radius);
+      color: #ffffff;
+      background: var(--teal);
+      font-weight: 850;
+      font-size: 0.86rem;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric-chip {
+      padding: 12px;
+    }
+
+    .metric-chip b {
+      display: block;
+      font-size: 1.35rem;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .metric-chip span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      padding: 76px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 32px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: #ffffff;
+      background: rgba(7,132,125,0.3);
+      border: 1px solid rgba(7,132,125,0.5);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: 5rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.78);
+      font-size: 1.2rem;
+      line-height: 1.6;
+      text-wrap: balance;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero .btn-secondary {
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.28);
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-header--center {
+      max-width: 780px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .section-header--center .section-copy {
+      margin-inline: auto;
+    }
+
+    .section-kicker {
+      margin: 0 0 10px;
+      color: var(--teal-strong);
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 3.05rem;
+      line-height: 1.04;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .section-copy {
+      margin: 16px 0 0;
+      color: var(--ink-soft);
+      font-size: 1.08rem;
+      max-width: 680px;
+      text-wrap: balance;
+    }
+
+    .offer-band {
+      padding: 88px 0;
+      background: transparent;
+    }
+
+    .offer-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.4fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .offer-intro {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .offer-intro .btn {
+      margin-top: auto;
+      align-self: flex-start;
+    }
+
+    .offer-title {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.12;
+    }
+
+    .offer-copy {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .benefit {
+      min-height: 100%;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(16,18,23,0.04);
+    }
+
+    .benefit b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .benefit span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .product-shot {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .shot-top {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--line);
+      background: #f9fbfd;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+    }
+
+    .shot-body {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      min-height: 420px;
+      background: #ffffff;
+    }
+
+    .shot-menu {
+      padding: 16px;
+      background: #f3f7fb;
+      border-right: 1px solid var(--line);
+    }
+
+    .shot-menu div {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      margin-bottom: 8px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 780;
+    }
+
+    .shot-menu .current {
+      color: var(--teal-strong);
+      background: var(--teal-soft);
+    }
+
+    .shot-main {
+      padding: 22px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+    }
+
+    .shot-input {
+      min-height: 94px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .shot-input b {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .input-lines {
+      display: grid;
+      gap: 8px;
+    }
+
+    .input-lines span {
+      height: 9px;
+      border-radius: 999px;
+      background: #dfe8f0;
+    }
+
+    .input-lines span:nth-child(2) {
+      width: 76%;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .output-tile {
+      min-height: 138px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(7,132,125,0.18), rgba(240,100,73,0.14)),
+        #f8fafc;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .output-tile:nth-child(2) {
+      background:
+        linear-gradient(135deg, rgba(89,70,168,0.15), rgba(217,154,24,0.16)),
+        #f8fafc;
+    }
+
+    .output-tile:nth-child(3) {
+      background:
+        linear-gradient(135deg, rgba(240,100,73,0.15), rgba(7,132,125,0.14)),
+        #f8fafc;
+    }
+
+    .output-tile:nth-child(4) {
+      background:
+        linear-gradient(135deg, rgba(217,154,24,0.16), rgba(89,70,168,0.12)),
+        #f8fafc;
+    }
+
+    .output-tile b {
+      font-size: 0.88rem;
+    }
+
+    .output-tile span {
+      width: 70%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(16,18,23,0.16);
+    }
+
+    .shot-footer {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .status-pill {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: var(--radius);
+      background: #edf8f3;
+      color: var(--success);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .copy-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .copy-item {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .copy-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      color: #ffffff;
+      background: var(--ink);
+      font-weight: 900;
+      font-family: var(--mono);
+      font-size: 0.86rem;
+    }
+
+    .copy-item b {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .copy-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .problem-band {
+      background: #101217;
+      color: #ffffff;
+    }
+
+    .problem-band .section-kicker {
+      color: #8fe0da;
+    }
+
+    .problem-band .section-copy {
+      color: rgba(255,255,255,0.68);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .problem-bridge {
+      margin-top: 64px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .problem-bridge h3 {
+      font-size: 2.2rem;
+      margin: 0;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .problem {
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .problem b {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .problem p {
+      margin: 0;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.94rem;
+    }
+
+    .workflow-grid,
+    .feature-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .workflow-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .workflow-step,
+    .feature-card,
+    .price-card,
+    .faq-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 10px 28px rgba(16,18,23,0.05);
+    }
+
+    .workflow-step {
+      position: relative;
+      padding: 22px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .workflow-step::before {
+      content: attr(data-step);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 160px;
+      font-weight: 900;
+      color: rgba(7, 132, 125, 0.04);
+      z-index: -1;
+      pointer-events: none;
+      line-height: 1;
+      font-family: var(--mono);
+      letter-spacing: -0.05em;
+    }
+
+    .step-index {
+      color: var(--teal-strong);
+      font-family: var(--mono);
+      font-weight: 900;
+      font-size: 0.86rem;
+    }
+
+    .workflow-step h3,
+    .feature-card h3,
+    .price-card h3 {
+      margin: 14px 0 8px;
+      font-size: 1.18rem;
+      line-height: 1.25;
+    }
+
+    .workflow-step p,
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 24px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-top {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      color: #ffffff;
+      background: var(--teal);
+      font-weight: 900;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .feature-tag {
+      width: max-content;
+      max-width: 100%;
+      margin-top: auto;
+      padding: 6px 9px;
+      border-radius: var(--radius);
+      color: var(--teal-strong);
+      background: var(--teal-soft);
+      font-weight: 850;
+      font-size: 0.78rem;
+    }
+
+    .voice-band {
+      background:
+        linear-gradient(180deg, #ffffff, #edf7f6);
+      border-block: 1px solid var(--line);
+    }
+
+    .voice-panel {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .voice-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .voice-row {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .voice-row b {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .voice-row span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .calculator-controls,
+    .calculator-results {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .range-group {
+      margin-top: 22px;
+    }
+
+    .range-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 750;
+    }
+
+    .range-value {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .result-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .result-row:last-child {
+      border-bottom: 0;
+    }
+
+    .result-row strong {
+      color: var(--ink);
+      font-family: var(--mono);
+      white-space: nowrap;
+    }
+
+    .result-row.savings {
+      align-items: flex-end;
+      color: var(--ink);
+    }
+
+    .result-row.savings strong {
+      color: var(--success);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .comparison-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .comparison-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .comparison-table th:first-child,
+    .comparison-table td:first-child {
+      text-align: left;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .comparison-table th {
+      background: #f8fafc;
+      font-size: 0.92rem;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .comparison-table .highlight {
+      color: var(--teal-strong);
+      background: #effaf8;
+    }
+
+    .yes,
+    .no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      min-height: 30px;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    .yes {
+      color: var(--success);
+      background: #edf8f3;
+    }
+
+    .no {
+      color: #a34131;
+      background: #fff0ec;
+    }
+
+    .pricing-band {
+      background: #ffffff;
+      border-block: 1px solid var(--line);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 420px);
+      justify-content: center;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .price-card.featured {
+      border-color: var(--teal);
+      box-shadow: 0 24px 70px rgba(7,132,125,0.16);
+      position: relative;
+    }
+
+    .price-badge {
+      display: inline-flex;
+      width: max-content;
+      max-width: 100%;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 9px;
+      border-radius: var(--radius);
+      color: var(--teal-strong);
+      background: var(--teal-soft);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .price {
+      display: flex;
+      align-items: flex-start;
+      gap: 2px;
+      margin: 18px 0 6px;
+      font-weight: 950;
+      line-height: 0.9;
+      font-size: 3.9rem;
+    }
+
+    .price span {
+      margin-top: 7px;
+      font-size: 1.25rem;
+    }
+
+    .price-note {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .price-list {
+      display: grid;
+      gap: 11px;
+      margin: 0 0 24px;
+      padding: 0;
+      list-style: none;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .price-list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .price-list li::before {
+      content: "";
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      color: #ffffff;
+      background: var(--success) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") no-repeat center;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .price-card .btn {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .fine-print {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .fine-print span {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .faq-item {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      padding: 20px 22px;
+      font-weight: 850;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      float: right;
+      color: var(--teal-strong);
+      font-weight: 950;
+    }
+
+    .faq-item[open] summary::after {
+      content: "-";
+    }
+
+    .faq-item p {
+      margin: 0;
+      padding: 0 22px 22px;
+      color: var(--muted);
+    }
+
+    .final-cta {
+      padding: 72px 0;
+      color: #ffffff;
+      background:
+        linear-gradient(135deg, #101217, #17262b 58%, #073f3d);
+    }
+
+    .final-layout {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .final-cta h2 {
+      margin: 0;
+      font-size: 3rem;
+      line-height: 1.06;
+    }
+
+    .final-cta p {
+      margin: 12px 0 0;
+      color: rgba(255,255,255,0.72);
+      font-size: 1.06rem;
+    }
+
+    .final-cta .btn {
+      background: #ffffff;
+      color: var(--ink);
+    }
+
+    .site-footer {
+      padding: 34px 0;
+      background: #0d1117;
+      color: rgba(255,255,255,0.64);
+    }
+
+    .footer-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.92rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: #ffffff;
+    }
+
+    .fade-up {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js-enabled .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .js-enabled .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1020px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 4.2rem;
+      }
+
+      .app-grid {
+        grid-template-columns: 170px minmax(0, 1fr);
+      }
+
+      .app-right {
+        display: none;
+      }
+
+      .offer-layout,
+      .split,
+      .voice-panel,
+      .calculator,
+      .final-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-grid,
+      .workflow-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .final-layout {
+        justify-items: start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .site-header .btn {
+        display: none;
+      }
+
+      .hero {
+        min-height: 86vh;
+        min-height: 86svh;
+        padding: 34px 0 26px;
+      }
+
+      .hero-stage {
+        padding-inline: 10px;
+        opacity: 0.42;
+      }
+
+      .app-frame {
+        width: 940px;
+        min-height: 500px;
+      }
+
+      .hero-content {
+        padding: 46px 0 26px;
+      }
+
+      .hero h1 {
+        font-size: 3.15rem;
+      }
+
+      .hero-copy {
+        font-size: 1.03rem;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 62px 0;
+      }
+
+      .section-title {
+        font-size: 2.18rem;
+      }
+
+      .offer-band {
+        padding: 34px 0;
+      }
+
+      .benefit-grid,
+      .problem-grid,
+      .workflow-grid,
+      .feature-grid,
+      .voice-list,
+      .pricing-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shot-body {
+        grid-template-columns: 1fr;
+      }
+
+      .shot-menu {
+        display: none;
+      }
+
+      .output-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator-controls,
+      .calculator-results {
+        padding: 22px;
+      }
+
+      .result-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .final-cta h2 {
+        font-size: 2.15rem;
+      }
+
+      .footer-layout {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .fade-up {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .checkout-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 60px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 60px;
+      box-shadow: var(--shadow-soft);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .checkout-form-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--teal);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .checkout-form-container h3 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+    }
+
+    .inline-form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .inline-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .inline-form input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      background: #ffffff;
+    }
+
+    .inline-form input:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(7, 132, 125, 0.1);
+    }
+
+    @media (max-width: 860px) {
+      .checkout-wrapper {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+        gap: 40px;
+      }
+    }
+    /* ── Mobile nav ── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--ink);
+      padding: 6px 10px;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: rgba(16,18,23,0.96);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .mobile-nav.is-open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+
+    .testimonial-stars {
+      color: #f59e0b;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    /* ── Form polish ── */
+    .optional-label {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .checkout-submit-btn {
+      width: 100%;
+      margin-top: 10px;
+      min-height: 54px;
+      font-size: 1.05rem;
+    }
+
+    .privacy-note {
+      margin: 14px 0 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .api-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      margin: 0 0 24px;
+      padding: 10px 14px;
+      background: rgba(7, 132, 125, 0.06);
+      border: 1px solid rgba(7, 132, 125, 0.18);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .api-note svg {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--teal);
+    }
+
+    /* ── Sticky CTA bar ── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: var(--ink);
+      color: #ffffff;
+      padding: 14px 24px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 -4px 24px rgba(16,18,23,0.24);
+    }
+
+    .sticky-cta.is-visible {
+      display: flex;
+    }
+
+    .sticky-cta p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .sticky-cta strong {
+      font-size: 1rem;
+    }
+
+    /* ── FAQ focus ring ── */
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 1020px) {
+      .nav-hamburger { display: block; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    @media (max-width: 720px) {
+      .sticky-cta p { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="MonsterCreative home">
+        <img src="{% static 'landing/icon.jpg' %}" class="brand-mark" alt="" aria-hidden="true">
+        <span>MonsterCreative</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#inside">Inside the app</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#voices">Arabic voices</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <a class="btn btn-accent" href="#pricing">Get Access &mdash; $39</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-content">
+        <p class="eyebrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8"/></svg>Windows 10/11 &bull; AI Content Production</p>
+        <h1>One app.<br>Every creative asset.</h1>
+        <p class="hero-copy">Create copy, product images, videos, Arabic voiceovers, landing pages, and content formats from one focused desktop studio. Buy it once, bring your own fal.ai key, and stop juggling a messy subscription stack.</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="#pricing">Get lifetime access</a>
+          <a class="btn btn-secondary" href="#inside">See what is included</a>
+        </div>
+        <ul class="hero-trust" aria-label="Product highlights">
+          <li>One-time license &mdash; $39</li>
+          <li>1 device activation (transferable)</li>
+          <li>7-day refund policy</li>
+          <li>Secure checkout by Gumroad</li>
+        </ul>
+      </div>
+
+      <div class="hero-stage" id="heroStage" aria-hidden="true">
+        <img src="{% static 'landing/dashboard.jpeg' %}" alt="MonsterCreative Content Studio" class="app-frame" style="min-height: auto; padding: 0; display: block; width: min(1120px, 92vw); max-width: 100%;">
+      </div>
+    </section>
+
+    <section class="section problem-band">
+      <div class="container">
+        <div class="section-header section-header--center fade-up">
+          <p class="section-kicker">The problem</p>
+          <h2 class="section-title">Most content and ad workflows are expensive because they are scattered.</h2>
+          <p class="section-copy">A normal project or ad campaign can touch copy tools, image tools, video tools, voice tools, design apps, landing page builders, and a lot of manual resizing. MonsterCreative brings the most common production work into one desktop app.</p>
+        </div>
+        <div class="problem-grid">
+          <div class="problem fade-up"><b>Too many subscriptions</b><p>Small monthly tools become a big recurring bill before you even publish content or launch ads.</p></div>
+          <div class="problem fade-up"><b>Slow creative turnaround</b><p>Projects stall while copy, visuals, and formats are produced in separate places.</p></div>
+          <div class="problem fade-up"><b>Weak Arabic voiceovers</b><p>Generic text-to-speech can sound robotic, foreign, or wrong for the market.</p></div>
+          <div class="problem fade-up"><b>Manual resizing and rework</b><p>Every platform needs different formats, and repeated editing drains momentum.</p></div>
+        </div>
+        <div class="problem-bridge fade-up">
+          <h3>MonsterCreative replaces all of it.</h3>
+          <a class="btn btn-accent" href="#pricing">Get Lifetime Access &mdash; $39</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO SECTION: Uncommented as requested -->
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="section-header fade-up">
+          <p class="section-kicker">See it in action</p>
+          <h2 class="section-title">Hit Play To See How This Works</h2>
+        </div>
+        <div class="video-container fade-up" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow);">
+          <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer-band" aria-labelledby="offer-title">
+      <div class="container offer-layout">
+        <div class="offer-intro">
+          <div>
+            <p class="section-kicker">What you get today</p>
+            <h2 class="offer-title" id="offer-title">A complete desktop content studio without the monthly software bill.</h2>
+            <p class="offer-copy">Stop paying for 6 separate tools to launch one project or campaign. MonsterCreative puts copy, images, videos, Arabic voiceovers, landing pages, and format resizing into one Windows desktop app you buy once.</p>
+          </div>
+          <a class="btn btn-secondary" href="#features" style="margin-top: auto; align-self: flex-start;">See all features &rarr;</a>
+        </div>
+        <div class="benefit-grid">
+          <div class="benefit"><b>Content strategy and copy</b><span>9-step copy workflow with proven angles and 5 variants per run.</span></div>
+          <div class="benefit"><b>Images and videos</b><span>Generate product visuals, creative concepts, and short videos through fal.ai models.</span></div>
+          <div class="benefit"><b>Arabic voice lab</b><span>Regional voices for Gulf, Egyptian, Maghrebi, and Standard Arabic projects.</span></div>
+          <div class="benefit"><b>Launch assets</b><span>Resize formats, clone winning post layouts, and generate a landing page package.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="inside">
+      <div class="container split">
+        <img src="{% static 'landing/social ads.jpeg' %}" alt="MonsterCreative Workflow" class="product-shot fade-up" style="width: 100%; height: auto; display: block; object-fit: cover;">
+
+        <div class="fade-up">
+          <p class="section-kicker">Inside the app</p>
+          <h2 class="section-title">Built for creators and marketers who need finished assets, not another empty editor.</h2>
+          <p class="section-copy">MonsterCreative starts from the job you actually need done: turning a product, offer, or competitor reference into usable content assets. The workflow is practical, repeatable, and focused on speed.</p>
+          <div class="copy-list">
+            <div class="copy-item">
+              <div class="copy-number">01</div>
+              <div><b>Start from a product, offer, or winning reference</b><p>Give the app the content context, upload references when needed, and choose the output you want.</p></div>
+            </div>
+            <div class="copy-item">
+              <div class="copy-number">02</div>
+              <div><b>Generate the content pieces together</b><p>Copy, images, videos, voiceovers, and landing page ideas stay in one workflow.</p></div>
+            </div>
+            <div class="copy-item">
+              <div class="copy-number">03</div>
+              <div><b>Export assets that are ready to test</b><p>Download content formats, creative variations, and page files without rebuilding everything manually.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header section-header--center fade-up">
+          <p class="section-kicker">How it works</p>
+          <h2 class="section-title">From raw idea to content assets in four steps.</h2>
+          <p class="section-copy">The flow is intentionally simple so buyers understand exactly what happens after they download the desktop app.</p>
+        </div>
+        <div class="workflow-grid">
+          <div class="workflow-step fade-up" data-step="01"><div><span class="step-index">Step 01</span><h3>Install the Windows app</h3><p>Purchase your license, download MonsterCreative, and activate it on your machine.</p></div></div>
+          <div class="workflow-step fade-up" data-step="02"><div><span class="step-index">Step 02</span><h3>Connect your fal.ai key</h3><p>Your generation costs go directly through your own API key with no platform markup from MonsterCreative.</p></div></div>
+          <div class="workflow-step fade-up" data-step="03"><div><span class="step-index">Step 03</span><h3>Build your campaign</h3><p>Choose copy, images, video, voices, cloning, resizing, landing pages, or virtual try-on.</p></div></div>
+          <div class="workflow-step fade-up" data-step="04"><div><span class="step-index">Step 04</span><h3>Export and test</h3><p>Download the assets, publish your posts, launch your tests, and iterate from what performs.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header section-header--center fade-up">
+          <p class="section-kicker">Features</p>
+          <h2 class="section-title">Everything needed to produce content projects from one workspace.</h2>
+          <p class="section-copy">Each tool is framed around a real marketing task, not a generic AI prompt box.</p>
+        </div>
+                <div class="feature-grid">
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">01</div><h3>Ad Copy</h3><p>Build high-converting copy for ads, social posts, and general content with audience context, hooks, and creative variants.</p><span class="feature-tag">Copy variants</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">02</div><h3>Image Generation</h3><p>Create product shots, concepts, social visuals, and marketing imagery using leading image models through fal.ai.</p><span class="feature-tag">Product visuals</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">03</div><h3>Virtual Try-On</h3><p>Place apparel or product visuals on models and in scenes for fashion lookbooks, ecommerce, and social content.</p><span class="feature-tag">Model scenes</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">04</div><h3>Social Ads</h3><p>Upload winning reference ads or viral social posts and adapt the structure to your own product without starting from scratch.</p><span class="feature-tag">Reference-based creative</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">05</div><h3>Format Resizer</h3><p>Convert one winning image into 1:1, 4:5, 9:16, 16:9, and wide placements with AI outpainting.</p><span class="feature-tag">All content sizes</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">06</div><h3>Landing Page</h3><p>Generate a landing page package from your content image, copy, and brand details, then download it as a ZIP.</p><span class="feature-tag">HTML package</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">07</div><h3>AI Fashion Video</h3><p>Generate short fashion videos from text or image prompts for TikTok, Reels, or ad creatives with cinematic motion.</p><span class="feature-tag">AI Video</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">08</div><h3>Audio Scripts</h3><p>Create voiceovers for ad reads, UGC-style scripts, and social videos with regional Arabic voices for more authentic projects.</p><span class="feature-tag">9 voices</span></article>
+          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">09</div><h3>Bring Your Own Key</h3><p>Connect your own fal.ai API key so generation costs stay transparent and under your control.</p><span class="feature-tag">No generation markup</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section voice-band" id="voices">
+      <div class="container voice-panel">
+        <div class="fade-up">
+          <p class="section-kicker">Arabic voice lab</p>
+          <h2 class="section-title">Make Arabic content sound native to the market.</h2>
+          <p class="section-copy">Arabic projects need more than translated text. MonsterCreative gives you regional voice options so your content can match the audience, market, and tone.</p>
+          <div class="copy-list">
+            <div class="copy-item"><div class="copy-number">A1</div><div><b>Regional control</b><p>Pick from Gulf, Saudi, Egyptian, Maghrebi, and Standard Arabic voice styles.</p></div></div>
+            <div class="copy-item"><div class="copy-number">A2</div><div><b>Marketing-first output</b><p>Create voiceovers for script reads, UGC-style scripts, product demos, and direct-response offers.</p></div></div>
+          </div>
+        </div>
+        <div class="voice-list fade-up">
+          <div class="voice-row"><b>Nasser Aljubaily</b><span>Gulf / Khaleeji male voice</span></div>
+          <div class="voice-row"><b>Jeddawi</b><span>Saudi male voice</span></div>
+          <div class="voice-row"><b>Haytham</b><span>Egyptian male voice</span></div>
+          <div class="voice-row"><b>Farah</b><span>Maghrebi female voice</span></div>
+          <div class="voice-row"><b>Mazen Lawand</b><span>Standard Arabic broadcast voice</span></div>
+          <div class="voice-row"><b>More voices included</b><span>Ghizlane, Rachid, Ilyass, Salma, and more</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pricing-band" id="pricing">
+      <div class="container">
+        <div class="checkout-wrapper fade-up">
+          <div class="checkout-info">
+            <p class="section-kicker" style="color: var(--teal);">One-time payment</p>
+            <h2 class="section-title" style="font-size: 2.5rem;">Lifetime Access</h2>
+            <div class="price" style="margin: 20px 0; font-size: 4rem; font-weight: 900; line-height: 1; color: var(--ink);"><span>$</span>39</div>
+             <p class="price-note" style="color: var(--muted); margin-bottom: 8px;">Own the software forever. No monthly app fees.</p>
+             <p class="api-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>AI costs not included &mdash; billed by <a href="https://fal.ai" target="_blank" rel="noopener noreferrer" style="color:var(--teal);text-decoration:underline;">fal.ai</a>.</p>
+            <ul class="price-list">
+              <li>All 8 core creative tools</li>
+              <li>1 device activation (transferable)</li>
+              <li>Lifetime updates</li>
+              <li>Priority email support</li>
+              <li>Bring your own fal.ai key</li>
+            </ul>
+          </div>
+          <div class="checkout-form-container">
+            <h3>Get your license</h3>
+            <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 24px;">Enter your details to proceed to secure checkout.</p>
+            <form id="leadForm" class="inline-form">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" autocomplete="name" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number <span class="optional-label">(optional)</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+1 234 567 890">
+              </div>
+              <button type="submit" class="btn btn-accent checkout-submit-btn">Buy and download &rarr;</button>
+            </form>
+            <div style="display: flex; align-items: center; justify-content: center; margin: 16px 0; color: var(--gold);">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span style="color: var(--ink); font-weight: 800; margin-left: 8px; font-size: 0.94rem;">Trusted by 3,400+ creators</span>
+            </div>
+            <p class="privacy-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-top: -2px; margin-right: 2px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Secure checkout via Gumroad &nbsp;&bull;&nbsp; 
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-top: -2px; margin-right: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg> 7-day refund guarantee
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header section-header--center fade-up">
+          <p class="section-kicker">FAQ</p>
+          <h2 class="section-title">Clear answers before you download.</h2>
+        </div>
+        <div class="faq-grid">
+          <details class="faq-item fade-up">
+            <summary>What is the refund policy?</summary>
+            <p>You have a 7-day refund window if the software does not work on your Windows 10/11 system. Contact us with your purchase email and a description of the issue.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>Is MonsterCreative a desktop app?</summary>
+            <p>Yes. MonsterCreative is a Windows desktop app built for Windows 10/11 64-bit systems.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>Do I need a fal.ai account?</summary>
+            <p>Yes. The app uses your own fal.ai API key for generation. That keeps usage billing transparent and avoids platform markup.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>Are AI generation costs included?</summary>
+            <p>No. The license covers MonsterCreative. AI usage is billed separately by fal.ai based on what you generate.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>What happens after purchase?</summary>
+            <p>You complete checkout through Gumroad, receive your license details, download the app, activate it, and connect your API key.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>Can I use it for Arabic content?</summary>
+            <p>Yes. MonsterCreative includes Arabic voice options for Gulf, Saudi, Egyptian, Maghrebi, and Standard Arabic use cases.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>Does it replace an agency?</summary>
+            <p>It replaces a lot of repetitive production work. Strategy, offer testing, media buying, and creative judgment still matter.</p>
+          </details>
+          <details class="faq-item fade-up">
+            <summary>Can I transfer my license to a new device?</summary>
+            <p>The license includes 1 device activation, but your license key is fully transferable if you change computers.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-layout">
+        <div>
+          <h2>Build your next project in one desktop workspace.</h2>
+          <p>Download MonsterCreative, connect your fal.ai key, and start producing content assets faster.</p>
+        </div>
+        <a class="btn btn-accent" href="#pricing">Get Lifetime Access &mdash; $39</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <a class="brand" href="#top" aria-label="MonsterCreative home">
+        <span class="brand-mark" aria-hidden="true">MC</span>
+        <span>MonsterCreative</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Service</a></li>
+      </ul>
+      <span>&copy; 2026 MonsterCreative</span>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" id="stickyCta" role="region" aria-label="Quick purchase">
+    <div style="display:flex; flex-direction:column; align-items:flex-start;">
+      <strong>MonsterCreative License</strong>
+      <p>One-time $39 payment. No subscriptions.</p>
+    </div>
+    <a class="btn btn-accent" href="#pricing">Get Access</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("navHamburger");
+    const mobileNav = document.getElementById("mobileNav");
+    const mobileClose = document.getElementById("mobileNavClose");
+    const stickyCta = document.getElementById("stickyCta");
+
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener("click", () => {
+        mobileNav.classList.add("is-open");
+        hamburger.setAttribute("aria-expanded", "true");
+      });
+      mobileClose.addEventListener("click", () => {
+        mobileNav.classList.remove("is-open");
+        hamburger.setAttribute("aria-expanded", "false");
+      });
+      mobileNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          mobileNav.classList.remove("is-open");
+          hamburger.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    if (stickyCta) {
+      window.addEventListener("scroll", () => {
+        const show = window.scrollY > window.innerHeight * 0.35;
+        stickyCta.classList.toggle("is-visible", show);
+      }, { passive: true });
+    }
+
+    const leadForm = document.getElementById("leadForm");
+    const checkoutUrl = "https://lbahidigital.gumroad.com/l/yuxjmq";
+
+    // Hidden link for Gumroad Overlay
+    const gumroadLink = document.createElement("a");
+    gumroadLink.className = "gumroad-button";
+    gumroadLink.style.display = "none";
+    document.body.appendChild(gumroadLink);
+
+    // Listen for Gumroad success signal
+    window.addEventListener("message", function(e) {
+      try {
+        const data = JSON.parse(e.data);
+        if (data.type === "gumroad:purchase_success" || e.data === "gumroad_success") {
+          window.location.href = "/success/?v=mc_launch_2024";
+        }
+      } catch (err) {
+        // Not a JSON message or not from Gumroad, ignore
+        if (e.data === "gumroad_success") {
+           window.location.href = "/success/?v=mc_launch_2024";
+        }
+      }
+    });
+
+    if (leadForm) {
+      leadForm.onsubmit = function(e) {
+        e.preventDefault();
+        const submitBtn = leadForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "Processing...";
+        submitBtn.disabled = true;
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone") ? document.getElementById("phone").value : "";
+
+        fetch("/api/lead/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, phone }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            const finalUrl = new URL(checkoutUrl);
+            finalUrl.searchParams.append("checkout[email]", email);
+            finalUrl.searchParams.append("checkout[name]", name);
+            
+            // Trigger Gumroad Overlay
+            gumroadLink.href = finalUrl.toString();
+            // Re-initialize Gumroad to pick up the dynamic link
+            if (window.Gumroad) {
+              gumroadLink.click();
+            } else {
+              // Fallback to direct redirect if script failed to load
+              window.location.href = finalUrl.toString();
+            }
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        })
+        .finally(() => {
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+        });
+      };
+    }
+
+    const revealTargets = document.querySelectorAll(".fade-up");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealTargets.forEach((target) => revealObserver.observe(target));
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    // ── Parallax: app frame scrolls at 0.35x speed ──
+    const heroStage = document.getElementById("heroStage");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (heroStage && !prefersReducedMotion) {
+      let ticking = false;
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            heroStage.style.transform = `translateY(${scrollY * 0.35}px)`;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>

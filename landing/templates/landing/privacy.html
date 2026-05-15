@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | MonsterCreative</title>
+  <link rel="icon" type="image/jpeg" href="{% static 'landing/icon.jpg' %}">
+  <meta name="description" content="MonsterCreative privacy policy." />
+  <style>
+    :root {
+      --paper: #f5f7fa;
+      --ink: #101217;
+      --muted: #687381;
+      --line: #dce4ec;
+      --surface: #ffffff;
+      --teal: #07847d;
+      --radius: 8px;
+      --max: 820px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--font);
+      line-height: 1.7;
+      letter-spacing: 0;
+    }
+
+    .wrap {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 42px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 850;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: block;
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+
+    article {
+      padding: 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 14px 38px rgba(16,18,23,0.06);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2.5rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 34px 0 8px;
+      font-size: 1.2rem;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--teal);
+      font-weight: 750;
+    }
+
+    .back {
+      display: inline-flex;
+      margin-top: 26px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="brand" href="/" aria-label="Back to MonsterCreative">
+      <img src="{% static 'landing/icon.jpg' %}" class="brand-mark" alt="" aria-hidden="true">
+      <span>MonsterCreative</span>
+    </a>
+
+    <article>
+      <h1>Privacy Policy</h1>
+      <p>Last updated: May 2026</p>
+
+      <h2>What we collect</h2>
+      <p>We collect the information needed to process your purchase, deliver your license, provide support, and respond to customer requests. This may include your name, email address, purchase details, and support messages.</p>
+
+      <h2>Payment processing</h2>
+      <p>Payments are handled by Gumroad. MonsterCreative does not store your full payment card details.</p>
+
+      <h2>Generated content</h2>
+      <p>MonsterCreative is designed to run as a desktop app and use your own fal.ai API key for generation. We do not sell your generated content.</p>
+
+      <h2>API usage</h2>
+      <p>When you connect your fal.ai API key, your AI usage is governed by fal.ai's own terms, privacy policy, and billing rules.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about privacy can be sent to <a href="mailto:support@lbahi.digital">support@lbahi.digital</a>.</p>
+
+      <a class="back" href="/">Back to MonsterCreative</a>
+    </article>
+  </main>
+</body>
+</html>
