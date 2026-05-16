@@ -2261,44 +2261,26 @@
     if (leadForm) {
       leadForm.onsubmit = function(e) {
         e.preventDefault();
-        const submitBtn = leadForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerText;
-        submitBtn.innerText = "Processing...";
-        submitBtn.disabled = true;
 
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phone = document.getElementById("phone") ? document.getElementById("phone").value : "";
 
+        // Build the Gumroad URL with prefilled customer info
+        const finalUrl = new URL(checkoutUrl);
+        finalUrl.searchParams.append("checkout[email]", email);
+        finalUrl.searchParams.append("checkout[name]", name);
+
+        // Trigger Gumroad overlay IMMEDIATELY (must stay in user gesture context)
+        gumroadLink.href = finalUrl.toString();
+        gumroadLink.click();
+
+        // Capture the lead in the background (fire-and-forget)
         fetch("/api/lead/", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, email, phone }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === "success") {
-            const finalUrl = new URL(checkoutUrl);
-            finalUrl.searchParams.append("checkout[email]", email);
-            finalUrl.searchParams.append("checkout[name]", name);
-            
-            // Trigger Gumroad Overlay
-            gumroadLink.href = finalUrl.toString();
-            gumroadLink.click();
-          } else {
-            alert("Error: " + data.message);
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          alert("An error occurred. Please try again.");
-        })
-        .finally(() => {
-          submitBtn.innerText = originalText;
-          submitBtn.disabled = false;
-        });
+        }).catch(() => {}); // silently ignore errors
       };
     }
 
