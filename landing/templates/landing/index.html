@@ -2238,17 +2238,28 @@
     const checkoutUrl = "https://lbahidigital.gumroad.com/l/yuxjmq";
 
 
-    // Listen for Gumroad success signal
+    // Listen for Gumroad success signal (handles all known message formats)
     window.addEventListener("message", function(e) {
       try {
-        const data = JSON.parse(e.data);
-        if (data.type === "gumroad:purchase_success" || e.data === "gumroad_success") {
+        // Only handle messages from Gumroad
+        if (!e.origin || !e.origin.includes("gumroad.com")) return;
+
+        // e.data can be a string or already an object
+        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+
+        // Catch any Gumroad purchase success signal
+        if (data && (
+          data.type === "gumroad:purchase_success" ||
+          data.type === "purchase" ||
+          data.sale != null ||
+          data.success === true
+        )) {
           window.location.href = "/success/?v=mc_launch_2024";
         }
       } catch (err) {
-        // Not a JSON message or not from Gumroad, ignore
-        if (e.data === "gumroad_success") {
-           window.location.href = "/success/?v=mc_launch_2024";
+        // If parse fails, check raw string
+        if (typeof e.data === "string" && e.data.includes("gumroad")) {
+          window.location.href = "/success/?v=mc_launch_2024";
         }
       }
     });
