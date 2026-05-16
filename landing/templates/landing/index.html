@@ -2286,13 +2286,7 @@
             
             // Trigger Gumroad Overlay
             gumroadLink.href = finalUrl.toString();
-            // Re-initialize Gumroad to pick up the dynamic link
-            if (window.Gumroad) {
-              gumroadLink.click();
-            } else {
-              // Fallback to direct redirect if script failed to load
-              window.location.href = finalUrl.toString();
-            }
+            gumroadLink.click();
           } else {
             alert("Error: " + data.message);
           }
