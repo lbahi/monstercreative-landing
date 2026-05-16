@@ -2237,11 +2237,6 @@
     const leadForm = document.getElementById("leadForm");
     const checkoutUrl = "https://lbahidigital.gumroad.com/l/yuxjmq";
 
-    // Hidden link for Gumroad Overlay
-    const gumroadLink = document.createElement("a");
-    gumroadLink.className = "gumroad-button";
-    gumroadLink.style.display = "none";
-    document.body.appendChild(gumroadLink);
 
     // Listen for Gumroad success signal
     window.addEventListener("message", function(e) {
@@ -2271,9 +2266,8 @@
         finalUrl.searchParams.append("checkout[email]", email);
         finalUrl.searchParams.append("checkout[name]", name);
 
-        // Trigger Gumroad overlay IMMEDIATELY (must stay in user gesture context)
-        gumroadLink.href = finalUrl.toString();
-        gumroadLink.click();
+        // Open Gumroad checkout as a popup — keeps our page alive to receive postMessage
+        window.open(finalUrl.toString(), 'gumroad_checkout', 'width=820,height=720,scrollbars=yes,resizable=yes');
 
         // Capture the lead in the background (fire-and-forget)
         fetch("/api/lead/", {
