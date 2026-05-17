@@ -2212,8 +2212,8 @@
 
     if (hamburger && mobileNav) {
       hamburger.addEventListener("click", () => {
-        mobileNav.classList.add("is-open");
-        hamburger.setAttribute("aria-expanded", "true");
+        const isOpen = mobileNav.classList.toggle("is-open");
+        hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
       mobileClose.addEventListener("click", () => {
         mobileNav.classList.remove("is-open");
@@ -2237,29 +2237,23 @@
     const leadForm = document.getElementById("leadForm");
     const checkoutUrl = "https://lbahidigital.gumroad.com/l/yuxjmq";
 
+    // Hidden link for Gumroad Overlay
+    const gumroadLink = document.createElement("a");
+    gumroadLink.className = "gumroad-button";
+    gumroadLink.style.display = "none";
+    document.body.appendChild(gumroadLink);
 
-    // Listen for Gumroad success signal (handles all known message formats)
+    // Listen for Gumroad success signal
     window.addEventListener("message", function(e) {
       try {
-        // Only handle messages from Gumroad
-        if (!e.origin || !e.origin.includes("gumroad.com")) return;
-
-        // e.data can be a string or already an object
-        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-
-        // Catch any Gumroad purchase success signal
-        if (data && (
-          data.type === "gumroad:purchase_success" ||
-          data.type === "purchase" ||
-          data.sale != null ||
-          data.success === true
-        )) {
+        const data = JSON.parse(e.data);
+        if (data.type === "gumroad:purchase_success" || e.data === "gumroad_success") {
           window.location.href = "/success/?v=mc_launch_2024";
         }
       } catch (err) {
-        // If parse fails, check raw string
-        if (typeof e.data === "string" && e.data.includes("gumroad")) {
-          window.location.href = "/success/?v=mc_launch_2024";
+        // Not a JSON message or not from Gumroad, ignore
+        if (e.data === "gumroad_success") {
+           window.location.href = "/success/?v=mc_launch_2024";
         }
       }
     });
@@ -2267,25 +2261,50 @@
     if (leadForm) {
       leadForm.onsubmit = function(e) {
         e.preventDefault();
+        const submitBtn = leadForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "Processing...";
+        submitBtn.disabled = true;
 
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const phone = document.getElementById("phone") ? document.getElementById("phone").value : "";
 
-        // Build the Gumroad URL with prefilled customer info
-        const finalUrl = new URL(checkoutUrl);
-        finalUrl.searchParams.append("checkout[email]", email);
-        finalUrl.searchParams.append("checkout[name]", name);
-
-        // Open Gumroad checkout as a popup — keeps our page alive to receive postMessage
-        window.open(finalUrl.toString(), 'gumroad_checkout', 'width=820,height=720,scrollbars=yes,resizable=yes');
-
-        // Capture the lead in the background (fire-and-forget)
         fetch("/api/lead/", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({ name, email, phone }),
-        }).catch(() => {}); // silently ignore errors
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            const finalUrl = new URL(checkoutUrl);
+            finalUrl.searchParams.append("checkout[email]", email);
+            finalUrl.searchParams.append("checkout[name]", name);
+            
+            // Trigger Gumroad Overlay
+            gumroadLink.href = finalUrl.toString();
+            // Re-initialize Gumroad to pick up the dynamic link
+            if (window.Gumroad) {
+              gumroadLink.click();
+            } else {
+              // Fallback to direct redirect if script failed to load
+              window.location.href = finalUrl.toString();
+            }
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        })
+        .finally(() => {
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+        });
       };
     }
 
