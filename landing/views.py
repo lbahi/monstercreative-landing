@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.conf import settings
 from .models import Lead
 from django.views.decorators.csrf import csrf_exempt
 import json
 
 def index(request):
-    return render(request, 'landing/index.html')
+    context = {
+        'FREEMIUS_PRODUCT_ID': settings.FREEMIUS_PRODUCT_ID,
+        'FREEMIUS_PUBLIC_KEY': settings.FREEMIUS_PUBLIC_KEY,
+        'FREEMIUS_PLAN_ID': settings.FREEMIUS_PLAN_ID,
+    }
+    return render(request, 'landing/index.html', context)
 
 def privacy(request):
     return render(request, 'landing/privacy.html')

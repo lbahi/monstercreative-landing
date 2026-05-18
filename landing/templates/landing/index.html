@@ -14,7 +14,7 @@
   <script>
     document.documentElement.classList.add("js-enabled");
   </script>
-  <script src="https://gumroad.com/js/gumroad.js"></script>
+  <script type="text/javascript" src="https://checkout.freemius.com/js/v1/"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
@@ -2236,28 +2236,24 @@
     }
 
     const leadForm = document.getElementById("leadForm");
-    const checkoutUrl = "https://lbahidigital.gumroad.com/l/yuxjmq";
 
-    // Hidden link for Gumroad Overlay
-    const gumroadLink = document.createElement("a");
-    gumroadLink.className = "gumroad-button";
-    gumroadLink.style.display = "none";
-    document.body.appendChild(gumroadLink);
+    // ==========================================
+    // Freemius Integration Configuration
+    // ==========================================
+    // Freemius Checkout Configuration (injected server-side from environment variables)
+    const FREEMIUS_PRODUCT_ID = '{{ FREEMIUS_PRODUCT_ID }}';
+    const FREEMIUS_PUBLIC_KEY = '{{ FREEMIUS_PUBLIC_KEY }}';
+    const FREEMIUS_PLAN_ID = '{{ FREEMIUS_PLAN_ID }}';
+    // ==========================================
 
-    // Listen for Gumroad success signal
-    window.addEventListener("message", function(e) {
-      try {
-        const data = JSON.parse(e.data);
-        if (data.type === "gumroad:purchase_success" || e.data === "gumroad_success") {
-          window.location.href = "/success/?v=mc_launch_2024";
-        }
-      } catch (err) {
-        // Not a JSON message or not from Gumroad, ignore
-        if (e.data === "gumroad_success") {
-           window.location.href = "/success/?v=mc_launch_2024";
-        }
-      }
-    });
+    // Initialize Freemius Checkout SDK
+    let freemiusCheckout = null;
+    if (window.FS && window.FS.Checkout) {
+      freemiusCheckout = new FS.Checkout({
+        product_id: FREEMIUS_PRODUCT_ID,
+        public_key: FREEMIUS_PUBLIC_KEY,
+      });
+    }
 
     if (leadForm) {
       leadForm.onsubmit = function(e) {
@@ -2281,18 +2277,24 @@
         .then(response => response.json())
         .then(data => {
           if (data.status === "success") {
-            const finalUrl = new URL(checkoutUrl);
-            finalUrl.searchParams.append("checkout[email]", email);
-            finalUrl.searchParams.append("checkout[name]", name);
-            
-            // Trigger Gumroad Overlay
-            gumroadLink.href = finalUrl.toString();
-            // Re-initialize Gumroad to pick up the dynamic link
-            if (window.Gumroad) {
-              gumroadLink.click();
+            // Trigger Freemius Checkout Overlay
+            if (freemiusCheckout) {
+              freemiusCheckout.open({
+                plan_id: FREEMIUS_PLAN_ID,
+                user_email: email,
+                user_firstname: name,
+                success: function(response) {
+                  window.location.href = "/success/?v=mc_launch_2024";
+                },
+                purchaseCompleted: function(response) {
+                  // Fallback redirect immediately on purchase completion to be safe
+                  window.location.href = "/success/?v=mc_launch_2024";
+                }
+              });
             } else {
-              // Fallback to direct redirect if script failed to load
-              window.location.href = finalUrl.toString();
+              // Fallback to Hosted Checkout if SDK is blocked or fails to load
+              const fallbackUrl = `https://checkout.freemius.com/product/${FREEMIUS_PRODUCT_ID}/plan/${FREEMIUS_PLAN_ID}/?user_email=${encodeURIComponent(email)}&user_firstname=${encodeURIComponent(name)}`;
+              window.location.href = fallbackUrl;
             }
           } else {
             alert("Error: " + data.message);

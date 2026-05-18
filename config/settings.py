@@ -119,3 +119,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Freemius Checkout Configuration
+# Set these as environment variables in your .env file / Coolify dashboard
+FREEMIUS_PRODUCT_ID = os.environ.get('FREEMIUS_PRODUCT_ID', '')
+FREEMIUS_PUBLIC_KEY = os.environ.get('FREEMIUS_PUBLIC_KEY', '')
+FREEMIUS_PLAN_ID = os.environ.get('FREEMIUS_PLAN_ID', '')
