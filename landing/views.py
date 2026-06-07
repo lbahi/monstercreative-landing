@@ -1,10 +1,33 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 from .models import Lead
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+def robots_txt(request):
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /success/\n"
+        f"Sitemap: {request.build_absolute_uri('/sitemap.xml')}\n"
+    )
+    return HttpResponse(content, content_type="text/plain")
+
+def google_verification(request):
+    return HttpResponse("google-site-verification: google91f4a71bffa82687.html", content_type="text/html")
+
+def sitemap_xml(request):
+    domain = request.build_absolute_uri('/').rstrip('/')
+    content = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f'  <url>\n    <loc>{domain}/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n'
+        f'  <url>\n    <loc>{domain}/privacy/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.3</priority>\n  </url>\n'
+        f'  <url>\n    <loc>{domain}/terms/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.3</priority>\n  </url>\n'
+        '</urlset>'
+    )
+    return HttpResponse(content, content_type="application/xml")
 def index(request):
     context = {
         'FREEMIUS_PRODUCT_ID': settings.FREEMIUS_PRODUCT_ID,
