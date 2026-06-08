@@ -19,6 +19,8 @@ def google_verification(request):
 
 def sitemap_xml(request):
     domain = request.build_absolute_uri('/').rstrip('/')
+    # Force HTTPS since the app runs behind an HTTPS reverse proxy
+    domain = domain.replace('http://', 'https://')
     content = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
