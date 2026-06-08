@@ -18,9 +18,8 @@ def google_verification(request):
     return HttpResponse("google-site-verification: google91f4a71bffa82687.html", content_type="text/html")
 
 def sitemap_xml(request):
-    domain = request.build_absolute_uri('/').rstrip('/')
-    # Force HTTPS since the app runs behind an HTTPS reverse proxy
-    domain = domain.replace('http://', 'https://')
+    # Hardcode HTTPS domain — app runs behind Coolify reverse proxy
+    domain = 'https://monstercreative.lbahi.digital'
     content = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
