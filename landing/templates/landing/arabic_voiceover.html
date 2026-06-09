@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arabic AI Voice Generator & Text to Speech Studio | MonsterCreative</title>
+  <link rel="icon" type="image/jpeg" href="{% static 'landing/icon.jpg' %}">
+  <link rel="canonical" href="https://monstercreative.lbahi.digital/features/arabic-voiceover/" />
+  <meta name="description" content="Generate realistic Arabic AI voiceovers and high-converting audio scripts with native dialects. One-time payment, lifetime access, bring your own fal.ai key." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "MonsterCreative Arabic Voice Lab",
+    "description": "Desktop AI Voice Generator for realistic Gulf, Egyptian, Maghrebi, and Standard Arabic text-to-speech voiceovers.",
+    "offers": {
+      "@type": "Offer",
+      "price": "39.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --paper: #f5f7fa;
+      --paper-soft: #eef3f7;
+      --ink: #101217;
+      --ink-soft: #343a44;
+      --muted: #687381;
+      --line: #dce4ec;
+      --line-strong: #becbd8;
+      --surface: #ffffff;
+      --teal: #07847d;
+      --teal-strong: #065f5a;
+      --teal-soft: #dff7f4;
+      --coral: #f06449;
+      --radius: 8px;
+      --max: 1180px;
+      --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0) 320px),
+        radial-gradient(circle at 20% 0%, rgba(7,132,125,0.08), transparent 300px),
+        var(--paper);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(220, 228, 236, 0.7);
+      background: rgba(245, 247, 250, 0.88);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 850;
+      color: var(--ink);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .btn-accent {
+      color: #ffffff;
+      background: var(--coral);
+      box-shadow: 0 16px 34px rgba(240, 100, 73, 0.2);
+    }
+
+    .btn-accent:hover {
+      background: #d9563d;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.74);
+      border-color: var(--line-strong);
+    }
+
+    .btn-secondary:hover {
+      background: #ffffff;
+      border-color: var(--ink);
+    }
+
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+      background: #101217;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .voice-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(16,18,23,0.05);
+    }
+
+    .voice-card h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+    }
+
+    .voice-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .site-footer {
+      padding: 34px 0;
+      background: #0d1117;
+      color: rgba(255, 255, 255, 0.64);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .voice-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="brand" href="/">
+        <img src="{% static 'landing/icon.jpg' %}" class="brand-mark" alt="MonsterCreative">
+        <span>MonsterCreative</span>
+      </a>
+      <a class="btn btn-accent" href="/#pricing">Get Access &mdash; $39</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Realistic Arabic AI Voice Generator</h1>
+        <p>Produce localized, high-converting voiceovers in multiple dialects including Gulf, Egyptian, Maghrebi, and Standard Arabic. Stop using robotic text-to-speech tools.</p>
+        <a class="btn btn-accent" href="/#pricing">Get Lifetime Access &mdash; $39</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Global Voice Lab Dialects</h2>
+        <div class="voice-grid">
+          <div class="voice-card">
+            <h3>Gulf (Khaleeji) Dialect</h3>
+            <p>Perfect for Saudi Arabia, UAE, and GCC markets. Features native expressions and authentic inflections.</p>
+          </div>
+          <div class="voice-card">
+            <h3>Egyptian (Masry) Dialect</h3>
+            <p>Designed for the largest consumer market in the Arab world. Ideal for casual, high-energy marketing campaigns.</p>
+          </div>
+          <div class="voice-card">
+            <h3>Levantine & Maghrebi Dialect</h3>
+            <p>Target North African and Mediterranean regions with localized dialects that sound naturally spoken.</p>
+          </div>
+          <div class="voice-card">
+            <h3>Standard Modern Arabic (Fusha)</h3>
+            <p>Best for corporate videos, news, and official announcements needing clear pronunciation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 MonsterCreative. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

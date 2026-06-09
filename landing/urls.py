@@ -3,6 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('features/arabic-voiceover/', views.arabic_voiceover, name='arabic_voiceover'),
+    path('features/virtual-try-on/', views.virtual_try_on, name='virtual_try_on'),
+    path('features/image-resizer/', views.image_resizer, name='image_resizer'),
     path('privacy/', views.privacy, name='privacy'),
     path('terms/', views.terms, name='terms'),
     path('api/lead/', views.capture_lead, name='capture_lead'),

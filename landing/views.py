@@ -24,6 +24,9 @@ def sitemap_xml(request):
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         f'  <url>\n    <loc>{domain}/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n'
+        f'  <url>\n    <loc>{domain}/features/arabic-voiceover/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+        f'  <url>\n    <loc>{domain}/features/virtual-try-on/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+        f'  <url>\n    <loc>{domain}/features/image-resizer/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
         f'  <url>\n    <loc>{domain}/privacy/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.3</priority>\n  </url>\n'
         f'  <url>\n    <loc>{domain}/terms/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.3</priority>\n  </url>\n'
         '</urlset>'
@@ -36,6 +39,15 @@ def index(request):
         'FREEMIUS_PLAN_ID': settings.FREEMIUS_PLAN_ID,
     }
     return render(request, 'landing/index.html', context)
+
+def arabic_voiceover(request):
+    return render(request, 'landing/arabic_voiceover.html')
+
+def virtual_try_on(request):
+    return render(request, 'landing/virtual_try_on.html')
+
+def image_resizer(request):
+    return render(request, 'landing/image_resizer.html')
 
 def privacy(request):
     return render(request, 'landing/privacy.html')
