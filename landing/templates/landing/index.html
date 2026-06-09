@@ -1583,22 +1583,34 @@
     }
 
     .site-footer {
-      padding: 34px 0 100px;
+      padding: 56px 0 40px;
       background: #0d1117;
       color: rgba(255,255,255,0.64);
     }
 
     .footer-layout {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      align-items: start;
+      gap: 48px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+
+    .footer-col-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin: 0 0 14px;
     }
 
     .footer-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
+      flex-direction: column;
+      gap: 10px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -1607,11 +1619,22 @@
 
     .footer-links a {
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     .footer-links a:hover,
     .footer-links a:focus-visible {
       color: #ffffff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .fade-up {
@@ -1764,8 +1787,14 @@
       }
 
       .footer-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
+        gap: 6px;
       }
     }
 
@@ -2328,18 +2357,52 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-layout">
-      <a class="brand" href="#top" aria-label="MonsterCreative home">
-        <span class="brand-mark" aria-hidden="true">MC</span>
-        <span>MonsterCreative</span>
-      </a>
-      <ul class="footer-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="/privacy/">Privacy Policy</a></li>
-        <li><a href="/terms/">Terms of Service</a></li>
-      </ul>
-      <span>&copy; 2026 MonsterCreative</span>
+    <div class="container">
+      <div class="footer-layout">
+
+        <!-- Brand -->
+        <div>
+          <a class="brand" href="/" aria-label="MonsterCreative home" style="margin-bottom: 14px; display: inline-flex;">
+            <span class="brand-mark" aria-hidden="true">MC</span>
+            <span>MonsterCreative</span>
+          </a>
+          <p style="font-size: 0.88rem; margin: 12px 0 0; max-width: 220px; line-height: 1.6;">AI content studio for Windows. Buy once, create forever.</p>
+        </div>
+
+        <!-- Features -->
+        <div>
+          <p class="footer-col-label">Features</p>
+          <ul class="footer-links">
+            <li><a href="/features/arabic-voiceover/">Arabic Voiceover</a></li>
+            <li><a href="/features/virtual-try-on/">Virtual Try-On</a></li>
+            <li><a href="/features/image-resizer/">Image Resizer</a></li>
+          </ul>
+        </div>
+
+        <!-- Product -->
+        <div>
+          <p class="footer-col-label">Product</p>
+          <ul class="footer-links">
+            <li><a href="#inside">Inside the app</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <p class="footer-col-label">Legal</p>
+          <ul class="footer-links">
+            <li><a href="/privacy/">Privacy Policy</a></li>
+            <li><a href="/terms/">Terms of Service</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 MonsterCreative</span>
+        <span>AI content production for Windows &mdash; one-time license</span>
+      </div>
     </div>
   </footer>
 
