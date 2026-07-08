@@ -1,15 +1,18 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MonsterCreative | AI Content Creation Suite for Windows</title>
   <link rel="icon" type="image/jpeg" href="{% static 'landing/icon.jpg' %}">
   <link rel="canonical" href="https://monstercreative.lbahi.digital/" />
-  <meta name="description" content="MonsterCreative is a Windows desktop app for creating copy, images, videos, Arabic voiceovers, landing pages, and content assets with AI. One-time license. Bring your own fal.ai key." />
+  <meta name="description"
+    content="MonsterCreative is a Windows desktop app for creating copy, images, videos, Arabic voiceovers, landing pages, and content assets with AI. One-time license. Bring your own fal.ai key." />
   <meta property="og:title" content="MonsterCreative | AI Content Creation Suite for Windows" />
-  <meta property="og:description" content="Create better content projects from one desktop app: copy, images, video, Arabic voiceovers, landing pages, and format resizing." />
+  <meta property="og:description"
+    content="Create better content projects from one desktop app: copy, images, video, Arabic voiceovers, landing pages, and format resizing." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#101217" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -124,7 +127,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -161,8 +166,8 @@
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0) 320px),
-        radial-gradient(circle at 20% 0%, rgba(7,132,125,0.08), transparent 300px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0) 320px),
+        radial-gradient(circle at 20% 0%, rgba(7, 132, 125, 0.08), transparent 300px),
         var(--paper);
       font-family: var(--font);
       font-size: 16px;
@@ -175,12 +180,14 @@
       color: inherit;
     }
 
-    img, svg {
+    img,
+    svg {
       display: block;
       max-width: 100%;
     }
 
-    button, input {
+    button,
+    input {
       font: inherit;
     }
 
@@ -324,8 +331,15 @@
 
     /* ── Hero entrance animations ── */
     @keyframes hero-up {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero {
@@ -341,8 +355,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(7,132,125,0.22), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 30%, rgba(240,100,73,0.08), transparent);
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(7, 132, 125, 0.22), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 30%, rgba(240, 100, 73, 0.08), transparent);
       pointer-events: none;
     }
 
@@ -356,11 +370,25 @@
     }
 
     /* Staggered entrance animations */
-    .hero-content .eyebrow  { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
-    .hero-content h1        { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.22s both; }
-    .hero-content .hero-copy { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.34s both; }
-    .hero-content .hero-actions { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.46s both; }
-    .hero-content .hero-trust { animation: hero-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.56s both; }
+    .hero-content .eyebrow {
+      animation: hero-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+
+    .hero-content h1 {
+      animation: hero-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+    }
+
+    .hero-content .hero-copy {
+      animation: hero-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+    }
+
+    .hero-content .hero-actions {
+      animation: hero-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.46s both;
+    }
+
+    .hero-content .hero-trust {
+      animation: hero-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.56s both;
+    }
 
     .hero-actions {
       display: flex;
@@ -378,7 +406,7 @@
       margin: 22px 0 0;
       padding: 0;
       list-style: none;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255, 255, 255, 0.78);
       font-size: 0.92rem;
       font-weight: 700;
     }
@@ -388,9 +416,9 @@
       display: inline-flex;
       align-items: center;
       padding: 6px 10px;
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
     }
 
     /* ── Parallax app stage ── */
@@ -401,7 +429,7 @@
       justify-content: center;
       padding: 0 24px;
       will-change: transform;
-      animation: hero-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.5s both;
+      animation: hero-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
     }
 
     /* Bottom fade so the frame bleeds into the next section */
@@ -419,13 +447,13 @@
     .app-frame {
       width: min(1120px, 92vw);
       min-height: 540px;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
       overflow: hidden;
       box-shadow:
-        0 50px 120px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(255,255,255,0.06),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+        0 50px 120px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
       background: rgba(21, 26, 33, 0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -439,9 +467,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 14px;
-      color: rgba(255,255,255,0.58);
+      color: rgba(255, 255, 255, 0.58);
       background: #0d1117;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.76rem;
       font-family: var(--mono);
     }
@@ -455,7 +483,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.26);
+      background: rgba(255, 255, 255, 0.26);
     }
 
     .app-grid {
@@ -466,7 +494,7 @@
 
     .app-sidebar {
       padding: 18px 14px;
-      border-right: 1px solid rgba(255,255,255,0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
       background: #11161d;
     }
 
@@ -478,14 +506,14 @@
       padding: 0 10px;
       margin-bottom: 8px;
       border-radius: var(--radius);
-      color: rgba(255,255,255,0.68);
+      color: rgba(255, 255, 255, 0.68);
       font-size: 0.84rem;
       font-weight: 700;
     }
 
     .app-tool.is-active {
       color: #ffffff;
-      background: rgba(7,132,125,0.24);
+      background: rgba(7, 132, 125, 0.24);
       border: 1px solid rgba(17, 214, 196, 0.18);
     }
 
@@ -512,8 +540,8 @@
     .app-canvas {
       padding: 22px;
       background:
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         #161c24;
       background-size: 28px 28px;
     }
@@ -529,12 +557,12 @@
     .asset-stack,
     .prompt-panel,
     .metric-chip {
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.08),
-        0 4px 16px rgba(0,0,0,0.24);
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 4px 16px rgba(0, 0, 0, 0.24);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
@@ -546,7 +574,7 @@
       justify-content: space-between;
       padding: 22px;
       background:
-        linear-gradient(135deg, rgba(7,132,125,0.88), rgba(240,100,73,0.8)),
+        linear-gradient(135deg, rgba(7, 132, 125, 0.88), rgba(240, 100, 73, 0.8)),
         #1c232c;
     }
 
@@ -555,7 +583,7 @@
       padding: 6px 9px;
       border-radius: var(--radius);
       color: #12201f;
-      background: rgba(255,255,255,0.82);
+      background: rgba(255, 255, 255, 0.82);
       font-size: 0.72rem;
       font-weight: 900;
     }
@@ -578,7 +606,7 @@
     .ad-bars span {
       height: 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.72);
+      background: rgba(255, 255, 255, 0.72);
     }
 
     .ad-bars span:nth-child(2) {
@@ -600,9 +628,9 @@
       min-height: 106px;
       border-radius: var(--radius);
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
         #202935;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
       overflow: hidden;
     }
@@ -612,7 +640,7 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      background: rgba(255,255,255,0.22);
+      background: rgba(255, 255, 255, 0.22);
     }
 
     .asset-thumb::before {
@@ -627,19 +655,19 @@
       height: 54px;
       left: 18px;
       bottom: 16px;
-      background: rgba(7,132,125,0.48);
+      background: rgba(7, 132, 125, 0.48);
     }
 
     .asset-thumb.wide {
       min-height: 78px;
       background:
-        linear-gradient(135deg, rgba(240,100,73,0.56), rgba(217,154,24,0.38)),
+        linear-gradient(135deg, rgba(240, 100, 73, 0.56), rgba(217, 154, 24, 0.38)),
         #202935;
     }
 
     .app-right {
       padding: 18px;
-      border-left: 1px solid rgba(255,255,255,0.08);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
       background: #11161d;
     }
 
@@ -650,7 +678,7 @@
 
     .panel-kicker {
       margin-bottom: 10px;
-      color: rgba(255,255,255,0.48);
+      color: rgba(255, 255, 255, 0.48);
       font-family: var(--mono);
       font-size: 0.72rem;
     }
@@ -658,7 +686,7 @@
     .prompt-line {
       height: 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255, 255, 255, 0.18);
       margin-bottom: 9px;
     }
 
@@ -698,7 +726,7 @@
     .metric-chip span {
       display: block;
       margin-top: 6px;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
       font-size: 0.75rem;
     }
 
@@ -717,8 +745,8 @@
       padding: 6px 14px;
       border-radius: 999px;
       color: #ffffff;
-      background: rgba(7,132,125,0.3);
-      border: 1px solid rgba(7,132,125,0.5);
+      background: rgba(7, 132, 125, 0.3);
+      border: 1px solid rgba(7, 132, 125, 0.5);
       font-size: 0.82rem;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -737,7 +765,7 @@
     .hero-copy {
       max-width: 660px;
       margin: 0 auto;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255, 255, 255, 0.78);
       font-size: 1.2rem;
       line-height: 1.6;
       text-wrap: balance;
@@ -752,8 +780,8 @@
 
     .hero .btn-secondary {
       color: #ffffff;
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.28);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.28);
     }
 
     .section {
@@ -846,7 +874,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: #ffffff;
-      box-shadow: 0 8px 24px rgba(16,18,23,0.04);
+      box-shadow: 0 8px 24px rgba(16, 18, 23, 0.04);
     }
 
     .benefit b {
@@ -965,7 +993,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background:
-        linear-gradient(135deg, rgba(7,132,125,0.18), rgba(240,100,73,0.14)),
+        linear-gradient(135deg, rgba(7, 132, 125, 0.18), rgba(240, 100, 73, 0.14)),
         #f8fafc;
       padding: 14px;
       display: flex;
@@ -975,19 +1003,19 @@
 
     .output-tile:nth-child(2) {
       background:
-        linear-gradient(135deg, rgba(89,70,168,0.15), rgba(217,154,24,0.16)),
+        linear-gradient(135deg, rgba(89, 70, 168, 0.15), rgba(217, 154, 24, 0.16)),
         #f8fafc;
     }
 
     .output-tile:nth-child(3) {
       background:
-        linear-gradient(135deg, rgba(240,100,73,0.15), rgba(7,132,125,0.14)),
+        linear-gradient(135deg, rgba(240, 100, 73, 0.15), rgba(7, 132, 125, 0.14)),
         #f8fafc;
     }
 
     .output-tile:nth-child(4) {
       background:
-        linear-gradient(135deg, rgba(217,154,24,0.16), rgba(89,70,168,0.12)),
+        linear-gradient(135deg, rgba(217, 154, 24, 0.16), rgba(89, 70, 168, 0.12)),
         #f8fafc;
     }
 
@@ -999,7 +1027,7 @@
       width: 70%;
       height: 8px;
       border-radius: 999px;
-      background: rgba(16,18,23,0.16);
+      background: rgba(16, 18, 23, 0.16);
     }
 
     .shot-footer {
@@ -1066,7 +1094,7 @@
     }
 
     .problem-band .section-copy {
-      color: rgba(255,255,255,0.68);
+      color: rgba(255, 255, 255, 0.68);
     }
 
     .problem-grid {
@@ -1084,6 +1112,7 @@
       align-items: center;
       gap: 24px;
     }
+
     .problem-bridge h3 {
       font-size: 2.2rem;
       margin: 0;
@@ -1093,9 +1122,9 @@
 
     .problem {
       padding: 22px;
-      border: 1px solid rgba(255,255,255,0.13);
+      border: 1px solid rgba(255, 255, 255, 0.13);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.055);
+      background: rgba(255, 255, 255, 0.055);
     }
 
     .problem b {
@@ -1107,7 +1136,7 @@
 
     .problem p {
       margin: 0;
-      color: rgba(255,255,255,0.62);
+      color: rgba(255, 255, 255, 0.62);
       font-size: 0.94rem;
     }
 
@@ -1128,7 +1157,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--surface);
-      box-shadow: 0 10px 28px rgba(16,18,23,0.05);
+      box-shadow: 0 10px 28px rgba(16, 18, 23, 0.05);
     }
 
     .workflow-step {
@@ -1418,7 +1447,7 @@
 
     .price-card.featured {
       border-color: var(--teal);
-      box-shadow: 0 24px 70px rgba(7,132,125,0.16);
+      box-shadow: 0 24px 70px rgba(7, 132, 125, 0.16);
       position: relative;
     }
 
@@ -1573,7 +1602,7 @@
 
     .final-cta p {
       margin: 12px 0 0;
-      color: rgba(255,255,255,0.72);
+      color: rgba(255, 255, 255, 0.72);
       font-size: 1.06rem;
     }
 
@@ -1585,7 +1614,7 @@
     .site-footer {
       padding: 56px 0 40px;
       background: #0d1117;
-      color: rgba(255,255,255,0.64);
+      color: rgba(255, 255, 255, 0.64);
     }
 
     .footer-layout {
@@ -1594,7 +1623,7 @@
       align-items: start;
       gap: 48px;
       padding-bottom: 36px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       margin-bottom: 28px;
     }
 
@@ -1603,7 +1632,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255, 255, 255, 0.35);
       margin: 0 0 14px;
     }
 
@@ -1632,7 +1661,7 @@
       align-items: center;
       justify-content: space-between;
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255, 255, 255, 0.35);
       gap: 16px;
       flex-wrap: wrap;
     }
@@ -1799,6 +1828,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
@@ -1813,6 +1843,7 @@
         transform: none;
       }
     }
+
     .checkout-wrapper {
       display: grid;
       grid-template-columns: 1fr 1.1fr;
@@ -1873,6 +1904,7 @@
         gap: 40px;
       }
     }
+
     /* ── Mobile nav ── */
     .nav-hamburger {
       display: none;
@@ -1889,7 +1921,7 @@
       position: fixed;
       inset: 0;
       z-index: 99;
-      background: rgba(16,18,23,0.96);
+      background: rgba(16, 18, 23, 0.96);
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -1981,7 +2013,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      box-shadow: 0 -4px 24px rgba(16,18,23,0.24);
+      box-shadow: 0 -4px 24px rgba(16, 18, 23, 0.24);
     }
 
     .sticky-cta.is-visible {
@@ -2006,15 +2038,24 @@
     }
 
     @media (max-width: 1020px) {
-      .nav-hamburger { display: block; }
-      .testimonials-grid { grid-template-columns: 1fr; gap: 14px; }
+      .nav-hamburger {
+        display: block;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
     }
 
     @media (max-width: 720px) {
-      .sticky-cta p { display: none; }
+      .sticky-cta p {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -2032,7 +2073,8 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
 
-      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation"
+        aria-expanded="false">&#9776;</button>
       <a class="btn btn-accent" href="#pricing">Get Access &mdash; $39</a>
     </nav>
   </header>
@@ -2050,9 +2092,14 @@
   <main id="main">
     <section class="hero" id="top">
       <div class="container hero-content">
-        <p class="eyebrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8"/></svg>Windows 10/11 &bull; AI Content Production</p>
+        <p class="eyebrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8" />
+          </svg>Windows 10/11 &bull; AI Content Production</p>
         <h1>One app.<br>Every creative asset.</h1>
-        <p class="hero-copy">Create copy, product images, videos, Arabic voiceovers, landing pages, and content formats from one focused desktop studio. Buy it once, bring your own fal.ai key, and stop juggling a messy subscription stack.</p>
+        <p class="hero-copy">Create copy, product images, videos, Arabic voiceovers, landing pages, and content formats
+          from one focused desktop studio. Buy it once, bring your own fal.ai key, and stop juggling a messy
+          subscription stack.</p>
         <div class="hero-actions">
           <a class="btn btn-accent" href="#pricing">Get lifetime access</a>
           <a class="btn btn-secondary" href="#inside">See what is included</a>
@@ -2066,7 +2113,9 @@
       </div>
 
       <div class="hero-stage" id="heroStage" aria-hidden="true">
-        <img src="{% static 'landing/dashboard.jpeg' %}" alt="MonsterCreative Content Studio" class="app-frame" style="min-height: auto; padding: 0; display: block; width: min(1120px, 92vw); max-width: 100%;" fetchpriority="high">
+        <img src="{% static 'landing/dashboard.jpeg' %}" alt="MonsterCreative Content Studio" class="app-frame"
+          style="min-height: auto; padding: 0; display: block; width: min(1120px, 92vw); max-width: 100%;"
+          fetchpriority="high">
       </div>
     </section>
 
@@ -2075,13 +2124,23 @@
         <div class="section-header section-header--center fade-up">
           <p class="section-kicker">The problem</p>
           <h2 class="section-title">Most content and ad workflows are expensive because they are scattered.</h2>
-          <p class="section-copy">A normal project or ad campaign can touch copy tools, image tools, video tools, voice tools, design apps, landing page builders, and a lot of manual resizing. MonsterCreative brings the most common production work into one desktop app.</p>
+          <p class="section-copy">A normal project or ad campaign can touch copy tools, image tools, video tools, voice
+            tools, design apps, landing page builders, and a lot of manual resizing. MonsterCreative brings the most
+            common production work into one desktop app.</p>
         </div>
         <div class="problem-grid">
-          <div class="problem fade-up"><b>Too many subscriptions</b><p>Small monthly tools become a big recurring bill before you even publish content or launch ads.</p></div>
-          <div class="problem fade-up"><b>Slow creative turnaround</b><p>Projects stall while copy, visuals, and formats are produced in separate places.</p></div>
-          <div class="problem fade-up"><b>Weak Arabic voiceovers</b><p>Generic text-to-speech can sound robotic, foreign, or wrong for the market.</p></div>
-          <div class="problem fade-up"><b>Manual resizing and rework</b><p>Every platform needs different formats, and repeated editing drains momentum.</p></div>
+          <div class="problem fade-up"><b>Too many subscriptions</b>
+            <p>Small monthly tools become a big recurring bill before you even publish content or launch ads.</p>
+          </div>
+          <div class="problem fade-up"><b>Slow creative turnaround</b>
+            <p>Projects stall while copy, visuals, and formats are produced in separate places.</p>
+          </div>
+          <div class="problem fade-up"><b>Weak Arabic voiceovers</b>
+            <p>Generic text-to-speech can sound robotic, foreign, or wrong for the market.</p>
+          </div>
+          <div class="problem fade-up"><b>Manual resizing and rework</b>
+            <p>Every platform needs different formats, and repeated editing drains momentum.</p>
+          </div>
         </div>
         <div class="problem-bridge fade-up">
           <h3>MonsterCreative replaces all of it.</h3>
@@ -2097,8 +2156,12 @@
           <p class="section-kicker">See it in action</p>
           <h2 class="section-title">Hit Play To See How This Works</h2>
         </div>
-        <div class="video-container fade-up" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow);">
-          <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="video-container fade-up"
+          style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow);">
+          <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            src="https://www.youtube.com/embed/kbY3Mi5D4yA" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </section>
@@ -2108,40 +2171,59 @@
         <div class="offer-intro">
           <div>
             <p class="section-kicker">What you get today</p>
-            <h2 class="offer-title" id="offer-title">A complete desktop content studio without the monthly software bill.</h2>
-            <p class="offer-copy">Stop paying for 6 separate tools to launch one project or campaign. MonsterCreative puts copy, images, videos, Arabic voiceovers, landing pages, and format resizing into one Windows desktop app you buy once.</p>
+            <h2 class="offer-title" id="offer-title">A complete desktop content studio without the monthly software
+              bill.</h2>
+            <p class="offer-copy">Stop paying for 6 separate tools to launch one project or campaign. MonsterCreative
+              puts copy, images, videos, Arabic voiceovers, landing pages, and format resizing into one Windows desktop
+              app you buy once.</p>
           </div>
-          <a class="btn btn-secondary" href="#features" style="margin-top: auto; align-self: flex-start;">See all features &rarr;</a>
+          <a class="btn btn-secondary" href="#features" style="margin-top: auto; align-self: flex-start;">See all
+            features &rarr;</a>
         </div>
         <div class="benefit-grid">
-          <div class="benefit"><b>Content strategy and copy</b><span>9-step copy workflow with proven angles and 5 variants per run.</span></div>
-          <div class="benefit"><b>Images and videos</b><span>Generate product visuals, creative concepts, and short videos through fal.ai models.</span></div>
-          <div class="benefit"><b>Global voice lab</b><span>Regional voices for Arabic, English, and French projects.</span></div>
-          <div class="benefit"><b>Launch assets</b><span>Resize formats, clone winning post layouts, and generate a landing page package.</span></div>
+          <div class="benefit"><b>Content strategy and copy</b><span>9-step copy workflow with proven angles and 5
+              variants per run.</span></div>
+          <div class="benefit"><b>Images and videos</b><span>Generate product visuals, creative concepts, and short
+              videos through fal.ai models.</span></div>
+          <div class="benefit"><b>Global voice lab</b><span>Regional voices for Arabic, English, and French
+              projects.</span></div>
+          <div class="benefit"><b>Launch assets</b><span>Resize formats, clone winning post layouts, and generate a
+              landing page package.</span></div>
         </div>
       </div>
     </section>
 
     <section class="section" id="inside">
       <div class="container split">
-        <img src="{% static 'landing/social ads.jpeg' %}" alt="MonsterCreative Workflow" class="product-shot fade-up" style="width: 100%; height: auto; display: block; object-fit: cover;" loading="lazy">
+        <img src="{% static 'landing/social ads.jpeg' %}" alt="MonsterCreative Workflow" class="product-shot fade-up"
+          style="width: 100%; height: auto; display: block; object-fit: cover;" loading="lazy">
 
         <div class="fade-up">
           <p class="section-kicker">Inside the app</p>
-          <h2 class="section-title">Built for creators and marketers who need finished assets, not another empty editor.</h2>
-          <p class="section-copy">MonsterCreative starts from the job you actually need done: turning a product, offer, or competitor reference into usable content assets. The workflow is practical, repeatable, and focused on speed.</p>
+          <h2 class="section-title">Built for creators and marketers who need finished assets, not another empty editor.
+          </h2>
+          <p class="section-copy">MonsterCreative starts from the job you actually need done: turning a product, offer,
+            or competitor reference into usable content assets. The workflow is practical, repeatable, and focused on
+            speed.</p>
           <div class="copy-list">
             <div class="copy-item">
               <div class="copy-number">01</div>
-              <div><b>Start from a product, offer, or winning reference</b><p>Give the app the content context, upload references when needed, and choose the output you want.</p></div>
+              <div><b>Start from a product, offer, or winning reference</b>
+                <p>Give the app the content context, upload references when needed, and choose the output you want.</p>
+              </div>
             </div>
             <div class="copy-item">
               <div class="copy-number">02</div>
-              <div><b>Generate the content pieces together</b><p>Copy, images, videos, voiceovers, and landing page ideas stay in one workflow.</p></div>
+              <div><b>Generate the content pieces together</b>
+                <p>Copy, images, videos, voiceovers, and landing page ideas stay in one workflow.</p>
+              </div>
             </div>
             <div class="copy-item">
               <div class="copy-number">03</div>
-              <div><b>Export assets that are ready to test</b><p>Download content formats, creative variations, and page files without rebuilding everything manually.</p></div>
+              <div><b>Export assets that are ready to test</b>
+                <p>Download content formats, creative variations, and page files without rebuilding everything manually.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -2155,13 +2237,35 @@
         <div class="section-header section-header--center fade-up">
           <p class="section-kicker">How it works</p>
           <h2 class="section-title">From raw idea to content assets in four steps.</h2>
-          <p class="section-copy">The flow is intentionally simple so buyers understand exactly what happens after they download the desktop app.</p>
+          <p class="section-copy">The flow is intentionally simple so buyers understand exactly what happens after they
+            download the desktop app.</p>
         </div>
         <div class="workflow-grid">
-          <div class="workflow-step fade-up" data-step="01"><div><span class="step-index">Step 01</span><h3>Install the Windows app</h3><p>Purchase your license, download MonsterCreative, and activate it on your machine.</p></div></div>
-          <div class="workflow-step fade-up" data-step="02"><div><span class="step-index">Step 02</span><h3>Connect your fal.ai key</h3><p>Your generation costs go directly through your own API key with no platform markup from MonsterCreative.</p></div></div>
-          <div class="workflow-step fade-up" data-step="03"><div><span class="step-index">Step 03</span><h3>Build your campaign</h3><p>Choose copy, images, video, voices, cloning, resizing, landing pages, or virtual try-on.</p></div></div>
-          <div class="workflow-step fade-up" data-step="04"><div><span class="step-index">Step 04</span><h3>Export and test</h3><p>Download the assets, publish your posts, launch your tests, and iterate from what performs.</p></div></div>
+          <div class="workflow-step fade-up" data-step="01">
+            <div><span class="step-index">Step 01</span>
+              <h3>Install the Windows app</h3>
+              <p>Purchase your license, download MonsterCreative, and activate it on your machine.</p>
+            </div>
+          </div>
+          <div class="workflow-step fade-up" data-step="02">
+            <div><span class="step-index">Step 02</span>
+              <h3>Connect your fal.ai key</h3>
+              <p>Your generation costs go directly through your own API key with no platform markup from
+                MonsterCreative.</p>
+            </div>
+          </div>
+          <div class="workflow-step fade-up" data-step="03">
+            <div><span class="step-index">Step 03</span>
+              <h3>Build your campaign</h3>
+              <p>Choose copy, images, video, voices, cloning, resizing, landing pages, or virtual try-on.</p>
+            </div>
+          </div>
+          <div class="workflow-step fade-up" data-step="04">
+            <div><span class="step-index">Step 04</span>
+              <h3>Export and test</h3>
+              <p>Download the assets, publish your posts, launch your tests, and iterate from what performs.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2173,16 +2277,61 @@
           <h2 class="section-title">Everything needed to produce content projects from one workspace.</h2>
           <p class="section-copy">Each tool is framed around a real marketing task, not a generic AI prompt box.</p>
         </div>
-                <div class="feature-grid">
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">01</div><h3>Ad Copy</h3><p>Build high-converting copy for ads, social posts, and general content with audience context, hooks, and creative variants.</p><span class="feature-tag">Copy variants</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">02</div><h3>Image Generation</h3><p>Create product shots, concepts, social visuals, and marketing imagery using leading image models through fal.ai.</p><span class="feature-tag">Product visuals</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">03</div><h3>Virtual Try-On</h3><p>Place apparel or product visuals on models and in scenes for fashion lookbooks, ecommerce, and social content.</p><span class="feature-tag">Model scenes</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">04</div><h3>Social Ads</h3><p>Upload winning reference ads or viral social posts and adapt the structure to your own product without starting from scratch.</p><span class="feature-tag">Reference-based creative</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">05</div><h3>Format Resizer</h3><p>Convert one winning image into 1:1, 4:5, 9:16, 16:9, and wide placements with AI outpainting.</p><span class="feature-tag">All content sizes</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">06</div><h3>Landing Page</h3><p>Generate a landing page package from your content image, copy, and brand details, then download it as a ZIP.</p><span class="feature-tag">HTML package</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">07</div><h3>AI Fashion Video</h3><p>Generate short fashion videos from text or image prompts for TikTok, Reels, or ad creatives with cinematic motion.</p><span class="feature-tag">AI Video</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">08</div><h3>Audio Scripts</h3><p>Create voiceovers for ad reads, UGC-style scripts, and social videos with regional Arabic, English, and French voices for more authentic projects.</p><span class="feature-tag">17+ voices</span></article>
-          <article class="feature-card fade-up"><div class="feature-top" aria-hidden="true">09</div><h3>Bring Your Own Key</h3><p>Connect your own fal.ai API key so generation costs stay transparent and under your control.</p><span class="feature-tag">No generation markup</span></article>
+        <div class="feature-grid">
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">01</div>
+            <h3>Ad Copy</h3>
+            <p>Build high-converting copy for ads, social posts, and general content with audience context, hooks, and
+              creative variants.</p><span class="feature-tag">Copy variants</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">02</div>
+            <h3>Image Generation</h3>
+            <p>Create product shots, concepts, social visuals, and marketing imagery using leading image models through
+              fal.ai.</p><span class="feature-tag">Product visuals</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">03</div>
+            <h3>Virtual Try-On</h3>
+            <p>Place apparel or product visuals on models and in scenes for fashion lookbooks, ecommerce, and social
+              content.</p><span class="feature-tag">Model scenes</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">04</div>
+            <h3>Social Ads</h3>
+            <p>Upload winning reference ads or viral social posts and adapt the structure to your own product without
+              starting from scratch.</p><span class="feature-tag">Reference-based creative</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">05</div>
+            <h3>Format Resizer</h3>
+            <p>Convert one winning image into 1:1, 4:5, 9:16, 16:9, and wide placements with AI outpainting.</p><span
+              class="feature-tag">All content sizes</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">06</div>
+            <h3>Landing Page</h3>
+            <p>Generate a landing page package from your content image, copy, and brand details, then download it as a
+              ZIP.</p><span class="feature-tag">HTML package</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">07</div>
+            <h3>AI Fashion Video</h3>
+            <p>Generate short fashion videos from text or image prompts for TikTok, Reels, or ad creatives with
+              cinematic motion.</p><span class="feature-tag">AI Video</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">08</div>
+            <h3>Audio Scripts</h3>
+            <p>Create voiceovers for ad reads, UGC-style scripts, and social videos with regional Arabic, English, and
+              French voices for more authentic projects.</p><span class="feature-tag">17+ voices</span>
+          </article>
+          <article class="feature-card fade-up">
+            <div class="feature-top" aria-hidden="true">09</div>
+            <h3>Bring Your Own Key</h3>
+            <p>Connect your own fal.ai API key so generation costs stay transparent and under your control.</p><span
+              class="feature-tag">No generation markup</span>
+          </article>
         </div>
       </div>
     </section>
@@ -2192,10 +2341,21 @@
         <div class="fade-up">
           <p class="section-kicker">Global voice lab</p>
           <h2 class="section-title">Make your content sound native to any market.</h2>
-          <p class="section-copy">Projects need more than translated text. MonsterCreative gives you regional Arabic, English, and French voice options so your content can match the audience, market, and tone.</p>
+          <p class="section-copy">Projects need more than translated text. MonsterCreative gives you regional Arabic,
+            English, and French voice options so your content can match the audience, market, and tone.</p>
           <div class="copy-list">
-            <div class="copy-item"><div class="copy-number">A1</div><div><b>Regional control</b><p>Pick from regional Arabic dialects, US/UK English, and Parisian/Classic French voice styles.</p></div></div>
-            <div class="copy-item"><div class="copy-number">A2</div><div><b>Marketing-first output</b><p>Create voiceovers for script reads, UGC-style scripts, product demos, and direct-response offers.</p></div></div>
+            <div class="copy-item">
+              <div class="copy-number">A1</div>
+              <div><b>Regional control</b>
+                <p>Pick from regional Arabic dialects, US/UK English, and Parisian/Classic French voice styles.</p>
+              </div>
+            </div>
+            <div class="copy-item">
+              <div class="copy-number">A2</div>
+              <div><b>Marketing-first output</b>
+                <p>Create voiceovers for script reads, UGC-style scripts, product demos, and direct-response offers.</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="voice-list fade-up">
@@ -2217,9 +2377,18 @@
           <div class="checkout-info">
             <p class="section-kicker" style="color: var(--teal);">One-time payment</p>
             <h2 class="section-title" style="font-size: 2.5rem;">Lifetime Access</h2>
-            <div class="price" style="margin: 20px 0; font-size: 4rem; font-weight: 900; line-height: 1; color: var(--ink);"><span>$</span>39</div>
-             <p class="price-note" style="color: var(--muted); margin-bottom: 8px;">Own the software forever. No monthly app fees.</p>
-             <p class="api-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>AI costs not included &mdash; billed by <a href="https://fal.ai" target="_blank" rel="noopener noreferrer" style="color:var(--teal);text-decoration:underline;">fal.ai</a>.</p>
+            <div class="price"
+              style="margin: 20px 0; font-size: 4rem; font-weight: 900; line-height: 1; color: var(--ink);">
+              <span>$</span>39</div>
+            <p class="price-note" style="color: var(--muted); margin-bottom: 8px;">Own the software forever. No monthly
+              app fees.</p>
+            <p class="api-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>AI costs not included &mdash; billed by <a href="https://fal.ai" target="_blank"
+                rel="noopener noreferrer" style="color:var(--teal);text-decoration:underline;">fal.ai</a>.</p>
             <ul class="price-list">
               <li>All 8 core creative tools</li>
               <li>1 device activation (transferable)</li>
@@ -2230,7 +2399,8 @@
           </div>
           <div class="checkout-form-container">
             <h3>Get your license</h3>
-            <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 24px;">Enter your details to proceed to secure checkout.</p>
+            <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 24px;">Enter your details to proceed to
+              secure checkout.</p>
             <form id="leadForm" class="inline-form">
               <div class="form-group">
                 <label for="name">Full Name</label>
@@ -2238,7 +2408,8 @@
               </div>
               <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" autocomplete="email" required placeholder="john@example.com">
+                <input type="email" id="email" name="email" autocomplete="email" required
+                  placeholder="john@example.com">
               </div>
               <div class="form-group">
                 <label for="phone">Phone Number <span class="optional-label">(optional)</span></label>
@@ -2246,14 +2417,22 @@
               </div>
               <button type="submit" class="btn btn-accent checkout-submit-btn">Buy and download &rarr;</button>
             </form>
-            <div class="privacy-note" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div class="privacy-note"
+              style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
               <span style="display: flex; align-items: center; gap: 6px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
                 Secure checkout
               </span>
               <span style="opacity: 0.5;">&bull;</span>
               <span style="display: flex; align-items: center; gap: 6px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
                 7-day refund guarantee
               </span>
             </div>
@@ -2271,7 +2450,8 @@
         <div class="faq-grid">
           <details class="faq-item fade-up">
             <summary>What is the refund policy?</summary>
-            <p>You have a 7-day refund window if the software does not work on your Windows 10/11 system. Contact us with your purchase email and a description of the issue.</p>
+            <p>You have a 7-day refund window if the software does not work on your Windows 10/11 system. Contact us
+              with your purchase email and a description of the issue.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Is MonsterCreative a desktop app?</summary>
@@ -2279,67 +2459,100 @@
           </details>
           <details class="faq-item fade-up">
             <summary>Do I need a fal.ai account?</summary>
-            <p>Yes. The app uses your own fal.ai API key for generation. That keeps usage billing transparent and avoids platform markup.</p>
+            <p>Yes. The app uses your own fal.ai API key for generation. That keeps usage billing transparent and avoids
+              platform markup.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Are AI generation costs included?</summary>
-            <p>No. The license covers MonsterCreative. AI usage is billed separately by fal.ai based on what you generate.</p>
+            <p>No. The license covers MonsterCreative. AI usage is billed separately by fal.ai based on what you
+              generate.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>What happens after purchase?</summary>
-            <p>You complete checkout securely, receive your license details by email, download the app, activate it, and connect your API key.</p>
+            <p>You complete checkout securely, receive your license details by email, download the app, activate it, and
+              connect your API key.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Can I use it for Arabic content?</summary>
-            <p>Yes. MonsterCreative includes Arabic voice options for Gulf, Saudi, Egyptian, Maghrebi, and Standard Arabic use cases.</p>
+            <p>Yes. MonsterCreative includes Arabic voice options for Gulf, Saudi, Egyptian, Maghrebi, and Standard
+              Arabic use cases.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Does it replace an agency?</summary>
-            <p>It replaces a lot of repetitive production work. Strategy, offer testing, media buying, and creative judgment still matter.</p>
+            <p>It replaces a lot of repetitive production work. Strategy, offer testing, media buying, and creative
+              judgment still matter.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Can I transfer my license to a new device?</summary>
-            <p>The license includes 1 device activation, but your license key is fully transferable if you change computers.</p>
+            <p>The license includes 1 device activation, but your license key is fully transferable if you change
+              computers.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>What are the best lifetime deal AI tools for small businesses?</summary>
-            <p>The best lifetime deal (LTD) AI tools are those that eliminate high recurring costs while providing core business utilities like copywriting, media generation, and voiceover production. Specialized desktop tools like MonsterCreative offer high value because they allow small businesses to own their software license forever and run generation via direct API keys (e.g., fal.ai) with zero platform markup.</p>
+            <p>The best lifetime deal (LTD) AI tools are those that eliminate high recurring costs while providing core
+              business utilities like copywriting, media generation, and voiceover production. Specialized desktop tools
+              like MonsterCreative offer high value because they allow small businesses to own their software license
+              forever and run generation via direct API keys (e.g., fal.ai) with zero platform markup.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>What are the benefits of investing in an AI tool with a one-time payment option?</summary>
-            <p>Investing in a one-time payment AI tool provides predictability in software budgets, removes the pressure of monthly subscription stacks, and guarantees long-term access to the tool. For creators and agencies, it converts operational software expenses into a single, predictable asset purchase.</p>
+            <p>Investing in a one-time payment AI tool provides predictability in software budgets, removes the pressure
+              of monthly subscription stacks, and guarantees long-term access to the tool. For creators and agencies, it
+              converts operational software expenses into a single, predictable asset purchase.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Where can I find lifetime deal AI tools for marketing automation?</summary>
-            <p>High-quality lifetime deals can be found on curated developer platforms, direct creator websites, and software hubs. MonsterCreative offers a direct lifetime purchase option for marketing and content production, covering social copy generation, format resizing, fashion virtual try-on, and automated video drafts.</p>
+            <p>High-quality lifetime deals can be found on curated developer platforms, direct creator websites, and
+              software hubs. MonsterCreative offers a direct lifetime purchase option for marketing and content
+              production, covering social copy generation, format resizing, fashion virtual try-on, and automated video
+              drafts.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Explain the concept of perpetual access for AI software.</summary>
-            <p>Perpetual access allows users to pay once and use the software indefinitely. In the context of AI tools like MonsterCreative, this is often achieved using a &quot;Bring Your Own Key&quot; (BYOK) model. Users own the desktop software application interface forever, while paying only for raw AI resource consumption directly to backend providers like fal.ai.</p>
+            <p>Perpetual access allows users to pay once and use the software indefinitely. In the context of AI tools
+              like MonsterCreative, this is often achieved using a &quot;Bring Your Own Key&quot; (BYOK) model. Users
+              own the desktop software application interface forever, while paying only for raw AI resource consumption
+              directly to backend providers like fal.ai.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Which AI tools offer lifetime deals for content creation?</summary>
-            <p>While most modern content editors require monthly plans, MonsterCreative is built specifically as a buy-once desktop suite for Windows. It provides a complete creative workbench for copy drafting, image generation, virtual try-ons, and multi-dialect Arabic voiceovers without recurring software fees.</p>
+            <p>While most modern content editors require monthly plans, MonsterCreative is built specifically as a
+              buy-once desktop suite for Windows. It provides a complete creative workbench for copy drafting, image
+              generation, virtual try-ons, and multi-dialect Arabic voiceovers without recurring software fees.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Where can I find reputable platforms offering discounted AI solutions?</summary>
-            <p>Reputable platforms include established independent software vendors and direct-to-consumer software launches that use trusted checkout partners like Freemius. Look for products that offer transparent refund policies, secure checkout systems, and direct developer support.</p>
+            <p>Reputable platforms include established independent software vendors and direct-to-consumer software
+              launches that use trusted checkout partners like Freemius. Look for products that offer transparent refund
+              policies, secure checkout systems, and direct developer support.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>Top platforms offering lifetime deal AI tools for startups?</summary>
-            <p>Startups looking to optimize burn rate can find lifetime deals directly on independent developer sites like MonsterCreative. Purchasing lifetime licenses for key utilities—such as image outpainting and copy generators—helps early-stage startups scale their creative output without adding to their monthly overhead.</p>
+            <p>Startups looking to optimize burn rate can find lifetime deals directly on independent developer sites
+              like MonsterCreative. Purchasing lifetime licenses for key utilities—such as image outpainting and copy
+              generators—helps early-stage startups scale their creative output without adding to their monthly
+              overhead.</p>
           </details>
           <details class="faq-item fade-up">
-            <summary>What types of artificial intelligence applications typically offer a single upfront payment?</summary>
-            <p>Single upfront payment options are common in desktop applications, utilities, and tools using the BYOK (Bring Your Own Key) model. Because the developer doesn't have to support ongoing server-side generation costs directly, they can offer the interface on a perpetual license.</p>
+            <summary>What types of artificial intelligence applications typically offer a single upfront payment?
+            </summary>
+            <p>Single upfront payment options are common in desktop applications, utilities, and tools using the BYOK
+              (Bring Your Own Key) model. Because the developer doesn't have to support ongoing server-side generation
+              costs directly, they can offer the interface on a perpetual license.</p>
           </details>
           <details class="faq-item fade-up">
             <summary>How to evaluate lifetime deal AI tools before purchase?</summary>
-            <p>When evaluating a lifetime deal, verify: (1) if the checkout process is secure and has a clear refund policy (such as a 7-day guarantee), (2) if the developer has a sustainable cost model (like BYOK, which ensures the company won't shut down due to high server costs), and (3) if it supports standard operating systems (such as Windows 10/11).</p>
+            <p>When evaluating a lifetime deal, verify: (1) if the checkout process is secure and has a clear refund
+              policy (such as a 7-day guarantee), (2) if the developer has a sustainable cost model (like BYOK, which
+              ensures the company won't shut down due to high server costs), and (3) if it supports standard operating
+              systems (such as Windows 10/11).</p>
           </details>
           <details class="faq-item fade-up">
             <summary>How to evaluate the long-term value of an AI service with a fixed price?</summary>
-            <p>The long-term value is measured by calculating your break-even point against subscription alternatives (like Midjourney or Jasper). If a lifetime tool costs $39 once and saves you $50+ a month in subscriptions, it pays for itself in the first month. Value is maximized when you control your generation expenses directly via API keys.</p>
+            <p>The long-term value is measured by calculating your break-even point against subscription alternatives
+              (like Midjourney or Jasper). If a lifetime tool costs $39 once and saves you $50+ a month in
+              subscriptions, it pays for itself in the first month. Value is maximized when you control your generation
+              expenses directly via API keys.</p>
           </details>
         </div>
       </div>
@@ -2362,11 +2575,13 @@
 
         <!-- Brand -->
         <div>
-          <a class="brand" href="/" aria-label="MonsterCreative home" style="margin-bottom: 14px; display: inline-flex;">
+          <a class="brand" href="/" aria-label="MonsterCreative home"
+            style="margin-bottom: 14px; display: inline-flex;">
             <span class="brand-mark" aria-hidden="true">MC</span>
             <span>MonsterCreative</span>
           </a>
-          <p style="font-size: 0.88rem; margin: 12px 0 0; max-width: 220px; line-height: 1.6;">AI content studio for Windows. Buy once, create forever.</p>
+          <p style="font-size: 0.88rem; margin: 12px 0 0; max-width: 220px; line-height: 1.6;">AI content studio for
+            Windows. Buy once, create forever.</p>
         </div>
 
         <!-- Features -->
@@ -2465,7 +2680,7 @@
     }
 
     if (leadForm) {
-      leadForm.onsubmit = function(e) {
+      leadForm.onsubmit = function (e) {
         e.preventDefault();
         const submitBtn = leadForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerText;
@@ -2483,40 +2698,40 @@
           },
           body: JSON.stringify({ name, email, phone }),
         })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === "success") {
-            // Trigger Freemius Checkout Overlay
-            if (freemiusCheckout) {
-              freemiusCheckout.open({
-                plan_id: FREEMIUS_PLAN_ID,
-                user_email: email,
-                user_firstname: name,
-                success: function(response) {
-                  window.location.href = "/success/?v=mc_launch_2024";
-                },
-                purchaseCompleted: function(response) {
-                  // Fallback redirect immediately on purchase completion to be safe
-                  window.location.href = "/success/?v=mc_launch_2024";
-                }
-              });
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === "success") {
+              // Trigger Freemius Checkout Overlay
+              if (freemiusCheckout) {
+                freemiusCheckout.open({
+                  plan_id: FREEMIUS_PLAN_ID,
+                  user_email: email,
+                  user_firstname: name,
+                  success: function (response) {
+                    window.location.href = "/success/?v=mc_launch_2024";
+                  },
+                  purchaseCompleted: function (response) {
+                    // Fallback redirect immediately on purchase completion to be safe
+                    window.location.href = "/success/?v=mc_launch_2024";
+                  }
+                });
+              } else {
+                // Fallback to Hosted Checkout if SDK is blocked or fails to load
+                const fallbackUrl = `https://checkout.freemius.com/product/${FREEMIUS_PRODUCT_ID}/plan/${FREEMIUS_PLAN_ID}/?user_email=${encodeURIComponent(email)}&user_firstname=${encodeURIComponent(name)}`;
+                window.location.href = fallbackUrl;
+              }
             } else {
-              // Fallback to Hosted Checkout if SDK is blocked or fails to load
-              const fallbackUrl = `https://checkout.freemius.com/product/${FREEMIUS_PRODUCT_ID}/plan/${FREEMIUS_PLAN_ID}/?user_email=${encodeURIComponent(email)}&user_firstname=${encodeURIComponent(name)}`;
-              window.location.href = fallbackUrl;
+              alert("Error: " + data.message);
             }
-          } else {
-            alert("Error: " + data.message);
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          alert("An error occurred. Please try again.");
-        })
-        .finally(() => {
-          submitBtn.innerText = originalText;
-          submitBtn.disabled = false;
-        });
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          })
+          .finally(() => {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+          });
       };
     }
 
@@ -2575,4 +2790,5 @@
   <!-- Freemius checkout SDK — loaded last so it never blocks CSS/rendering -->
   <script type="text/javascript" src="https://checkout.freemius.com/js/v1/"></script>
 </body>
+
 </html>
