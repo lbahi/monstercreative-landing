@@ -125,3 +125,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 FREEMIUS_PRODUCT_ID = os.environ.get('FREEMIUS_PRODUCT_ID', '')
 FREEMIUS_PUBLIC_KEY = os.environ.get('FREEMIUS_PUBLIC_KEY', '')
 FREEMIUS_PLAN_ID = os.environ.get('FREEMIUS_PLAN_ID', '')
+
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
