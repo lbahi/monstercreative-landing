@@ -2705,6 +2705,7 @@
               if (freemiusCheckout) {
                 freemiusCheckout.open({
                   plan_id: FREEMIUS_PLAN_ID,
+                  trial: 'free',
                   user_email: email,
                   user_firstname: name,
                   success: function (response) {
@@ -2717,7 +2718,7 @@
                 });
               } else {
                 // Fallback to Hosted Checkout if SDK is blocked or fails to load
-                const fallbackUrl = `https://checkout.freemius.com/product/${FREEMIUS_PRODUCT_ID}/plan/${FREEMIUS_PLAN_ID}/?user_email=${encodeURIComponent(email)}&user_firstname=${encodeURIComponent(name)}`;
+                const fallbackUrl = `https://checkout.freemius.com/app/${FREEMIUS_PRODUCT_ID}/plan/${FREEMIUS_PLAN_ID}/?trial=free&user_email=${encodeURIComponent(email)}&user_firstname=${encodeURIComponent(name)}`;
                 window.location.href = fallbackUrl;
               }
             } else {
