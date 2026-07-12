@@ -57,9 +57,12 @@ def terms(request):
 
 def success(request):
     # Simple security check: redirect to home if the verification token is missing
-    # This prevents users from just typing /success/ to get the download link
+    # This prevents users from just typing /success/ to get the download link.
+    # We also allow access if redirecting from Freemius (which appends plan_id / user_id / payment_id).
     verify = request.GET.get('v')
-    if verify != 'mc_launch_2024':
+    from_freemius = any(k in request.GET for k in ['user_id', 'plan_id', 'payment_id', 'subscription_id'])
+    
+    if verify != 'mc_launch_2024' and not from_freemius:
         return redirect('index')
     return render(request, 'landing/success.html')
 
