@@ -1,13 +1,17 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}" dir="{{ LANGUAGE_DIR }}">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MonsterCreative | AI Content Creation Suite for Windows</title>
   <link rel="icon" type="image/jpeg" href="{% static 'landing/icon.jpg' %}">
-  <link rel="canonical" href="https://monstercreative.lbahi.digital/" />
+  <link rel="canonical" href="https://monstercreative.lbahi.digital{{ CURRENT_LANGUAGE_URL }}" />
+  <link rel="alternate" hreflang="en" href="https://monstercreative.lbahi.digital/" />
+  <link rel="alternate" hreflang="ar" href="https://monstercreative.lbahi.digital/ar/" />
+  <link rel="alternate" hreflang="fr" href="https://monstercreative.lbahi.digital/fr/" />
+  <link rel="alternate" hreflang="x-default" href="https://monstercreative.lbahi.digital/" />
   <meta name="description"
     content="MonsterCreative is a Windows desktop app for creating copy, images, videos, Arabic voiceovers, landing pages, and content assets with AI. One-time license. Bring your own fal.ai key." />
   <meta property="og:title" content="MonsterCreative | AI Content Creation Suite for Windows" />
@@ -270,6 +274,51 @@
     .nav-links a:hover,
     .nav-links a:focus-visible {
       color: var(--ink);
+    }
+
+    .language-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .language-switcher a {
+      min-width: 36px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      color: var(--muted);
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .language-switcher a:hover,
+    .language-switcher a:focus-visible,
+    .language-switcher a.is-active {
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    html[dir="rtl"] body {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .section-header--center,
+    html[dir="rtl"] .hero-content {
+      text-align: center;
+    }
+
+    html[dir="rtl"] .copy-item,
+    html[dir="rtl"] .privacy-note span,
+    html[dir="rtl"] .brand,
+    html[dir="rtl"] .voice-row {
+      direction: rtl;
     }
 
     .btn {
@@ -2075,6 +2124,14 @@
 
       <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation"
         aria-expanded="false">&#9776;</button>
+      <div class="language-switcher" aria-label="Language">
+        <a href="/" lang="en" data-language-link="en" class="{% if LANGUAGE_CODE == 'en' %}is-active{% endif %}"
+          aria-label="English">EN</a>
+        <a href="/ar/" lang="ar" data-language-link="ar" class="{% if LANGUAGE_CODE == 'ar' %}is-active{% endif %}"
+          aria-label="Arabic">AR</a>
+        <a href="/fr/" lang="fr" data-language-link="fr" class="{% if LANGUAGE_CODE == 'fr' %}is-active{% endif %}"
+          aria-label="French">FR</a>
+      </div>
       <a class="btn btn-accent" href="#pricing">Get Access &mdash; $39</a>
     </nav>
   </header>
@@ -2085,6 +2142,13 @@
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
+    <div class="language-switcher" aria-label="Language">
+      <a href="/" lang="en" data-language-link="en" class="{% if LANGUAGE_CODE == 'en' %}is-active{% endif %}">EN</a>
+      <a href="/ar/" lang="ar" data-language-link="ar"
+        class="{% if LANGUAGE_CODE == 'ar' %}is-active{% endif %}">AR</a>
+      <a href="/fr/" lang="fr" data-language-link="fr"
+        class="{% if LANGUAGE_CODE == 'fr' %}is-active{% endif %}">FR</a>
+    </div>
     <a class="btn btn-accent" href="#pricing" style="margin-top: 10px;">Get Access &mdash; $39</a>
   </div>
 
@@ -2630,6 +2694,923 @@
   </div>
 
   <script>
+    const CURRENT_LANGUAGE = "{{ LANGUAGE_CODE|default:'en' }}";
+
+    const pageTranslations = {
+      fr: {
+        skip: "Aller au contenu",
+        nav: ["Dans l'app", "Fonctionnalites", "Tarifs", "FAQ"],
+        navOpen: "Ouvrir la navigation",
+        navClose: "Fermer la navigation",
+        getAccess: "Obtenir l'acces - $39",
+        eyebrow: "Windows 10/11 - Production de contenu IA",
+        heroTitle: "Une app.<br>Chaque ressource creative.",
+        heroCopy: "Creez des textes, images produit, videos, voix off arabes, landing pages et formats de contenu depuis un studio desktop concentre. Achetez une fois, connectez votre cle fal.ai, et arretez d'empiler les abonnements.",
+        heroButtons: ["Obtenir l'acces a vie", "Voir ce qui est inclus"],
+        trust: ["Licence unique - $39", "Activation sur 1 appareil (transferable)", "Garantie de remboursement 7 jours", "Paiement securise"],
+        problemKicker: "Le probleme",
+        problemTitle: "La plupart des workflows de contenu et de publicite coutent cher parce qu'ils sont disperses.",
+        problemCopy: "Un projet ou une campagne peut passer par des outils de texte, d'image, de video, de voix, de design, de landing page et beaucoup de redimensionnement manuel. MonsterCreative rassemble les taches de production les plus courantes dans une app desktop.",
+        problems: [
+          ["Trop d'abonnements", "Les petits outils mensuels deviennent vite une grosse facture recurrente avant meme de publier du contenu ou lancer des pubs."],
+          ["Production creative lente", "Les projets ralentissent quand le texte, les visuels et les formats sont produits a differents endroits."],
+          ["Voix off arabes faibles", "Les voix generiques peuvent sonner robotiques, etrangeres ou mal adaptees au marche."],
+          ["Redimensionnement manuel", "Chaque plateforme demande des formats differents, et les retouches repetitives cassent l'elan."]
+        ],
+        replaces: "MonsterCreative remplace tout cela.",
+        demoKicker: "Voir en action",
+        demoTitle: "Lancez la video pour voir comment ca marche",
+        offerKicker: "Ce que vous obtenez aujourd'hui",
+        offerTitle: "Un studio desktop complet sans facture logicielle mensuelle.",
+        offerCopy: "Arretez de payer 6 outils separes pour lancer un projet ou une campagne. MonsterCreative regroupe texte, images, videos, voix off arabes, landing pages et redimensionnement dans une app Windows achetee une fois.",
+        seeFeatures: "Voir toutes les fonctionnalites ->",
+        benefits: [
+          ["Strategie de contenu et copywriting", "Workflow copy en 9 etapes avec angles prouves et 5 variantes par execution."],
+          ["Images et videos", "Generez des visuels produit, concepts creatifs et courtes videos avec les modeles fal.ai."],
+          ["Laboratoire vocal global", "Voix regionales pour projets arabes, anglais et francais."],
+          ["Ressources de lancement", "Redimensionnez les formats, clonez les posts gagnants et genereez un package de landing page."]
+        ],
+        insideKicker: "Dans l'app",
+        insideTitle: "Concu pour les createurs et marketeurs qui veulent des ressources finies, pas un autre editeur vide.",
+        insideCopy: "MonsterCreative part du vrai travail a faire : transformer un produit, une offre ou une reference concurrente en ressources de contenu utilisables. Le workflow est pratique, repetable et rapide.",
+        copyItems: [
+          ["Commencez par un produit, une offre ou une reference gagnante", "Donnez le contexte, ajoutez des references si besoin, puis choisissez le resultat voulu."],
+          ["Generez les pieces ensemble", "Textes, images, videos, voix off et idees de landing page restent dans un seul workflow."],
+          ["Exportez des ressources pretes a tester", "Telechargez formats, variations creatives et fichiers de page sans tout reconstruire a la main."]
+        ],
+        howKicker: "Comment ca marche",
+        howTitle: "De l'idee brute aux ressources de contenu en quatre etapes.",
+        howCopy: "Le flux est volontairement simple pour que les acheteurs comprennent exactement ce qui se passe apres le telechargement.",
+        steps: [
+          ["Etape 01", "Installez l'app Windows", "Achetez votre licence, telechargez MonsterCreative et activez-le sur votre machine."],
+          ["Etape 02", "Connectez votre cle fal.ai", "Vos couts de generation passent par votre propre cle API, sans marge de plateforme MonsterCreative."],
+          ["Etape 03", "Construisez votre campagne", "Choisissez copy, images, video, voix, clonage, redimensionnement, landing pages ou virtual try-on."],
+          ["Etape 04", "Exportez et testez", "Telechargez les ressources, publiez vos posts, lancez vos tests et iterez selon les performances."]
+        ],
+        featuresKicker: "Fonctionnalites",
+        featuresTitle: "Tout ce qu'il faut pour produire des projets de contenu depuis un seul espace.",
+        featuresCopy: "Chaque outil est pense autour d'une vraie tache marketing, pas d'une boite de prompt generique.",
+        featureCards: [
+          ["Texte publicitaire", "Creez des textes performants pour publicites, posts sociaux et contenu general avec contexte audience, accroches et variantes creatives.", "Variantes de copy"],
+          ["Generation d'images", "Creez des photos produit, concepts, visuels sociaux et images marketing avec les meilleurs modeles image via fal.ai.", "Visuels produit"],
+          ["Essayage virtuel", "Placez des vetements ou visuels produit sur des modeles et dans des scenes pour lookbooks, ecommerce et contenu social.", "Scenes avec modeles"],
+          ["Publicites sociales", "Importez des pubs gagnantes ou posts viraux et adaptez leur structure a votre produit sans repartir de zero.", "Creatif base sur reference"],
+          ["Redimensionnement", "Transformez une image gagnante en formats 1:1, 4:5, 9:16, 16:9 et larges avec outpainting IA.", "Tous les formats"],
+          ["Landing page", "Generez un package de landing page depuis votre image, votre copy et vos details de marque, puis telechargez-le en ZIP.", "Package HTML"],
+          ["Video mode IA", "Generez de courtes videos fashion depuis texte ou image pour TikTok, Reels ou pubs avec mouvement cinematographique.", "Video IA"],
+          ["Scripts audio", "Creez des voix off pour pubs, scripts UGC et videos sociales avec voix arabes regionales, anglaises et francaises.", "17+ voix"],
+          ["Votre propre cle", "Connectez votre propre cle API fal.ai pour garder les couts de generation transparents et sous votre controle.", "Aucune marge generation"]
+        ],
+        voiceKicker: "Laboratoire vocal global",
+        voiceTitle: "Faites sonner votre contenu comme natif sur chaque marche.",
+        voiceCopy: "Les projets ont besoin de plus qu'un texte traduit. MonsterCreative offre des voix arabes regionales, anglaises et francaises pour adapter audience, marche et ton.",
+        voiceItems: [
+          ["Controle regional", "Choisissez des dialectes arabes regionaux, anglais US/UK et styles francais parisien/classique."],
+          ["Sortie orientee marketing", "Creez des voix off pour scripts publicitaires, UGC, demos produit et offres direct-response."]
+        ],
+        voiceRows: [
+          ["ELareef & Yasmine", "Egyptien Masry - Homme et femme"],
+          ["Fares & Salma", "Golfe Khaleeji - Homme et femme"],
+          ["Mazen Lawand & Belma", "Arabe standard MENA - Homme et femme"],
+          ["Rachid & Adina", "Maghrebi et marocain - Homme et femme"],
+          ["Ilyass & Rima M", "Dialecte algerien - Homme et femme"],
+          ["Hale & Christina", "Anglais US/UK - Tech et luxe"],
+          ["Lorenzo & Manon", "Francais classique - Prestige et haut de gamme"],
+          ["Sam & Audrey", "Francais moderne - Mode et voyage"]
+        ],
+        priceKicker: "Paiement unique",
+        priceTitle: "Acces a vie",
+        priceNote: "Possedez le logiciel pour toujours. Aucun frais mensuel d'app.",
+        apiNote: "Couts IA non inclus - factures par ",
+        priceList: ["Les 8 outils creatifs principaux", "Activation sur 1 appareil (transferable)", "Mises a jour a vie", "Support email prioritaire", "Connectez votre propre cle fal.ai"],
+        formTitle: "Obtenir votre licence",
+        formCopy: "Entrez vos informations pour passer au paiement securise.",
+        labels: ["Nom complet", "Adresse email", "Numero de telephone "],
+        optional: "(optionnel)",
+        buy: "Acheter et telecharger ->",
+        secure: "Paiement securise",
+        refund: "Garantie de remboursement 7 jours",
+        faqTitle: "Des reponses claires avant le telechargement.",
+        faqs: [
+          ["Quelle est la politique de remboursement ?", "Vous avez une fenetre de remboursement de 7 jours si le logiciel ne fonctionne pas sur votre systeme Windows 10/11. Contactez-nous avec votre email d'achat et une description du probleme."],
+          ["MonsterCreative est-il une app desktop ?", "Oui. MonsterCreative est une application Windows concue pour les systemes Windows 10/11 64 bits."],
+          ["Ai-je besoin d'un compte fal.ai ?", "Oui. L'app utilise votre propre cle API fal.ai pour la generation. Cela garde la facturation transparente et evite toute marge de plateforme."],
+          ["Les couts de generation IA sont-ils inclus ?", "Non. La licence couvre MonsterCreative. L'usage IA est facture separement par fal.ai selon ce que vous genereez."],
+          ["Que se passe-t-il apres l'achat ?", "Vous terminez le paiement securise, recevez vos details de licence par email, telechargez l'app, l'activez, puis connectez votre cle API."],
+          ["Puis-je l'utiliser pour du contenu arabe ?", "Oui. MonsterCreative inclut des options vocales arabes pour les usages Golfe, saoudien, egyptien, maghrebi et arabe standard."],
+          ["Est-ce que cela remplace une agence ?", "Cela remplace beaucoup de travail de production repetitif. La strategie, les tests d'offres, l'achat media et le jugement creatif restent importants."],
+          ["Puis-je transferer ma licence vers un nouvel appareil ?", "La licence inclut une activation sur 1 appareil, mais votre cle de licence est transferable si vous changez d'ordinateur."],
+          ["Quels sont les meilleurs outils IA lifetime deal pour petites entreprises ?", "Les meilleurs outils IA lifetime deal reduisent les couts recurrents tout en couvrant des besoins metier comme copywriting, generation media et voix off. MonsterCreative apporte de la valeur car les petites entreprises possedent leur licence et utilisent leurs propres cles API."],
+          ["Quels sont les avantages d'un outil IA en paiement unique ?", "Un paiement unique rend le budget logiciel previsible, reduit la pression des abonnements mensuels et garantit un acces long terme a l'outil."],
+          ["Ou trouver des outils IA lifetime deal pour marketing automation ?", "On les trouve sur des plateformes de createurs, sites directs et hubs logiciels. MonsterCreative propose un achat lifetime direct pour la production marketing et contenu."],
+          ["Qu'est-ce que l'acces perpetuel pour un logiciel IA ?", "L'acces perpetuel permet de payer une fois et d'utiliser le logiciel indefiniment. Avec MonsterCreative, le modele BYOK vous laisse posseder l'interface tout en payant l'usage IA directement au fournisseur."],
+          ["Quels outils IA proposent des lifetime deals pour la creation de contenu ?", "MonsterCreative est construit comme une suite desktop Windows a acheter une fois, avec copy, images, virtual try-on et voix off arabes multi-dialectes."],
+          ["Ou trouver des plateformes reputees avec solutions IA reduites ?", "Cherchez des vendeurs logiciels etablis et des lancements directs utilisant des paiements fiables comme Freemius, avec politique de remboursement claire et support developpeur."],
+          ["Quelles plateformes lifetime deal conviennent aux startups ?", "Les startups peuvent optimiser leur burn rate avec des licences lifetime directes comme MonsterCreative pour les outils de creation essentiels."],
+          ["Quels types d'apps IA proposent souvent un paiement initial unique ?", "Les apps desktop, utilitaires et outils BYOK proposent souvent un paiement initial unique, car le developpeur ne porte pas directement les couts serveur de generation."],
+          ["Comment evaluer un outil IA lifetime deal avant achat ?", "Verifiez le paiement securise, la politique de remboursement, la durabilite du modele economique comme BYOK, et le support de votre systeme Windows."],
+          ["Comment evaluer la valeur long terme d'un service IA a prix fixe ?", "Comparez le prix fixe aux abonnements alternatifs et calculez le point de rentabilite. La valeur augmente quand vous controlez directement vos couts de generation."]
+        ],
+        finalTitle: "Construisez votre prochain projet dans un seul espace desktop.",
+        finalCopy: "Telechargez MonsterCreative, connectez votre cle fal.ai et produisez vos ressources de contenu plus vite.",
+        footerCopy: "Studio de contenu IA pour Windows. Achetez une fois, creez pour toujours.",
+        product: "Produit",
+        legal: "Legal",
+        privacy: "Politique de confidentialite",
+        terms: "Conditions d'utilisation",
+        stickyTitle: "Licence MonsterCreative",
+        stickyCopy: "Paiement unique de $39. Aucun abonnement.",
+        processing: "Traitement..."
+      },
+      ar: {
+        skip: "تجاوز إلى المحتوى",
+        nav: ["داخل التطبيق", "المميزات", "السعر", "الأسئلة"],
+        navOpen: "فتح القائمة",
+        navClose: "إغلاق القائمة",
+        getAccess: "احصل على الرخصة - $39",
+        eyebrow: "Windows 10/11 - إنتاج محتوى بالذكاء الاصطناعي",
+        heroTitle: "تطبيق واحد.<br>كل أصولك الإبداعية.",
+        heroCopy: "أنشئ النصوص، صور المنتجات، الفيديوهات، التعليقات الصوتية العربية، صفحات الهبوط، ومقاسات المحتوى من استوديو سطح مكتب واحد. ادفع مرة واحدة، اربط مفتاح fal.ai الخاص بك، وتخلص من فوضى الاشتراكات.",
+        heroButtons: ["احصل على رخصة مدى الحياة", "شاهد ما يتضمنه"],
+        trust: ["رخصة لمرة واحدة - $39", "تفعيل جهاز واحد (قابل للنقل)", "ضمان استرداد 7 أيام", "دفع آمن"],
+        problemKicker: "المشكلة",
+        problemTitle: "معظم سير عمل المحتوى والإعلانات مكلف لأنه موزع بين أدوات كثيرة.",
+        problemCopy: "المشروع أو الحملة عادة يحتاج أدوات كتابة، صور، فيديو، صوت، تصميم، صفحات هبوط، وتعديل مقاسات يدوي. MonsterCreative يجمع أكثر مهام الإنتاج استخداما في تطبيق سطح مكتب واحد.",
+        problems: [
+          ["اشتراكات كثيرة", "الأدوات الشهرية الصغيرة تتحول إلى فاتورة متكررة كبيرة قبل نشر المحتوى أو إطلاق الإعلانات."],
+          ["بطء في الإنتاج الإبداعي", "تتعطل المشاريع عندما يتم إنتاج النصوص والمرئيات والمقاسات في أماكن مختلفة."],
+          ["تعليقات عربية ضعيفة", "بعض أصوات التحويل النصي تبدو آلية أو غير طبيعية أو غير مناسبة للسوق."],
+          ["تعديل مقاسات يدوي", "كل منصة تحتاج مقاسات مختلفة، والتعديل المتكرر يستهلك الوقت والطاقة."]
+        ],
+        replaces: "MonsterCreative يعوض كل ذلك.",
+        demoKicker: "شاهد التطبيق",
+        demoTitle: "شغل الفيديو لترى كيف يعمل",
+        offerKicker: "ما تحصل عليه اليوم",
+        offerTitle: "استوديو محتوى كامل لسطح المكتب بدون فاتورة شهرية.",
+        offerCopy: "توقف عن دفع ثمن 6 أدوات منفصلة لإطلاق مشروع أو حملة واحدة. MonsterCreative يجمع النصوص، الصور، الفيديوهات، التعليقات الصوتية العربية، صفحات الهبوط وتعديل المقاسات في تطبيق Windows تدفع ثمنه مرة واحدة.",
+        seeFeatures: "شاهد كل المميزات ->",
+        benefits: [
+          ["استراتيجية المحتوى والكتابة", "سير عمل كتابة من 9 خطوات مع زوايا مجربة و5 نسخ في كل تشغيل."],
+          ["الصور والفيديوهات", "أنشئ صور منتجات، أفكارا إبداعية وفيديوهات قصيرة عبر نماذج fal.ai."],
+          ["مختبر أصوات عالمي", "أصوات إقليمية لمشاريع العربية والإنجليزية والفرنسية."],
+          ["أصول الإطلاق", "غير المقاسات، استنسخ تخطيطات المنشورات الناجحة، وأنشئ حزمة صفحة هبوط."]
+        ],
+        insideKicker: "داخل التطبيق",
+        insideTitle: "مصمم للمبدعين والمسوقين الذين يريدون أصولا جاهزة، وليس محررا فارغا آخر.",
+        insideCopy: "يبدأ MonsterCreative من المهمة الحقيقية: تحويل منتج أو عرض أو مرجع منافس إلى أصول محتوى قابلة للاستخدام. سير العمل عملي، قابل للتكرار، ومركز على السرعة.",
+        copyItems: [
+          ["ابدأ من منتج أو عرض أو مرجع ناجح", "أضف سياق المحتوى، ارفع المراجع عند الحاجة، واختر النتيجة التي تريدها."],
+          ["أنشئ قطع المحتوى معا", "النصوص، الصور، الفيديوهات، التعليقات الصوتية وأفكار صفحات الهبوط تبقى في سير عمل واحد."],
+          ["صدر أصولا جاهزة للاختبار", "حمل المقاسات، النسخ الإبداعية، وملفات الصفحة بدون إعادة بناء كل شيء يدويا."]
+        ],
+        howKicker: "طريقة العمل",
+        howTitle: "من فكرة أولية إلى أصول محتوى في أربع خطوات.",
+        howCopy: "التدفق بسيط عمدا حتى يعرف المشتري بالضبط ما الذي يحدث بعد تحميل التطبيق.",
+        steps: [
+          ["الخطوة 01", "ثبت تطبيق Windows", "اشتر الرخصة، حمل MonsterCreative، وفعلها على جهازك."],
+          ["الخطوة 02", "اربط مفتاح fal.ai", "تكاليف التوليد تمر عبر مفتاح API الخاص بك مباشرة، بدون هامش من MonsterCreative."],
+          ["الخطوة 03", "ابن حملتك", "اختر النصوص، الصور، الفيديو، الأصوات، الاستنساخ، تعديل المقاسات، صفحات الهبوط أو التجربة الافتراضية."],
+          ["الخطوة 04", "صدر واختبر", "حمل الأصول، انشر منشوراتك، أطلق اختباراتك، وطور بناء على الأداء."]
+        ],
+        featuresKicker: "المميزات",
+        featuresTitle: "كل ما تحتاجه لإنتاج مشاريع المحتوى من مساحة واحدة.",
+        featuresCopy: "كل أداة مبنية حول مهمة تسويقية حقيقية، وليست مجرد صندوق أوامر عام.",
+        featureCards: [
+          ["كتابة الإعلانات", "أنشئ نصوصا عالية التحويل للإعلانات، منشورات السوشيال والمحتوى العام مع سياق الجمهور، الخطافات، والنسخ الإبداعية.", "نسخ متعددة"],
+          ["توليد الصور", "أنشئ صور منتجات، أفكارا، مرئيات للسوشيال وصورا تسويقية باستخدام نماذج صور قوية عبر fal.ai.", "صور منتجات"],
+          ["التجربة الافتراضية", "ضع الملابس أو صور المنتجات على عارضين وفي مشاهد مناسبة للموضة، المتاجر الإلكترونية ومحتوى السوشيال.", "مشاهد عارضين"],
+          ["إعلانات السوشيال", "ارفع إعلانات ناجحة أو منشورات فيروسية وعدل بنيتها لتناسب منتجك بدون البدء من الصفر.", "إبداع مبني على مرجع"],
+          ["تغيير المقاسات", "حول صورة ناجحة واحدة إلى مقاسات 1:1 و4:5 و9:16 و16:9 والمقاسات العريضة باستخدام outpainting بالذكاء الاصطناعي.", "كل مقاسات المحتوى"],
+          ["صفحة هبوط", "أنشئ حزمة صفحة هبوط من صورة المحتوى والنص وتفاصيل العلامة، ثم حملها كملف ZIP.", "حزمة HTML"],
+          ["فيديو موضة بالذكاء الاصطناعي", "أنشئ فيديوهات موضة قصيرة من نص أو صورة لتيك توك، ريلز أو الإعلانات بحركة سينمائية.", "فيديو AI"],
+          ["سكريبتات صوتية", "أنشئ تعليقات صوتية للإعلانات، سكريبتات UGC وفيديوهات السوشيال بأصوات عربية إقليمية وإنجليزية وفرنسية.", "17+ صوت"],
+          ["اربط مفتاحك الخاص", "اربط مفتاح fal.ai API الخاص بك حتى تبقى تكاليف التوليد واضحة وتحت سيطرتك.", "بدون هامش على التوليد"]
+        ],
+        voiceKicker: "مختبر أصوات عالمي",
+        voiceTitle: "اجعل محتواك يبدو طبيعيا في كل سوق.",
+        voiceCopy: "المشاريع تحتاج أكثر من نص مترجم. MonsterCreative يوفر خيارات أصوات عربية إقليمية وإنجليزية وفرنسية حتى يطابق المحتوى الجمهور والسوق والنبرة.",
+        voiceItems: [
+          ["تحكم إقليمي", "اختر من لهجات عربية إقليمية، إنجليزية أمريكية/بريطانية، وأنماط فرنسية كلاسيكية/باريسية."],
+          ["مخرجات موجهة للتسويق", "أنشئ تعليقات صوتية لإعلانات، سكريبتات UGC، عروض منتجات، وعروض مباشرة."]
+        ],
+        voiceRows: [
+          ["ELareef و Yasmine", "مصري - ذكر وأنثى"],
+          ["Fares و Salma", "خليجي - ذكر وأنثى"],
+          ["Mazen Lawand و Belma", "عربية فصحى للشرق الأوسط وشمال أفريقيا - ذكر وأنثى"],
+          ["Rachid و Adina", "مغاربي ومغربي - ذكر وأنثى"],
+          ["Ilyass و Rima M", "لهجة جزائرية - ذكر وأنثى"],
+          ["Hale و Christina", "إنجليزية أمريكية/بريطانية - تقنية وفخامة"],
+          ["Lorenzo و Manon", "فرنسية كلاسيكية - فخامة وراقي"],
+          ["Sam و Audrey", "فرنسية عصرية - موضة وسفر"]
+        ],
+        priceKicker: "دفع لمرة واحدة",
+        priceTitle: "رخصة مدى الحياة",
+        priceNote: "امتلك البرنامج للأبد. بدون رسوم شهرية للتطبيق.",
+        apiNote: "تكاليف الذكاء الاصطناعي غير مشمولة - تتم الفوترة عبر ",
+        priceList: ["كل أدوات الإبداع الأساسية الثمانية", "تفعيل جهاز واحد (قابل للنقل)", "تحديثات مدى الحياة", "دعم بريد إلكتروني أولوية", "اربط مفتاح fal.ai الخاص بك"],
+        formTitle: "احصل على رخصتك",
+        formCopy: "أدخل بياناتك للانتقال إلى الدفع الآمن.",
+        labels: ["الاسم الكامل", "البريد الإلكتروني", "رقم الهاتف "],
+        optional: "(اختياري)",
+        buy: "اشتر وحمل ->",
+        secure: "دفع آمن",
+        refund: "ضمان استرداد 7 أيام",
+        faqTitle: "إجابات واضحة قبل التحميل.",
+        faqs: [
+          ["ما هي سياسة الاسترداد؟", "لديك فترة استرداد 7 أيام إذا لم يعمل البرنامج على نظام Windows 10/11 لديك. تواصل معنا ببريد الشراء ووصف المشكلة."],
+          ["هل MonsterCreative تطبيق سطح مكتب؟", "نعم. MonsterCreative تطبيق Windows مصمم لأنظمة Windows 10/11 بنواة 64 بت."],
+          ["هل أحتاج حساب fal.ai؟", "نعم. يستخدم التطبيق مفتاح fal.ai API الخاص بك للتوليد، وهذا يجعل الفوترة واضحة ويتجنب أي هامش منصة."],
+          ["هل تكاليف توليد الذكاء الاصطناعي مشمولة؟", "لا. الرخصة تغطي MonsterCreative فقط. استخدام الذكاء الاصطناعي تتم فوترته بشكل منفصل من fal.ai حسب ما تولده."],
+          ["ماذا يحدث بعد الشراء؟", "تكمل الدفع الآمن، تستلم تفاصيل الرخصة بالبريد، تحمل التطبيق، تفعله، ثم تربط مفتاح API الخاص بك."],
+          ["هل يمكنني استخدامه للمحتوى العربي؟", "نعم. MonsterCreative يتضمن خيارات أصوات عربية للخليجي، السعودي، المصري، المغاربي والعربية الفصحى."],
+          ["هل يعوض وكالة؟", "يعوض الكثير من أعمال الإنتاج المتكررة. لكن الاستراتيجية، اختبار العروض، شراء الإعلانات والحكم الإبداعي تبقى مهمة."],
+          ["هل يمكنني نقل الرخصة إلى جهاز جديد؟", "الرخصة تشمل تفعيل جهاز واحد، لكن مفتاح الرخصة قابل للنقل إذا غيرت جهازك."],
+          ["ما أفضل أدوات الذكاء الاصطناعي بصفقة مدى الحياة للشركات الصغيرة؟", "أفضل أدوات lifetime deal هي التي تقلل التكاليف المتكررة وتغطي احتياجات مثل الكتابة، توليد الوسائط، والتعليقات الصوتية. MonsterCreative يمنح قيمة لأنه يسمح بامتلاك الرخصة واستخدام مفاتيح API الخاصة بك."],
+          ["ما فوائد الاستثمار في أداة AI بدفع لمرة واحدة؟", "الدفع لمرة واحدة يجعل ميزانية البرامج أوضح، يخفف ضغط الاشتراكات الشهرية، ويضمن وصولا طويل المدى للأداة."],
+          ["أين أجد أدوات AI lifetime deal لأتمتة التسويق؟", "يمكن إيجادها في منصات المبدعين، مواقع المطورين المباشرة، ومراكز البرامج. MonsterCreative يقدم شراء مدى الحياة لإنتاج المحتوى والتسويق."],
+          ["ما معنى الوصول الدائم لبرنامج ذكاء اصطناعي؟", "الوصول الدائم يعني الدفع مرة واحدة واستخدام البرنامج دون مدة محددة. في MonsterCreative، نموذج BYOK يعني أنك تملك الواجهة وتدفع استخدام الذكاء الاصطناعي مباشرة للمزود."],
+          ["أي أدوات AI تقدم lifetime deals لصناعة المحتوى؟", "MonsterCreative مبني كحزمة سطح مكتب لWindows تشتريها مرة واحدة، وتغطي الكتابة، الصور، التجربة الافتراضية، والتعليقات الصوتية العربية متعددة اللهجات."],
+          ["أين أجد منصات موثوقة تقدم حلول AI مخفضة؟", "ابحث عن بائعي برامج موثوقين وإطلاقات مباشرة تستخدم دفعا آمنا مثل Freemius، مع سياسة استرداد واضحة ودعم من المطور."],
+          ["ما أفضل منصات lifetime deal للشركات الناشئة؟", "يمكن للشركات الناشئة تقليل المصاريف عبر رخص مدى الحياة مباشرة مثل MonsterCreative لأدوات الإنتاج الإبداعي الأساسية."],
+          ["ما أنواع تطبيقات AI التي تقدم عادة دفعة واحدة؟", "تطبيقات سطح المكتب، الأدوات المساعدة، وأدوات BYOK تقدم غالبا دفعة واحدة لأن المطور لا يتحمل تكاليف التوليد السحابية مباشرة."],
+          ["كيف أقيم أداة AI lifetime deal قبل الشراء؟", "تحقق من أمان الدفع، وضوح سياسة الاسترداد، استدامة النموذج مثل BYOK، ودعم نظام Windows لديك."],
+          ["كيف أقيم القيمة طويلة المدى لخدمة AI بسعر ثابت؟", "قارن السعر الثابت بالاشتراكات البديلة واحسب نقطة التعادل. تزيد القيمة عندما تتحكم مباشرة في تكاليف التوليد."]
+        ],
+        finalTitle: "ابن مشروعك القادم في مساحة سطح مكتب واحدة.",
+        finalCopy: "حمل MonsterCreative، اربط مفتاح fal.ai، وابدأ إنتاج أصول المحتوى بسرعة أكبر.",
+        footerCopy: "استوديو محتوى بالذكاء الاصطناعي لWindows. اشتر مرة واحدة، وأنشئ للأبد.",
+        product: "المنتج",
+        legal: "قانوني",
+        privacy: "سياسة الخصوصية",
+        terms: "شروط الخدمة",
+        stickyTitle: "رخصة MonsterCreative",
+        stickyCopy: "دفعة واحدة $39. بدون اشتراكات.",
+        processing: "جاري المعالجة..."
+      }
+    };
+
+    const localizedCopyPolish = {
+      fr: {
+        skip: "Aller au contenu",
+        nav: ["Dans l'application", "Fonctionnalites", "Tarifs", "FAQ"],
+        navOpen: "Ouvrir le menu",
+        navClose: "Fermer le menu",
+        getAccess: "Acces a vie - 39 $",
+        eyebrow: "Windows 10/11 - Studio de production IA",
+        heroTitle: "Une seule app.<br>Tous vos contenus creatifs.",
+        heroCopy: "Creez vos textes, visuels produit, videos, voix off arabes, pages de vente et formats pour les reseaux sociaux depuis un seul studio desktop. Paiement unique, votre propre cle fal.ai, et beaucoup moins d'abonnements a gerer.",
+        heroButtons: ["Obtenir l'acces a vie", "Voir ce qui est inclus"],
+        trust: ["Licence a paiement unique - 39 $", "1 appareil active, transfert possible", "Garantie de remboursement 7 jours", "Paiement securise"],
+        problemKicker: "Le probleme",
+        problemTitle: "La production de contenu coute cher quand elle est eparpillee entre trop d'outils.",
+        problemCopy: "Une campagne peut vite passer par un outil de copywriting, un generateur d'images, un outil video, une solution de voix off, un editeur de design, un builder de landing page et du redimensionnement manuel. MonsterCreative regroupe les taches de production les plus utiles dans une seule application Windows.",
+        problems: [
+          ["Trop d'abonnements", "Quelques petits outils mensuels finissent par devenir une vraie charge recurrente avant meme de publier ou de lancer une campagne."],
+          ["Creation trop lente", "Les projets avancent moins vite quand le texte, les visuels, les videos et les formats sont produits dans des outils separes."],
+          ["Voix arabes peu naturelles", "Beaucoup de voix synthetiques sonnent robotiques ou ne correspondent pas au dialecte et au marche vises."],
+          ["Trop de retouches manuelles", "Chaque plateforme demande ses propres formats, et refaire les memes adaptations fait perdre du temps."]
+        ],
+        replaces: "MonsterCreative centralise ce travail.",
+        demoKicker: "Demo",
+        demoTitle: "Regardez comment fonctionne l'application",
+        offerKicker: "Ce que vous recevez",
+        offerTitle: "Un studio de contenu complet, sans nouvel abonnement logiciel.",
+        offerCopy: "Au lieu de payer plusieurs outils pour lancer une seule campagne, MonsterCreative regroupe copywriting, images, videos, voix off arabes, landing pages et redimensionnement dans une application Windows a paiement unique.",
+        seeFeatures: "Voir toutes les fonctionnalites ->",
+        benefits: [
+          ["Strategie de contenu et copywriting", "Un workflow de copywriting en 9 etapes avec angles marketing, hooks et 5 variantes par generation."],
+          ["Images et videos", "Generez des visuels produit, concepts creatifs et courtes videos avec les modeles fal.ai."],
+          ["Voix pour plusieurs marches", "Des voix arabes regionales, anglaises et francaises pour adapter le ton au public vise."],
+          ["Assets prets a lancer", "Redimensionnez vos formats, adaptez des posts performants et genereez un package de landing page."]
+        ],
+        insideKicker: "Dans l'application",
+        insideTitle: "Concu pour les createurs et marketeurs qui veulent des assets finis, pas un editeur vide de plus.",
+        insideCopy: "MonsterCreative part du travail concret : transformer un produit, une offre ou une reference concurrente en contenus utilisables. Le flux est pratique, repetable et pense pour avancer vite.",
+        copyItems: [
+          ["Partez d'un produit, d'une offre ou d'une reference gagnante", "Ajoutez le contexte, importez des references si besoin, puis choisissez le type de contenu a produire."],
+          ["Generez les pieces de la campagne ensemble", "Textes, images, videos, voix off et idees de landing page restent dans le meme flux."],
+          ["Exportez des assets prets a tester", "Telechargez vos formats, variantes creatives et fichiers de page sans tout reconstruire a la main."]
+        ],
+        howKicker: "Comment ca marche",
+        howTitle: "De l'idee brute aux assets de campagne en quatre etapes.",
+        howCopy: "Le parcours reste simple pour que vous sachiez exactement quoi faire apres l'achat et l'installation.",
+        steps: [
+          ["Etape 01", "Installez l'application Windows", "Achetez votre licence, telechargez MonsterCreative, puis activez-le sur votre machine."],
+          ["Etape 02", "Connectez votre cle fal.ai", "Vos generations passent par votre propre cle API, sans marge ajoutee par MonsterCreative."],
+          ["Etape 03", "Construisez votre campagne", "Choisissez copy, images, video, voix, clonage de reference, redimensionnement, landing page ou essayage virtuel."],
+          ["Etape 04", "Exportez et testez", "Publiez vos assets, lancez vos tests et iterez a partir des resultats."]
+        ],
+        featuresKicker: "Fonctionnalites",
+        featuresTitle: "Tout ce qu'il faut pour produire vos contenus depuis un seul espace.",
+        featuresCopy: "Chaque outil correspond a une vraie tache marketing, pas a une simple zone de prompt generique.",
+        featureCards: [
+          ["Copy publicitaire", "Creez des textes pour publicites, posts sociaux et contenus marketing avec contexte d'audience, hooks et variantes creatives.", "Variantes de copy"],
+          ["Generation d'images", "Produisez des visuels produit, concepts creatifs, images sociales et supports marketing avec les modeles fal.ai.", "Visuels produit"],
+          ["Essayage virtuel", "Placez des vetements ou produits sur des modeles et dans des scenes pour l'e-commerce, la mode et les reseaux sociaux.", "Scenes avec modeles"],
+          ["Social ads", "Adaptez la structure d'annonces gagnantes ou de posts viraux a votre propre produit sans repartir de zero.", "Creatif inspire d'une reference"],
+          ["Redimensionnement", "Declinez une image performante en 1:1, 4:5, 9:16, 16:9 et formats larges avec l'outpainting IA.", "Tous les formats"],
+          ["Landing page", "Generez une page de vente a partir de votre image, de votre copy et de vos elements de marque, puis telechargez le ZIP.", "Package HTML"],
+          ["Video fashion IA", "Creez de courtes videos mode a partir d'un texte ou d'une image pour TikTok, Reels ou publicites.", "Video IA"],
+          ["Scripts audio", "Produisez des voix off pour annonces, scripts UGC et videos sociales avec des voix arabes regionales, anglaises et francaises.", "17+ voix"],
+          ["Bring Your Own Key", "Utilisez votre propre cle API fal.ai pour garder les couts de generation clairs et sous votre controle.", "Sans marge sur l'IA"]
+        ],
+        voiceKicker: "Studio vocal international",
+        voiceTitle: "Adaptez la voix de vos contenus au marche vise.",
+        voiceCopy: "Un bon contenu ne se limite pas a une traduction. MonsterCreative propose des voix arabes regionales, anglaises et francaises pour mieux coller au public, au marche et au ton de la campagne.",
+        voiceItems: [
+          ["Controle regional", "Choisissez des dialectes arabes, des voix anglaises US/UK et des styles francais classiques ou modernes."],
+          ["Pense pour le marketing", "Creez des voix off pour annonces, scripts UGC, demos produit et offres direct-response."]
+        ],
+        voiceRows: [
+          ["ELareef & Yasmine", "Egyptien masri - voix homme et femme"],
+          ["Fares & Salma", "Arabe du Golfe - voix homme et femme"],
+          ["Mazen Lawand & Belma", "Arabe standard MENA - voix homme et femme"],
+          ["Rachid & Adina", "Maghrebin et marocain - voix homme et femme"],
+          ["Ilyass & Rima M", "Dialecte algerien - voix homme et femme"],
+          ["Hale & Christina", "Anglais US/UK - tech et luxe"],
+          ["Lorenzo & Manon", "Francais classique - prestige et haut de gamme"],
+          ["Sam & Audrey", "Francais moderne - mode et voyage"]
+        ],
+        priceKicker: "Paiement unique",
+        priceTitle: "Acces a vie",
+        priceNote: "Vous possedez le logiciel. Pas d'abonnement mensuel a l'application.",
+        apiNote: "Les couts IA ne sont pas inclus - facturation par ",
+        priceList: ["Les 8 outils creatifs principaux", "1 appareil active, transfert possible", "Mises a jour a vie", "Support prioritaire par email", "Votre propre cle fal.ai"],
+        formTitle: "Obtenir votre licence",
+        formCopy: "Renseignez vos informations pour passer au paiement securise.",
+        labels: ["Nom complet", "Adresse email", "Numero de telephone "],
+        optional: "(optionnel)",
+        buy: "Acheter et telecharger ->",
+        secure: "Paiement securise",
+        refund: "Garantie de remboursement 7 jours",
+        faqTitle: "Les reponses importantes avant de telecharger.",
+        faqs: [
+          ["Quelle est la politique de remboursement ?", "Vous disposez de 7 jours pour demander un remboursement si le logiciel ne fonctionne pas sur votre systeme Windows 10/11. Contactez-nous avec l'email d'achat et une description du probleme."],
+          ["MonsterCreative est-il une application desktop ?", "Oui. MonsterCreative est une application Windows concue pour les systemes Windows 10/11 64 bits."],
+          ["Ai-je besoin d'un compte fal.ai ?", "Oui. L'application utilise votre propre cle API fal.ai pour les generations. Cela garde les couts transparents et evite toute marge ajoutee."],
+          ["Les couts de generation IA sont-ils inclus ?", "Non. La licence couvre MonsterCreative. Les generations IA sont facturees separement par fal.ai selon votre usage."],
+          ["Que se passe-t-il apres l'achat ?", "Vous finalisez le paiement, recevez vos informations de licence par email, telechargez l'application, l'activez, puis connectez votre cle API."],
+          ["Puis-je creer du contenu arabe avec l'outil ?", "Oui. MonsterCreative inclut des options de voix arabes pour le Golfe, l'Arabie saoudite, l'Egypte, le Maghreb et l'arabe standard."],
+          ["Est-ce que l'outil remplace une agence ?", "Il remplace surtout une grande partie de la production repetitive. La strategie, les tests d'offres, le media buying et le jugement creatif restent importants."],
+          ["Puis-je transferer ma licence vers un nouvel appareil ?", "La licence inclut une activation sur un appareil, mais votre cle peut etre transferee si vous changez d'ordinateur."],
+          ["Quels sont les meilleurs outils IA en lifetime deal pour une petite entreprise ?", "Les meilleurs outils en paiement unique reduisent les couts recurrents tout en couvrant des besoins concrets comme la copy, les visuels et les voix off. MonsterCreative se distingue par son modele desktop avec votre propre cle API."],
+          ["Pourquoi choisir un outil IA a paiement unique ?", "Un paiement unique rend le budget plus previsible, evite l'accumulation d'abonnements et donne un acces long terme au logiciel."],
+          ["Ou trouver des outils IA lifetime deal pour le marketing ?", "On les trouve souvent sur des sites d'editeurs independants, plateformes de createurs et hubs logiciels. MonsterCreative propose une licence directe pour la production marketing et contenu."],
+          ["Que signifie acces perpetuel pour un logiciel IA ?", "Cela signifie que vous payez une fois pour utiliser le logiciel sans abonnement. Avec le modele BYOK, vous gardez l'interface et payez l'usage IA directement au fournisseur."],
+          ["Quels outils IA proposent un paiement unique pour la creation de contenu ?", "MonsterCreative est une suite Windows a paiement unique pour copywriting, images, essayage virtuel et voix off arabes multi-dialectes."],
+          ["Comment reconnaitre une offre logicielle fiable ?", "Verifiez un paiement securise, une politique de remboursement claire, un modele durable comme BYOK et un support developpeur accessible."],
+          ["Pourquoi les startups aiment les licences lifetime ?", "Elles permettent de reduire les charges mensuelles et de garder les outils essentiels sans augmenter le budget recurrent."],
+          ["Quels types d'outils IA proposent souvent un paiement unique ?", "Les applications desktop, utilitaires et outils BYOK s'y pretent bien, car l'editeur ne finance pas directement vos couts de generation."],
+          ["Comment evaluer un lifetime deal avant achat ?", "Verifiez la securite du paiement, la politique de remboursement, le modele economique, la compatibilite Windows et le controle des couts IA."],
+          ["Comment mesurer la valeur long terme d'un prix fixe ?", "Comparez le prix unique aux abonnements alternatifs et au temps gagne. La valeur augmente quand vous controlez directement vos couts de generation."]
+        ],
+        finalTitle: "Construisez votre prochaine campagne dans un seul espace desktop.",
+        finalCopy: "Telechargez MonsterCreative, connectez votre cle fal.ai et produisez vos assets plus vite.",
+        footerCopy: "Studio de contenu IA pour Windows. Achetez une fois, creez sans abonnement.",
+        product: "Produit",
+        legal: "Legal",
+        privacy: "Politique de confidentialite",
+        terms: "Conditions d'utilisation",
+        stickyTitle: "Licence MonsterCreative",
+        stickyCopy: "Paiement unique de 39 $. Aucun abonnement.",
+        processing: "Traitement..."
+      },
+      ar: {
+        skip: "تجاوز إلى المحتوى",
+        nav: ["داخل التطبيق", "المميزات", "السعر", "الأسئلة"],
+        navOpen: "فتح القائمة",
+        navClose: "إغلاق القائمة",
+        getAccess: "احصل على الرخصة - 39$",
+        eyebrow: "Windows 10/11 - استوديو إنتاج بالذكاء الاصطناعي",
+        heroTitle: "تطبيق واحد.<br>كل محتواك الإبداعي.",
+        heroCopy: "أنشئ النصوص، صور المنتجات، الفيديوهات، التعليقات الصوتية العربية، صفحات الهبوط ومقاسات السوشيال من استوديو سطح مكتب واحد. ادفع مرة واحدة، اربط مفتاح fal.ai الخاص بك، وتخلص من كثرة الاشتراكات.",
+        heroButtons: ["احصل على رخصة مدى الحياة", "شاهد ما الذي ستحصل عليه"],
+        trust: ["رخصة بدفع مرة واحدة - 39$", "تفعيل جهاز واحد مع إمكانية النقل", "ضمان استرداد خلال 7 أيام", "دفع آمن"],
+        problemKicker: "المشكلة",
+        problemTitle: "إنتاج المحتوى يصبح مكلفا عندما يتوزع بين أدوات كثيرة.",
+        problemCopy: "الحملة الواحدة قد تحتاج أداة للكتابة، أداة للصور، أداة للفيديو، خدمة تعليق صوتي، محرر تصميم، منشئ صفحات هبوط، ثم تعديلات مقاسات يدوية. MonsterCreative يجمع أهم مهام الإنتاج في تطبيق Windows واحد.",
+        problems: [
+          ["اشتراكات كثيرة", "الأدوات الشهرية الصغيرة تتحول بسرعة إلى تكلفة متكررة قبل أن تنشر المحتوى أو تطلق حملتك."],
+          ["الإنتاج يأخذ وقتا أطول", "عندما تكون النصوص، الصور، الفيديوهات والمقاسات في أدوات متفرقة، تتباطأ الحملة كلها."],
+          ["أصوات عربية غير طبيعية", "الكثير من أصوات الذكاء الاصطناعي تبدو آلية أو لا تناسب اللهجة والسوق المستهدف."],
+          ["تعديلات يدوية متكررة", "كل منصة لها مقاساتها، وإعادة تجهيز نفس المحتوى لكل منصة يستهلك وقتا كبيرا."]
+        ],
+        replaces: "MonsterCreative يجمع هذا العمل في مكان واحد.",
+        demoKicker: "العرض التجريبي",
+        demoTitle: "شاهد كيف يعمل التطبيق",
+        offerKicker: "ما الذي تحصل عليه",
+        offerTitle: "استوديو محتوى كامل بدون اشتراك شهري جديد.",
+        offerCopy: "بدل أن تدفع لعدة أدوات من أجل حملة واحدة، يجمع MonsterCreative الكتابة، الصور، الفيديو، التعليقات الصوتية العربية، صفحات الهبوط وتغيير المقاسات في تطبيق Windows بدفع مرة واحدة.",
+        seeFeatures: "شاهد كل المميزات ->",
+        benefits: [
+          ["استراتيجية المحتوى والكتابة", "سير عمل من 9 خطوات للكتابة التسويقية مع زوايا، خطافات و5 نسخ في كل مرة."],
+          ["صور وفيديوهات", "أنشئ صور منتجات، أفكارا إبداعية وفيديوهات قصيرة باستخدام نماذج fal.ai."],
+          ["أصوات لأسواق متعددة", "أصوات عربية بلهجات مختلفة، وإنجليزية وفرنسية حتى تختار النبرة المناسبة للجمهور."],
+          ["أصول جاهزة للإطلاق", "غير المقاسات، اقتبس بنية المنشورات الناجحة، وأنشئ حزمة صفحة هبوط بسرعة."]
+        ],
+        insideKicker: "داخل التطبيق",
+        insideTitle: "مصمم للمبدعين والمسوقين الذين يريدون أصولا جاهزة، لا محررا فارغا آخر.",
+        insideCopy: "ينطلق MonsterCreative من العمل الحقيقي: تحويل منتج أو عرض أو مرجع منافس إلى محتوى قابل للاستخدام. سير العمل عملي، قابل للتكرار، ومبني لتسريع الإنتاج.",
+        copyItems: [
+          ["ابدأ من منتج أو عرض أو مرجع ناجح", "أضف سياق الحملة، ارفع المراجع عند الحاجة، ثم اختر نوع المحتوى الذي تريد إنتاجه."],
+          ["أنشئ قطع الحملة معا", "النصوص، الصور، الفيديوهات، التعليقات الصوتية وأفكار صفحات الهبوط تبقى في سير واحد."],
+          ["صدر أصولا جاهزة للاختبار", "حمل المقاسات والنسخ الإبداعية وملفات الصفحة دون إعادة بناء كل شيء يدويا."]
+        ],
+        howKicker: "طريقة العمل",
+        howTitle: "من فكرة أولية إلى أصول حملة جاهزة في أربع خطوات.",
+        howCopy: "المسار بسيط حتى تعرف بالضبط ما الذي تفعله بعد الشراء والتثبيت.",
+        steps: [
+          ["الخطوة 01", "ثبت تطبيق Windows", "اشتر الرخصة، حمل MonsterCreative، ثم فعله على جهازك."],
+          ["الخطوة 02", "اربط مفتاح fal.ai", "كل عمليات التوليد تمر عبر مفتاح API الخاص بك، بدون هامش إضافي من MonsterCreative."],
+          ["الخطوة 03", "ابن حملتك", "اختر كتابة، صور، فيديو، أصوات، اقتباس مراجع، تغيير مقاسات، صفحة هبوط أو تجربة افتراضية."],
+          ["الخطوة 04", "صدر واختبر", "انشر الأصول، أطلق اختباراتك، ثم طور بناء على النتائج."]
+        ],
+        featuresKicker: "المميزات",
+        featuresTitle: "كل ما تحتاجه لإنتاج محتوى الحملة من مكان واحد.",
+        featuresCopy: "كل أداة مبنية حول مهمة تسويقية واضحة، وليس مجرد صندوق أوامر عام.",
+        featureCards: [
+          ["كتابة إعلانية", "أنشئ نصوصا للإعلانات، منشورات السوشيال والمحتوى التسويقي مع سياق الجمهور، الخطافات ونسخ متعددة.", "نسخ متعددة"],
+          ["توليد الصور", "أنشئ صور منتجات، أفكارا إبداعية، مرئيات للسوشيال ومواد تسويقية باستخدام نماذج fal.ai.", "صور منتجات"],
+          ["تجربة افتراضية", "ضع الملابس أو المنتجات على عارضين وفي مشاهد مناسبة للمتاجر الإلكترونية، الموضة والسوشيال.", "مشاهد بعارضين"],
+          ["إعلانات السوشيال", "حول بنية الإعلانات الناجحة أو المنشورات الرائجة إلى محتوى يناسب منتجك دون البدء من الصفر.", "إبداع من مرجع"],
+          ["تغيير المقاسات", "حول صورة ناجحة إلى مقاسات 1:1 و4:5 و9:16 و16:9 والمقاسات العريضة باستخدام outpainting.", "كل المقاسات"],
+          ["صفحة هبوط", "أنشئ صفحة بيع من الصورة والنص وعناصر العلامة، ثم حملها كحزمة ZIP.", "حزمة HTML"],
+          ["فيديو موضة بالذكاء الاصطناعي", "أنشئ فيديوهات قصيرة للموضة من نص أو صورة لتيك توك، ريلز أو الإعلانات.", "فيديو AI"],
+          ["سكريبتات صوتية", "أنتج تعليقات صوتية للإعلانات، سكريبتات UGC وفيديوهات السوشيال بأصوات عربية، إنجليزية وفرنسية.", "17+ صوت"],
+          ["مفتاحك الخاص", "استخدم مفتاح fal.ai API الخاص بك حتى تبقى تكاليف التوليد واضحة وتحت سيطرتك.", "بدون هامش على الذكاء الاصطناعي"]
+        ],
+        voiceKicker: "استوديو أصوات عالمي",
+        voiceTitle: "اختر صوتا يناسب السوق والجمهور.",
+        voiceCopy: "المحتوى الجيد ليس مجرد ترجمة. MonsterCreative يوفر أصواتا عربية بلهجات مختلفة، وإنجليزية وفرنسية، حتى تكون نبرة الحملة أقرب للجمهور المستهدف.",
+        voiceItems: [
+          ["تحكم في اللهجة", "اختر بين لهجات عربية، أصوات إنجليزية أمريكية/بريطانية، وأنماط فرنسية كلاسيكية أو عصرية."],
+          ["مناسب للتسويق", "أنشئ تعليقات صوتية للإعلانات، سكريبتات UGC، عروض المنتجات والعروض المباشرة."]
+        ],
+        voiceRows: [
+          ["ELareef و Yasmine", "مصري - صوت رجل وصوت امرأة"],
+          ["Fares و Salma", "خليجي - صوت رجل وصوت امرأة"],
+          ["Mazen Lawand و Belma", "عربية فصحى لمنطقة MENA - صوت رجل وصوت امرأة"],
+          ["Rachid و Adina", "مغاربي ومغربي - صوت رجل وصوت امرأة"],
+          ["Ilyass و Rima M", "لهجة جزائرية - صوت رجل وصوت امرأة"],
+          ["Hale و Christina", "إنجليزية أمريكية/بريطانية - تقنية وفخامة"],
+          ["Lorenzo و Manon", "فرنسية كلاسيكية - فخامة وراقي"],
+          ["Sam و Audrey", "فرنسية عصرية - موضة وسفر"]
+        ],
+        priceKicker: "دفع مرة واحدة",
+        priceTitle: "رخصة مدى الحياة",
+        priceNote: "امتلك البرنامج بدون اشتراك شهري للتطبيق.",
+        apiNote: "تكاليف الذكاء الاصطناعي غير مشمولة - تتم الفوترة عبر ",
+        priceList: ["كل أدوات الإبداع الأساسية الثمانية", "تفعيل جهاز واحد مع إمكانية النقل", "تحديثات مدى الحياة", "دعم أولوية عبر البريد", "استخدم مفتاح fal.ai الخاص بك"],
+        formTitle: "احصل على رخصتك",
+        formCopy: "أدخل بياناتك للانتقال إلى الدفع الآمن.",
+        labels: ["الاسم الكامل", "البريد الإلكتروني", "رقم الهاتف "],
+        optional: "(اختياري)",
+        buy: "اشتر وحمل ->",
+        secure: "دفع آمن",
+        refund: "ضمان استرداد خلال 7 أيام",
+        faqTitle: "إجابات مهمة قبل التحميل.",
+        faqs: [
+          ["ما سياسة الاسترداد؟", "يمكنك طلب الاسترداد خلال 7 أيام إذا لم يعمل البرنامج على Windows 10/11 لديك. تواصل معنا ببريد الشراء ووصف المشكلة."],
+          ["هل MonsterCreative تطبيق سطح مكتب؟", "نعم. MonsterCreative تطبيق Windows مصمم لأنظمة Windows 10/11 بنواة 64 بت."],
+          ["هل أحتاج إلى حساب fal.ai؟", "نعم. يستخدم التطبيق مفتاح fal.ai API الخاص بك للتوليد، وهذا يبقي التكاليف واضحة وبدون هامش إضافي."],
+          ["هل تكاليف توليد الذكاء الاصطناعي مشمولة؟", "لا. الرخصة تغطي برنامج MonsterCreative فقط. استخدام الذكاء الاصطناعي تتم فوترته من fal.ai حسب الاستهلاك."],
+          ["ماذا يحدث بعد الشراء؟", "تكمل الدفع، تستلم تفاصيل الرخصة بالبريد، تحمل التطبيق، تفعله، ثم تربط مفتاح API الخاص بك."],
+          ["هل يمكنني إنشاء محتوى عربي؟", "نعم. MonsterCreative يتضمن أصواتا عربية للخليج، السعودية، مصر، المغرب العربي والعربية الفصحى."],
+          ["هل يغني عن وكالة؟", "هو يغطي جزءا كبيرا من الإنتاج المتكرر. لكن الاستراتيجية، اختبار العروض، شراء الإعلانات والحكم الإبداعي تبقى مهمة."],
+          ["هل يمكن نقل الرخصة إلى جهاز جديد؟", "الرخصة تشمل تفعيل جهاز واحد، لكن يمكن نقل مفتاح الرخصة إذا غيرت جهازك."],
+          ["ما أفضل أدوات الذكاء الاصطناعي بدفع مدى الحياة للشركات الصغيرة؟", "الأفضل هو ما يقلل الاشتراكات ويغطي حاجات عملية مثل الكتابة، الصور والتعليقات الصوتية. MonsterCreative مناسب لأنه تطبيق سطح مكتب يعمل بمفتاح API الخاص بك."],
+          ["لماذا أختار أداة ذكاء اصطناعي بدفع مرة واحدة؟", "الدفع مرة واحدة يجعل الميزانية أوضح، يقلل تراكم الاشتراكات، ويمنحك وصولا طويل المدى للبرنامج."],
+          ["أين أجد أدوات AI lifetime deal للتسويق؟", "غالبا تجدها عند مطورين مستقلين، منصات مبدعين أو متاجر برامج. MonsterCreative يقدم رخصة مباشرة لإنتاج المحتوى والتسويق."],
+          ["ما معنى الوصول الدائم لبرنامج ذكاء اصطناعي؟", "يعني أنك تدفع مرة واحدة لاستخدام البرنامج دون اشتراك. ومع نموذج BYOK تدفع استهلاك الذكاء الاصطناعي مباشرة للمزود."],
+          ["أي أدوات AI تقدم دفعا مرة واحدة لصناعة المحتوى؟", "MonsterCreative حزمة Windows بدفع واحد للكتابة، الصور، التجربة الافتراضية والتعليقات الصوتية العربية متعددة اللهجات."],
+          ["كيف أعرف أن العرض موثوق؟", "تحقق من الدفع الآمن، سياسة الاسترداد، نموذج العمل مثل BYOK، توافق Windows، ووجود دعم واضح."],
+          ["لماذا تناسب رخص مدى الحياة الشركات الناشئة؟", "لأنها تقلل المصاريف الشهرية وتبقي الأدوات الأساسية متاحة بدون زيادة الالتزامات المتكررة."],
+          ["ما أنواع أدوات AI التي تناسب الدفع مرة واحدة؟", "تطبيقات سطح المكتب، الأدوات المساعدة وأدوات BYOK تناسب هذا النموذج لأن المطور لا يدفع تكاليف التوليد نيابة عنك."],
+          ["كيف أقيم lifetime deal قبل الشراء؟", "راجع أمان الدفع، سياسة الاسترداد، استدامة النموذج، توافق Windows، وقدرتك على التحكم في تكاليف الذكاء الاصطناعي."],
+          ["كيف أقيس القيمة طويلة المدى لسعر ثابت؟", "قارن السعر الواحد بالاشتراكات البديلة وبالوقت الذي توفره. تزيد القيمة عندما تتحكم مباشرة في تكاليف التوليد."]
+        ],
+        finalTitle: "ابن حملتك القادمة في مساحة سطح مكتب واحدة.",
+        finalCopy: "حمل MonsterCreative، اربط مفتاح fal.ai، وابدأ إنتاج أصولك بسرعة أكبر.",
+        footerCopy: "استوديو محتوى بالذكاء الاصطناعي لWindows. اشتر مرة واحدة، وأنشئ بدون اشتراك.",
+        product: "المنتج",
+        legal: "قانوني",
+        privacy: "سياسة الخصوصية",
+        terms: "شروط الخدمة",
+        stickyTitle: "رخصة MonsterCreative",
+        stickyCopy: "دفعة واحدة 39$. بدون اشتراكات.",
+        processing: "جاري المعالجة..."
+      }
+    };
+
+    Object.assign(pageTranslations.fr, localizedCopyPolish.fr);
+    Object.assign(pageTranslations.ar, localizedCopyPolish.ar);
+
+    const finalFrenchCopy = {
+      skip: "Aller au contenu",
+      nav: ["Dans l'application", "Fonctionnalités", "Tarifs", "FAQ"],
+      navOpen: "Ouvrir le menu",
+      navClose: "Fermer le menu",
+      getAccess: "Acheter la licence - 39 $",
+      priceCta: "Acheter la licence à vie - 39 $",
+      eyebrow: "Windows 10/11 - Studio de production de contenu par IA",
+      heroTitle: "Une seule application.<br>Tout pour produire vos contenus.",
+      heroCopy: "Créez vos textes, visuels produit, vidéos, voix off arabes, pages de vente et formats pour les réseaux sociaux depuis un seul studio desktop. Paiement unique, votre propre clé fal.ai, et beaucoup moins d'outils à gérer.",
+      heroButtons: ["Acheter la licence à vie", "Voir ce qui est inclus"],
+      trust: ["Licence permanente à paiement unique - 39 $", "1 appareil activé, transfert possible", "Garantie de remboursement 7 jours", "Paiement sécurisé"],
+      problemKicker: "Le problème",
+      problemTitle: "Produire du contenu devient cher et lent quand tout est réparti entre trop d'outils.",
+      problemCopy: "Une seule campagne peut demander un outil de rédaction, un générateur d'images, un outil vidéo, une solution de voix off, un éditeur design, un créateur de pages de vente, puis des redimensionnements manuels. MonsterCreative regroupe les tâches de production les plus utiles dans une application Windows.",
+      problems: [
+        ["Trop d'abonnements", "Quelques petits outils mensuels finissent vite par devenir une dépense récurrente avant même de publier ou de lancer une campagne."],
+        ["Une production trop lente", "Quand les textes, visuels, vidéos et formats sont répartis dans plusieurs outils, toute la campagne ralentit."],
+        ["Des voix arabes peu naturelles", "Beaucoup de voix générées par IA sonnent mécaniques ou ne correspondent pas au dialecte et au marché visés."],
+        ["Trop de retouches manuelles", "Chaque plateforme impose ses formats, et préparer le même contenu encore et encore fait perdre un temps précieux."]
+      ],
+      replaces: "MonsterCreative centralise ce travail.",
+      demoKicker: "Démo",
+      demoTitle: "Regardez comment fonctionne l'application",
+      offerKicker: "Ce que vous obtenez",
+      offerTitle: "Un studio de contenu complet, sans abonnement mensuel supplémentaire.",
+      offerCopy: "Au lieu de payer plusieurs outils pour lancer une seule campagne, MonsterCreative regroupe rédaction, images, vidéo, voix off arabes, pages de vente et redimensionnement dans une application Windows à paiement unique.",
+      seeFeatures: "Voir toutes les fonctionnalités ->",
+      benefits: [
+        ["Stratégie de contenu et rédaction", "Un workflow en 9 étapes pour générer des angles marketing, des accroches et 5 variantes de texte à chaque lancement."],
+        ["Images et vidéos", "Créez des visuels produit, concepts créatifs et courtes vidéos avec les modèles fal.ai."],
+        ["Voix pour plusieurs marchés", "Des voix arabes régionales, anglaises et françaises pour adapter le ton au public visé."],
+        ["Supports prêts à lancer", "Redimensionnez vos formats, inspirez-vous de publications performantes et générez rapidement un package de page de vente."]
+      ],
+      insideKicker: "Dans l'application",
+      insideTitle: "Conçu pour les créateurs et marketeurs qui veulent des supports prêts à utiliser, pas un éditeur vide de plus.",
+      insideCopy: "MonsterCreative part du travail réel : transformer un produit, une offre ou une référence concurrente en contenus exploitables. Le flux est pratique, répétable et pensé pour accélérer la production.",
+      copyItems: [
+        ["Partez d'un produit, d'une offre ou d'une référence gagnante", "Ajoutez le contexte de la campagne, importez des références si besoin, puis choisissez le type de contenu à produire."],
+        ["Produisez les éléments de campagne ensemble", "Textes, images, vidéos, voix off et idées de page de vente restent dans le même flux."],
+        ["Exportez des supports prêts à tester", "Téléchargez vos formats, variantes créatives et fichiers de page sans tout reconstruire à la main."]
+      ],
+      howKicker: "Comment ça marche",
+      howTitle: "De l'idée brute aux supports de campagne en quatre étapes.",
+      howCopy: "Le parcours reste simple pour que vous sachiez exactement quoi faire après l'achat et l'installation.",
+      steps: [
+        ["Étape 01", "Installez l'application Windows", "Achetez votre licence, téléchargez MonsterCreative, puis activez-le sur votre machine."],
+        ["Étape 02", "Connectez votre clé fal.ai", "Toutes les générations passent par votre propre clé API, sans marge ajoutée par MonsterCreative."],
+        ["Étape 03", "Construisez votre campagne", "Choisissez rédaction, images, vidéo, voix, inspiration depuis une référence, redimensionnement, page de vente ou essayage virtuel."],
+        ["Étape 04", "Exportez et testez", "Publiez vos supports, lancez vos tests, puis améliorez vos campagnes à partir des résultats."]
+      ],
+      featuresKicker: "Fonctionnalités",
+      featuresTitle: "Tout ce qu'il faut pour produire le contenu d'une campagne depuis un seul espace.",
+      featuresCopy: "Chaque outil répond à une vraie tâche marketing, pas à une simple zone de prompt générique.",
+      featureCards: [
+        ["Rédaction publicitaire", "Créez des textes pour publicités, publications sociales et contenus marketing avec contexte d'audience, accroches et variantes.", "Variantes de texte"],
+        ["Génération d'images", "Produisez des visuels produit, concepts créatifs, images sociales et supports marketing avec les modèles fal.ai.", "Visuels produit"],
+        ["Essayage virtuel", "Placez des vêtements ou produits sur des modèles et dans des scènes adaptées à l'e-commerce, à la mode et aux réseaux sociaux.", "Scènes avec modèles"],
+        ["Publicités sociales", "Transformez la structure d'annonces gagnantes ou de publications virales en contenu adapté à votre produit.", "Création à partir d'une référence"],
+        ["Redimensionnement", "Déclinez une image performante en formats 1:1, 4:5, 9:16, 16:9 et formats larges avec l'outpainting.", "Tous les formats"],
+        ["Page de vente", "Générez une page de vente à partir de votre image, de votre texte et de vos éléments de marque, puis téléchargez le ZIP.", "Package HTML"],
+        ["Vidéo mode par IA", "Créez de courtes vidéos mode à partir d'un texte ou d'une image pour TikTok, Reels ou vos publicités.", "Vidéo IA"],
+        ["Scripts audio", "Produisez des voix off pour annonces, scripts UGC et vidéos sociales avec des voix arabes, anglaises et françaises.", "17+ voix"],
+        ["Votre propre clé", "Utilisez votre propre clé API fal.ai pour garder les coûts de génération clairs et sous votre contrôle.", "Sans marge sur l'IA"]
+      ],
+      voiceKicker: "Studio vocal international",
+      voiceTitle: "Choisissez une voix adaptée au marché et au public.",
+      voiceCopy: "Un bon contenu ne se limite pas à une traduction. MonsterCreative propose des voix arabes avec plusieurs dialectes, ainsi que des voix anglaises et françaises, pour rapprocher le ton de votre campagne du public visé.",
+      voiceItems: [
+        ["Contrôle du dialecte", "Choisissez parmi des dialectes arabes, des voix anglaises US/UK et des styles français classiques ou modernes."],
+        ["Pensé pour le marketing", "Créez des voix off pour publicités, scripts UGC, présentations produit et offres directes."]
+      ],
+      voiceRows: [
+        ["ELareef & Yasmine", "Égyptien masri - voix homme et femme"],
+        ["Fares & Salma", "Arabe du Golfe - voix homme et femme"],
+        ["Mazen Lawand & Belma", "Arabe standard MENA - voix homme et femme"],
+        ["Rachid & Adina", "Maghrébin et marocain - voix homme et femme"],
+        ["Ilyass & Rima M", "Dialecte algérien - voix homme et femme"],
+        ["Hale & Christina", "Anglais US/UK - tech et luxe"],
+        ["Lorenzo & Manon", "Français classique - prestige et haut de gamme"],
+        ["Sam & Audrey", "Français moderne - mode et voyage"]
+      ],
+      priceKicker: "Paiement unique",
+      priceTitle: "Licence à vie",
+      priceNote: "Possédez le logiciel sans abonnement mensuel à l'application.",
+      apiNote: "Les coûts d'IA ne sont pas inclus - facturation par ",
+      priceList: ["Les 8 outils créatifs principaux", "1 appareil activé, transfert possible", "Mises à jour à vie", "Support prioritaire par email", "Utilisez votre propre clé fal.ai"],
+      formTitle: "Obtenir votre licence",
+      formCopy: "Renseignez vos informations pour passer au paiement sécurisé.",
+      labels: ["Nom complet", "Adresse email", "Numéro de téléphone "],
+      optional: "(facultatif)",
+      buy: "Acheter et télécharger ->",
+      secure: "Paiement sécurisé",
+      refund: "Garantie de remboursement 7 jours",
+      faqTitle: "Les réponses importantes avant de télécharger.",
+      faqs: [
+        ["Quelle est la politique de remboursement ?", "Vous pouvez demander un remboursement sous 7 jours si le logiciel ne fonctionne pas sur votre système Windows 10/11. Contactez-nous avec l'email d'achat et une description du problème."],
+        ["MonsterCreative est-il une application desktop ?", "Oui. MonsterCreative est une application Windows conçue pour les systèmes Windows 10/11 64 bits."],
+        ["Ai-je besoin d'un compte fal.ai ?", "Oui. L'application utilise votre propre clé API fal.ai pour générer les contenus. Les coûts restent clairs et sans marge ajoutée."],
+        ["Les coûts de génération IA sont-ils inclus ?", "Non. La licence couvre uniquement MonsterCreative. L'utilisation de l'IA est facturée séparément par fal.ai selon votre consommation."],
+        ["Que se passe-t-il après l'achat ?", "Vous finalisez le paiement, recevez vos informations de licence par email, téléchargez l'application, l'activez, puis connectez votre clé API."],
+        ["Puis-je créer du contenu arabe ?", "Oui. MonsterCreative inclut des voix arabes pour le Golfe, l'Arabie saoudite, l'Égypte, le Maghreb et l'arabe standard."],
+        ["Est-ce que l'outil remplace une agence ?", "Il couvre une grande partie de la production répétitive. La stratégie, les tests d'offres, l'achat média et le jugement créatif restent importants."],
+        ["Puis-je transférer ma licence vers un nouvel appareil ?", "La licence inclut l'activation sur un appareil, mais la clé peut être transférée si vous changez d'ordinateur."],
+        ["Quels sont les meilleurs outils IA avec licence à vie pour une petite entreprise ?", "Les meilleurs outils réduisent les abonnements tout en couvrant des besoins concrets comme la rédaction, les visuels et les voix off. MonsterCreative est adapté car il fonctionne en desktop avec votre propre clé API."],
+        ["Pourquoi choisir un outil IA à paiement unique ?", "Le paiement unique rend le budget plus clair, limite l'accumulation d'abonnements et vous donne un usage long terme du logiciel."],
+        ["Où trouver des outils IA marketing à paiement unique ?", "On les trouve souvent chez des éditeurs indépendants, sur des plateformes de créateurs ou dans des boutiques logicielles. MonsterCreative propose une licence directe pour la production de contenu et le marketing."],
+        ["Que signifie licence permanente pour un logiciel IA ?", "Cela signifie que vous payez une fois pour utiliser le logiciel sans abonnement. Avec le modèle où vous utilisez votre propre clé, vous payez la consommation IA directement au fournisseur."],
+        ["Quels outils IA proposent un paiement unique pour créer du contenu ?", "MonsterCreative est une suite Windows à paiement unique pour la rédaction, les images, l'essayage virtuel et les voix off arabes multi-dialectes."],
+        ["Comment savoir si l'offre est fiable ?", "Vérifiez le paiement sécurisé, la politique de remboursement, le modèle économique, la compatibilité Windows et l'existence d'un support clair."],
+        ["Pourquoi les licences à vie conviennent-elles aux startups ?", "Elles réduisent les dépenses mensuelles et gardent les outils essentiels disponibles sans augmenter les engagements récurrents."],
+        ["Quels types d'outils IA conviennent au paiement unique ?", "Les applications desktop, utilitaires et outils utilisant votre propre clé API conviennent bien, car l'éditeur ne paie pas les coûts de génération à votre place."],
+        ["Comment évaluer une offre de licence à vie avant achat ?", "Vérifiez la sécurité du paiement, la politique de remboursement, la durabilité du modèle, la compatibilité Windows et votre contrôle sur les coûts IA."],
+        ["Comment mesurer la valeur à long terme d'un prix fixe ?", "Comparez le prix unique aux abonnements alternatifs et au temps gagné. La valeur augmente quand vous contrôlez directement vos coûts de génération."]
+      ],
+      finalTitle: "Construisez votre prochaine campagne dans un seul espace desktop.",
+      finalCopy: "Téléchargez MonsterCreative, connectez votre clé fal.ai et produisez vos supports plus vite.",
+      footerCopy: "Studio de contenu IA pour Windows. Achetez une fois, créez sans abonnement.",
+      product: "Produit",
+      legal: "Légal",
+      privacy: "Politique de confidentialité",
+      terms: "Conditions d'utilisation",
+      stickyTitle: "Licence MonsterCreative",
+      stickyCopy: "Paiement unique de 39 $. Aucun abonnement.",
+      processing: "Traitement..."
+    };
+
+    const finalArabicCopy = {
+      skip: "تجاوز إلى المحتوى",
+      nav: ["داخل التطبيق", "المميزات", "السعر", "الأسئلة الشائعة"],
+      navOpen: "فتح القائمة",
+      navClose: "إغلاق القائمة",
+      getAccess: "اشتر الرخصة - 39$",
+      priceCta: "اشتر رخصة مدى الحياة - 39$",
+      eyebrow: "Windows 10/11 - استوديو إنتاج محتوى بالذكاء الاصطناعي",
+      heroTitle: "تطبيق واحد.<br>كل ما تحتاجه لإنتاج المحتوى.",
+      heroCopy: "أنشئ النصوص، صور المنتجات، الفيديوهات، التعليقات الصوتية العربية، صفحات الهبوط ومقاسات السوشيال من مكان واحد. ادفع مرة واحدة، اربط مفتاح fal.ai الخاص بك، وتخلص من تشتت الأدوات والاشتراكات.",
+      heroButtons: ["اشتر رخصة مدى الحياة", "شاهد ما الذي ستحصل عليه"],
+      trust: ["رخصة دائمة بدفع مرة واحدة - 39$", "تفعيل جهاز واحد مع إمكانية النقل", "ضمان استرداد خلال 7 أيام", "دفع آمن"],
+      problemKicker: "المشكلة",
+      problemTitle: "إنتاج المحتوى يصبح مكلفا وبطيئا عندما يتوزع بين أدوات كثيرة.",
+      problemCopy: "الحملة الواحدة قد تحتاج أداة للكتابة، أداة للصور، أداة للفيديو، خدمة تعليق صوتي، محرر تصميم، منشئ صفحات هبوط، ثم تعديلات مقاسات يدوية. MonsterCreative يجمع أهم مهام الإنتاج في تطبيق Windows واحد.",
+      problems: [
+        ["اشتراكات كثيرة", "الأدوات الشهرية الصغيرة تتحول بسرعة إلى تكلفة متكررة قبل أن تنشر المحتوى أو تطلق حملتك."],
+        ["إنتاج أبطأ من اللازم", "عندما تكون النصوص، الصور، الفيديوهات والمقاسات في أدوات متفرقة، تتباطأ الحملة كلها."],
+        ["أصوات عربية غير طبيعية", "الكثير من الأصوات الاصطناعية تبدو آلية أو لا تناسب اللهجة والسوق المستهدف."],
+        ["تعديلات يدوية متكررة", "كل منصة لها مقاساتها، وإعادة تجهيز نفس المحتوى لكل منصة تستهلك وقتا كان يمكن استثماره في الاختبار والتحسين."]
+      ],
+      replaces: "MonsterCreative يجمع هذا العمل في مكان واحد.",
+      demoKicker: "العرض التجريبي",
+      demoTitle: "شاهد كيف يعمل التطبيق",
+      offerKicker: "ما الذي تحصل عليه",
+      offerTitle: "استوديو محتوى كامل بدون اشتراك شهري جديد.",
+      offerCopy: "بدل أن تدفع لعدة أدوات من أجل حملة واحدة، يجمع MonsterCreative الكتابة، الصور، الفيديو، التعليقات الصوتية العربية، صفحات الهبوط وتغيير المقاسات في تطبيق Windows بدفع مرة واحدة.",
+      seeFeatures: "شاهد كل المميزات ->",
+      benefits: [
+        ["استراتيجية محتوى وكتابة تسويقية", "سير عمل من 9 خطوات يساعدك على توليد زوايا تسويقية، خطافات، و5 نسخ مختلفة في كل مرة."],
+        ["صور وفيديوهات", "أنشئ صور منتجات، أفكارا إبداعية وفيديوهات قصيرة باستخدام نماذج fal.ai."],
+        ["أصوات لأسواق متعددة", "أصوات عربية بلهجات مختلفة، إضافة إلى الإنجليزية والفرنسية، حتى تختار النبرة المناسبة للجمهور."],
+        ["مواد جاهزة للإطلاق", "غير المقاسات، استلهم بنية المنشورات الناجحة، وأنشئ حزمة صفحة هبوط بسرعة."]
+      ],
+      insideKicker: "داخل التطبيق",
+      insideTitle: "مصمم للمبدعين والمسوقين الذين يريدون موادا جاهزة، لا محررا فارغا آخر.",
+      insideCopy: "ينطلق MonsterCreative من العمل الحقيقي: تحويل منتج أو عرض أو مرجع منافس إلى محتوى قابل للاستخدام. سير العمل عملي، قابل للتكرار، ومبني لتسريع الإنتاج.",
+      copyItems: [
+        ["ابدأ من منتج أو عرض أو مرجع ناجح", "أضف سياق الحملة، ارفع المراجع عند الحاجة، ثم اختر نوع المحتوى الذي تريد إنتاجه."],
+        ["أنشئ مكونات الحملة معا", "النصوص، الصور، الفيديوهات، التعليقات الصوتية وأفكار صفحات الهبوط تبقى في سير واحد."],
+        ["صدر موادا جاهزة للاختبار", "حمل المقاسات والنسخ الإبداعية وملفات الصفحة دون إعادة بناء كل شيء يدويا."]
+      ],
+      howKicker: "طريقة العمل",
+      howTitle: "من فكرة أولية إلى مواد حملة جاهزة في أربع خطوات.",
+      howCopy: "المسار بسيط حتى تعرف بالضبط ما الذي تفعله بعد الشراء والتثبيت.",
+      steps: [
+        ["الخطوة 01", "ثبت تطبيق Windows", "اشتر الرخصة، حمل MonsterCreative، ثم فعله على جهازك."],
+        ["الخطوة 02", "اربط مفتاح fal.ai", "كل عمليات التوليد تمر عبر مفتاح API الخاص بك، بدون هامش إضافي من MonsterCreative."],
+        ["الخطوة 03", "ابن حملتك", "اختر كتابة، صور، فيديو، أصوات، اقتباس مراجع، تغيير مقاسات، صفحة هبوط أو تجربة افتراضية."],
+        ["الخطوة 04", "صدر واختبر", "انشر المواد، أطلق اختباراتك، ثم طور بناء على النتائج."]
+      ],
+      featuresKicker: "المميزات",
+      featuresTitle: "كل ما تحتاجه لإنتاج محتوى الحملة من مكان واحد.",
+      featuresCopy: "كل أداة مبنية حول مهمة تسويقية واضحة، وليس مجرد صندوق أوامر عام.",
+      featureCards: [
+        ["كتابة إعلانية", "أنشئ نصوصا للإعلانات، منشورات السوشيال والمحتوى التسويقي مع سياق الجمهور، خطافات قوية ونسخ متعددة.", "نسخ متعددة"],
+        ["توليد الصور", "أنشئ صور منتجات، أفكارا إبداعية، مرئيات للسوشيال ومواد تسويقية باستخدام نماذج fal.ai.", "صور منتجات"],
+        ["تجربة افتراضية", "ضع الملابس أو المنتجات على عارضين وفي مشاهد مناسبة للمتاجر الإلكترونية، الموضة والسوشيال.", "مشاهد بعارضين"],
+        ["إعلانات السوشيال", "حول بنية الإعلانات الناجحة أو المنشورات الرائجة إلى محتوى يناسب منتجك دون البدء من الصفر.", "إبداع من مرجع"],
+        ["تغيير المقاسات", "حول صورة ناجحة إلى مقاسات 1:1 و4:5 و9:16 و16:9 والمقاسات العريضة باستخدام outpainting.", "كل المقاسات"],
+        ["صفحة هبوط", "أنشئ صفحة بيع من الصورة والنص وعناصر العلامة، ثم حملها كحزمة ZIP.", "حزمة HTML"],
+        ["فيديو موضة بالذكاء الاصطناعي", "أنشئ فيديوهات قصيرة للموضة من نص أو صورة لتيك توك، ريلز أو الإعلانات.", "فيديو AI"],
+        ["سكريبتات صوتية", "أنتج تعليقات صوتية للإعلانات، سكريبتات UGC وفيديوهات السوشيال بأصوات عربية، إنجليزية وفرنسية.", "17+ صوت"],
+        ["استخدم مفتاحك الخاص", "اربط مفتاح fal.ai API الخاص بك حتى تبقى تكاليف التوليد واضحة وتحت سيطرتك.", "بدون هامش على الذكاء الاصطناعي"]
+      ],
+      voiceKicker: "استوديو أصوات عالمي",
+      voiceTitle: "اختر صوتا يناسب السوق والجمهور.",
+      voiceCopy: "المحتوى الجيد ليس مجرد ترجمة. MonsterCreative يوفر أصواتا عربية بلهجات مختلفة، وإنجليزية وفرنسية، حتى تكون نبرة الحملة أقرب للجمهور المستهدف.",
+      voiceItems: [
+        ["تحكم في اللهجة", "اختر بين لهجات عربية، أصوات إنجليزية أمريكية/بريطانية، وأنماط فرنسية كلاسيكية أو عصرية."],
+        ["مناسب للتسويق", "أنشئ تعليقات صوتية للإعلانات، سكريبتات UGC، عروض المنتجات والعروض المباشرة."]
+      ],
+      voiceRows: [
+        ["ELareef و Yasmine", "مصري - صوت رجل وصوت امرأة"],
+        ["Fares و Salma", "خليجي - صوت رجل وصوت امرأة"],
+        ["Mazen Lawand و Belma", "عربية فصحى لمنطقة MENA - صوت رجل وصوت امرأة"],
+        ["Rachid و Adina", "مغاربي ومغربي - صوت رجل وصوت امرأة"],
+        ["Ilyass و Rima M", "لهجة جزائرية - صوت رجل وصوت امرأة"],
+        ["Hale و Christina", "إنجليزية أمريكية/بريطانية - تقنية وفخامة"],
+        ["Lorenzo و Manon", "فرنسية كلاسيكية - فخامة ورقي"],
+        ["Sam و Audrey", "فرنسية عصرية - موضة وسفر"]
+      ],
+      priceKicker: "دفع مرة واحدة",
+      priceTitle: "رخصة مدى الحياة",
+      priceNote: "امتلك البرنامج بدون اشتراك شهري للتطبيق.",
+      apiNote: "تكاليف الذكاء الاصطناعي غير مشمولة - تتم الفوترة عبر ",
+      priceList: ["كل أدوات الإبداع الأساسية الثمانية", "تفعيل جهاز واحد مع إمكانية النقل", "تحديثات مدى الحياة", "دعم أولوية عبر البريد", "استخدم مفتاح fal.ai الخاص بك"],
+      formTitle: "احصل على رخصتك",
+      formCopy: "أدخل بياناتك للانتقال إلى الدفع الآمن.",
+      labels: ["الاسم الكامل", "البريد الإلكتروني", "رقم الهاتف "],
+      optional: "(اختياري)",
+      buy: "اشتر وحمل ->",
+      secure: "دفع آمن",
+      refund: "ضمان استرداد خلال 7 أيام",
+      faqTitle: "إجابات مهمة قبل التحميل.",
+      faqs: [
+        ["ما سياسة الاسترداد؟", "يمكنك طلب الاسترداد خلال 7 أيام إذا لم يعمل البرنامج على Windows 10/11 لديك. تواصل معنا ببريد الشراء ووصف المشكلة."],
+        ["هل MonsterCreative تطبيق سطح مكتب؟", "نعم. MonsterCreative تطبيق Windows مصمم لأنظمة Windows 10/11 بنواة 64 بت."],
+        ["هل أحتاج إلى حساب fal.ai؟", "نعم. يستخدم التطبيق مفتاح fal.ai API الخاص بك للتوليد، وهذا يبقي التكاليف واضحة وبدون هامش إضافي."],
+        ["هل تكاليف توليد الذكاء الاصطناعي مشمولة؟", "لا. الرخصة تغطي برنامج MonsterCreative فقط. استخدام الذكاء الاصطناعي تتم فوترته من fal.ai حسب الاستهلاك."],
+        ["ماذا يحدث بعد الشراء؟", "تكمل الدفع، تستلم تفاصيل الرخصة بالبريد، تحمل التطبيق، تفعله، ثم تربط مفتاح API الخاص بك."],
+        ["هل يمكنني إنشاء محتوى عربي؟", "نعم. MonsterCreative يتضمن أصواتا عربية للخليج، السعودية، مصر، المغرب العربي والعربية الفصحى."],
+        ["هل يغني عن وكالة؟", "هو يغطي جزءا كبيرا من الإنتاج المتكرر. لكن الاستراتيجية، اختبار العروض، شراء الإعلانات والحكم الإبداعي تبقى مهمة."],
+        ["هل يمكن نقل الرخصة إلى جهاز جديد؟", "الرخصة تشمل تفعيل جهاز واحد، لكن يمكن نقل مفتاح الرخصة إذا غيرت جهازك."],
+        ["ما أفضل أدوات الذكاء الاصطناعي برخصة مدى الحياة للشركات الصغيرة؟", "الأفضل هو ما يقلل الاشتراكات ويغطي حاجات عملية مثل الكتابة، الصور والتعليقات الصوتية. MonsterCreative مناسب لأنه تطبيق سطح مكتب يعمل بمفتاح API الخاص بك."],
+        ["لماذا أختار أداة ذكاء اصطناعي بدفع مرة واحدة؟", "الدفع مرة واحدة يجعل الميزانية أوضح، يقلل تراكم الاشتراكات، ويمنحك استخداما طويل المدى للبرنامج."],
+        ["أين أجد أدوات ذكاء اصطناعي للتسويق بدفع مرة واحدة؟", "غالبا تجدها عند مطورين مستقلين، منصات مبدعين أو متاجر برامج. MonsterCreative يقدم رخصة مباشرة لإنتاج المحتوى والتسويق."],
+        ["ما معنى الرخصة الدائمة لبرنامج ذكاء اصطناعي؟", "يعني أنك تدفع مرة واحدة لاستخدام البرنامج دون اشتراك. ومع نموذج استخدام مفتاحك الخاص، تدفع استهلاك الذكاء الاصطناعي مباشرة للمزود."],
+        ["أي أدوات ذكاء اصطناعي تقدم دفعا مرة واحدة لصناعة المحتوى؟", "MonsterCreative حزمة Windows بدفع واحد للكتابة، الصور، التجربة الافتراضية والتعليقات الصوتية العربية متعددة اللهجات."],
+        ["كيف أعرف أن العرض موثوق؟", "تحقق من الدفع الآمن، سياسة الاسترداد، نموذج العمل مثل استخدام مفتاحك الخاص، توافق Windows، ووجود دعم واضح."],
+        ["لماذا تناسب رخص مدى الحياة الشركات الناشئة؟", "لأنها تقلل المصاريف الشهرية وتبقي الأدوات الأساسية متاحة بدون زيادة الالتزامات المتكررة."],
+        ["ما أنواع أدوات الذكاء الاصطناعي التي تناسب الدفع مرة واحدة؟", "تطبيقات سطح المكتب، الأدوات المساعدة وأدوات استخدام مفتاحك الخاص تناسب هذا النموذج لأن المطور لا يدفع تكاليف التوليد نيابة عنك."],
+        ["كيف أقيم عرض رخصة مدى الحياة قبل الشراء؟", "راجع أمان الدفع، سياسة الاسترداد، استدامة النموذج، توافق Windows، وقدرتك على التحكم في تكاليف الذكاء الاصطناعي."],
+        ["كيف أقيس القيمة طويلة المدى لسعر ثابت؟", "قارن السعر الواحد بالاشتراكات البديلة وبالوقت الذي توفره. تزيد القيمة عندما تتحكم مباشرة في تكاليف التوليد."]
+      ],
+      finalTitle: "ابن حملتك القادمة في مساحة سطح مكتب واحدة.",
+      finalCopy: "حمل MonsterCreative، اربط مفتاح fal.ai، وابدأ إنتاج موادك بسرعة أكبر.",
+      footerCopy: "استوديو محتوى بالذكاء الاصطناعي لWindows. اشتر مرة واحدة، وأنشئ بدون اشتراك.",
+      product: "المنتج",
+      legal: "قانوني",
+      privacy: "سياسة الخصوصية",
+      terms: "شروط الخدمة",
+      stickyTitle: "رخصة MonsterCreative",
+      stickyCopy: "دفعة واحدة 39$. بدون اشتراكات.",
+      processing: "جاري المعالجة..."
+    };
+
+    Object.assign(pageTranslations.fr, finalFrenchCopy);
+    Object.assign(pageTranslations.ar, finalArabicCopy);
+
+    function setText(selector, value) {
+      document.querySelectorAll(selector).forEach((el) => {
+        el.textContent = value;
+      });
+    }
+
+    function setHtml(selector, value) {
+      document.querySelectorAll(selector).forEach((el) => {
+        el.innerHTML = value;
+      });
+    }
+
+    function applyPageLanguage() {
+      const t = pageTranslations[CURRENT_LANGUAGE];
+      if (!t) return;
+
+      document.title = CURRENT_LANGUAGE === "ar"
+        ? "MonsterCreative | استوديو محتوى بالذكاء الاصطناعي لنظام Windows"
+        : "MonsterCreative | Studio de création de contenu IA pour Windows";
+
+      setText(".skip-link", t.skip);
+      document.getElementById("navHamburger")?.setAttribute("aria-label", t.navOpen);
+      document.getElementById("mobileNavClose")?.setAttribute("aria-label", t.navClose);
+
+      ["#inside", "#features", "#pricing", "#faq"].forEach((href, index) => {
+        document.querySelectorAll(`.nav-links a[href="${href}"], .mobile-nav > a[href="${href}"], .footer-links a[href="${href}"]`)
+          .forEach((el) => el.textContent = t.nav[index]);
+      });
+
+      setText(".site-header .btn-accent, .mobile-nav .btn-accent, .sticky-cta .btn-accent", t.getAccess);
+      setHtml(".hero .eyebrow", `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.8" /></svg>${t.eyebrow}`);
+      setHtml(".hero h1", t.heroTitle);
+      setText(".hero-copy", t.heroCopy);
+      document.querySelectorAll(".hero-actions .btn").forEach((el, index) => el.textContent = t.heroButtons[index]);
+      document.querySelectorAll(".hero-trust li").forEach((el, index) => el.textContent = t.trust[index]);
+
+      setText(".problem-band .section-kicker", t.problemKicker);
+      setText(".problem-band .section-title", t.problemTitle);
+      setText(".problem-band .section-copy", t.problemCopy);
+      document.querySelectorAll(".problem").forEach((el, index) => {
+        el.querySelector("b").textContent = t.problems[index][0];
+        el.querySelector("p").textContent = t.problems[index][1];
+      });
+      setText(".problem-bridge h3", t.replaces);
+      setText(".problem-bridge .btn", t.priceCta || `${t.heroButtons[0]} - $39`);
+
+      setText("#demo .section-kicker", t.demoKicker);
+      setText("#demo .section-title", t.demoTitle);
+      setText(".offer-band .section-kicker", t.offerKicker);
+      setText(".offer-title", t.offerTitle);
+      setText(".offer-copy", t.offerCopy);
+      setText(".offer-intro .btn", t.seeFeatures);
+      document.querySelectorAll(".benefit").forEach((el, index) => {
+        el.querySelector("b").textContent = t.benefits[index][0];
+        el.querySelector("span").textContent = t.benefits[index][1];
+      });
+
+      setText("#inside .section-kicker", t.insideKicker);
+      setText("#inside .section-title", t.insideTitle);
+      setText("#inside .section-copy", t.insideCopy);
+      document.querySelectorAll("#inside .copy-item").forEach((el, index) => {
+        el.querySelector("b").textContent = t.copyItems[index][0];
+        el.querySelector("p").textContent = t.copyItems[index][1];
+      });
+
+      const howSection = document.querySelectorAll("main > .section")[3];
+      if (howSection) {
+        howSection.querySelector(".section-kicker").textContent = t.howKicker;
+        howSection.querySelector(".section-title").textContent = t.howTitle;
+        howSection.querySelector(".section-copy").textContent = t.howCopy;
+      }
+      document.querySelectorAll(".workflow-step").forEach((el, index) => {
+        el.querySelector(".step-index").textContent = t.steps[index][0];
+        el.querySelector("h3").textContent = t.steps[index][1];
+        el.querySelector("p").textContent = t.steps[index][2];
+      });
+
+      setText("#features .section-kicker", t.featuresKicker);
+      setText("#features .section-title", t.featuresTitle);
+      setText("#features .section-copy", t.featuresCopy);
+      document.querySelectorAll(".feature-card").forEach((el, index) => {
+        el.querySelector("h3").textContent = t.featureCards[index][0];
+        el.querySelector("p").textContent = t.featureCards[index][1];
+        el.querySelector(".feature-tag").textContent = t.featureCards[index][2];
+      });
+
+      setText("#voices .section-kicker", t.voiceKicker);
+      setText("#voices .section-title", t.voiceTitle);
+      setText("#voices .section-copy", t.voiceCopy);
+      document.querySelectorAll("#voices .copy-item").forEach((el, index) => {
+        el.querySelector("b").textContent = t.voiceItems[index][0];
+        el.querySelector("p").textContent = t.voiceItems[index][1];
+      });
+      document.querySelectorAll(".voice-row").forEach((el, index) => {
+        el.querySelector("b").textContent = t.voiceRows[index][0];
+        el.querySelector("span").textContent = t.voiceRows[index][1];
+      });
+
+      setText("#pricing .section-kicker", t.priceKicker);
+      setText("#pricing .section-title", t.priceTitle);
+      setText(".price-note", t.priceNote);
+      const apiNote = document.querySelector(".api-note");
+      if (apiNote) {
+        apiNote.lastChild.textContent = ".";
+        apiNote.childNodes[1].textContent = t.apiNote;
+      }
+      document.querySelectorAll(".price-list li").forEach((el, index) => el.textContent = t.priceList[index]);
+      setText(".checkout-form-container h3", t.formTitle);
+      setText(".checkout-form-container > p", t.formCopy);
+      document.querySelectorAll(".form-group label").forEach((el, index) => {
+        el.textContent = t.labels[index];
+        if (index === 2) {
+          const optional = document.createElement("span");
+          optional.className = "optional-label";
+          optional.textContent = t.optional;
+          el.appendChild(optional);
+        }
+      });
+      setText(".checkout-submit-btn", t.buy);
+      document.querySelectorAll(".privacy-note span").forEach((el, index) => {
+        if (index === 0) el.lastChild.textContent = t.secure;
+        if (index === 2) el.lastChild.textContent = t.refund;
+      });
+
+      setText("#faq .section-title", t.faqTitle);
+      document.querySelectorAll(".faq-item").forEach((el, index) => {
+        el.querySelector("summary").textContent = t.faqs[index][0];
+        el.querySelector("p").textContent = t.faqs[index][1];
+      });
+      setText(".final-cta h2", t.finalTitle);
+      setText(".final-cta p", t.finalCopy);
+      setText(".final-cta .btn", t.priceCta || `${t.heroButtons[0]} - $39`);
+      setText(".site-footer .brand + p", t.footerCopy);
+      setText(".footer-layout > div:nth-child(3) .footer-col-label", t.product);
+      setText(".footer-layout > div:nth-child(4) .footer-col-label", t.legal);
+      setText('a[href="/privacy/"]', t.privacy);
+      setText('a[href="/terms/"]', t.terms);
+      setText(".sticky-cta strong", t.stickyTitle);
+      setText(".sticky-cta p", t.stickyCopy);
+    }
+
+    document.querySelectorAll("[data-language-link]").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.cookie = `site_language=${link.dataset.languageLink};path=/;max-age=31536000;samesite=lax`;
+      });
+    });
+
+    applyPageLanguage();
+
     const hamburger = document.getElementById("navHamburger");
     const mobileNav = document.getElementById("mobileNav");
     const mobileClose = document.getElementById("mobileNavClose");

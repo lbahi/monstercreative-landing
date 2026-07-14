@@ -2,7 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.language_redirect, name='index'),
+    path('ar/', views.localized_index, {'lang': 'ar'}, name='index_ar'),
+    path('fr/', views.localized_index, {'lang': 'fr'}, name='index_fr'),
     path('features/arabic-voiceover/', views.arabic_voiceover, name='arabic_voiceover'),
     path('features/virtual-try-on/', views.virtual_try_on, name='virtual_try_on'),
     path('features/image-resizer/', views.image_resizer, name='image_resizer'),

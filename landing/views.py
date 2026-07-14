@@ -5,6 +5,16 @@ from .models import Lead
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+SUPPORTED_LANGUAGES = ("en", "ar", "fr")
+
+
+def _pick_language_from_header(accept_language):
+    for language_range in accept_language.split(","):
+        code = language_range.split(";")[0].strip().lower().split("-")[0]
+        if code in SUPPORTED_LANGUAGES and code != "en":
+            return code
+    return "en"
+
 def robots_txt(request):
     content = (
         "User-agent: *\n"
@@ -32,13 +42,44 @@ def sitemap_xml(request):
         '</urlset>'
     )
     return HttpResponse(content, content_type="application/xml")
-def index(request):
+def index(request, lang="en"):
+    if lang not in SUPPORTED_LANGUAGES:
+        lang = "en"
+
     context = {
         'FREEMIUS_PRODUCT_ID': settings.FREEMIUS_PRODUCT_ID,
         'FREEMIUS_PUBLIC_KEY': settings.FREEMIUS_PUBLIC_KEY,
         'FREEMIUS_PLAN_ID': settings.FREEMIUS_PLAN_ID,
+        'LANGUAGE_CODE': lang,
+        'LANGUAGE_DIR': 'rtl' if lang == 'ar' else 'ltr',
+        'LANGUAGE_URLS': {
+            'en': '/',
+            'ar': '/ar/',
+            'fr': '/fr/',
+        },
+        'CURRENT_LANGUAGE_URL': '/' if lang == 'en' else f'/{lang}/',
     }
-    return render(request, 'landing/index.html', context)
+    response = render(request, 'landing/index.html', context)
+    response.set_cookie('site_language', lang, max_age=60 * 60 * 24 * 365, samesite='Lax')
+    return response
+
+
+def localized_index(request, lang):
+    return index(request, lang=lang)
+
+
+def language_redirect(request):
+    saved_language = request.COOKIES.get("site_language")
+    if saved_language == "en":
+        return index(request)
+    if saved_language in ("ar", "fr"):
+        return redirect(f"/{saved_language}/")
+
+    detected_language = _pick_language_from_header(request.META.get("HTTP_ACCEPT_LANGUAGE", ""))
+    if detected_language in ("ar", "fr"):
+        return redirect(f"/{detected_language}/")
+
+    return index(request)
 
 def arabic_voiceover(request):
     return render(request, 'landing/arabic_voiceover.html')
